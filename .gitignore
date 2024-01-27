@@ -1,0 +1,7 @@
+### Maven ###
+target/
+
+## Additional Ignores ###
+.DS_Store
+.vscode/
+
