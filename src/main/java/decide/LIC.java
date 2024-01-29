@@ -60,8 +60,20 @@ public class LIC {
         return false;
     }
 
-    private boolean LIC_14(ArrayList<Point> POINTS, int AREA1, int AREA2, int E_PTS, int F_PTS){
-        if(POINTS.size() < 5){ return false; }
+    /**
+     * There exists at least one set of three data points, separated by exactly E_PTS and F_PTS consecutive intervening points, respectively, that are the vertices of a triangle with area greater
+     * than AREA1. In addition, there exist three data points (which can be the same or different from the three data points just mentioned) separated by exactly E PTS and F PTS consecutive intervening points, respectively, that are the vertices of a triangle with area less than
+     * AREA2. Both parts must be true for the LIC to be true. The condition is not met when NUMPOINTS < 5.
+     * @param POINTS Array containing the coordinates of data points
+     * @param NUMPOINTS The number of planar data points
+     * @param AREA1 1st Area in LICs
+     * @param AREA2 2nd Area in LICs
+     * @param E_PTS Number of points between the 1st and the 2nd data point
+     * @param F_PTS Number of points between the 2nd and the 3rd data point
+     * @return true iff LIC 14 is met
+     */
+    private boolean LIC_14(final ArrayList<Point> POINTS, final int NUMPOINTS, final int AREA1, final int AREA2, final int E_PTS, final int F_PTS){
+        if(NUMPOINTS < 5){ return false; }
         Point A, B, C;
         double area;
         boolean isGreater = false, isLesser = false;
