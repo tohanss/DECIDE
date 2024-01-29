@@ -21,7 +21,7 @@ public class LIC {
      * with area greater than AREA1
      * @param points Array containing the coordinates of data points
      * @param AREA1 Area in LICs
-     * @return true if and only if LIC 3 is met
+     * @return true iff LIC 3 is met
      */
     private boolean LIC_3(final ArrayList<Point> points, final int AREA1){
         Point A, B, C;
