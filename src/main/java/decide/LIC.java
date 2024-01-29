@@ -1,5 +1,8 @@
 package decide;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class LIC {
     private boolean LIC_0() {
         return false;
@@ -13,7 +16,18 @@ public class LIC {
         return false;
     }
 
-    private boolean LIC_3() {
+    private boolean LIC_3(ArrayList<Point> points, final int AREA1){
+        Point A, B, C;
+        int area;
+        for(int i = 0; i < points.size() - 2; i++){
+            A = points.get(i);
+            B = points.get(i + 1);
+            C = points.get(i + 2);
+            area = Math.abs((A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y)))/2;
+            if(area > AREA1){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -67,7 +81,7 @@ public class LIC {
         CMV[0] = LIC_0();
         CMV[1] = LIC_1();
         CMV[2] = LIC_2();
-        CMV[3] = LIC_3();
+        //CMV[3] = LIC_3();
         CMV[4] = LIC_4();
         CMV[5] = LIC_5();
         CMV[6] = LIC_6();
