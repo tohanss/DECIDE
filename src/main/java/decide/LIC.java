@@ -16,7 +16,14 @@ public class LIC {
         return false;
     }
 
-    private boolean LIC_3(ArrayList<Point> points, final int AREA1){
+    /**
+     * There exists at least one set of three consecutive data points that are the vertices of a triangle
+     * with area greater than AREA1
+     * @param points Array containing the coordinates of data points
+     * @param AREA1 Area in LICs
+     * @return true if and only if the 4th LIC is met
+     */
+    private boolean LIC_3(final ArrayList<Point> points, final int AREA1){
         Point A, B, C;
         int area;
         for(int i = 0; i < points.size() - 2; i++){
