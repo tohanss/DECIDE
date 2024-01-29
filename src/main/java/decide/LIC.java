@@ -72,7 +72,7 @@ public class LIC {
      * @param F_PTS Number of points between the 2nd and the 3rd data point
      * @return true iff LIC 14 is met
      */
-    private boolean LIC_14(final ArrayList<Point> POINTS, final int NUMPOINTS, final int AREA1, final int AREA2, final int E_PTS, final int F_PTS){
+    protected boolean LIC_14(final ArrayList<Point> POINTS, final int NUMPOINTS, final int AREA1, final int AREA2, final int E_PTS, final int F_PTS){
         if(NUMPOINTS < 5){ return false; }
         Point A, B, C;
         double area;
