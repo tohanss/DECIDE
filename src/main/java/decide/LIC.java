@@ -23,7 +23,7 @@ public class LIC {
      * @param AREA1 Area in LICs
      * @return true iff LIC 3 is met
      */
-    private boolean LIC_3(final ArrayList<Point> points, final int AREA1){
+    protected boolean LIC_3(final ArrayList<Point> points, final int AREA1){
         Point A, B, C;
         int area;
         for(int i = 0; i < points.size() - 2; i++){
