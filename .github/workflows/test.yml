@@ -10,8 +10,6 @@ name: Build & Unit Test
 
 on:
   push:
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
