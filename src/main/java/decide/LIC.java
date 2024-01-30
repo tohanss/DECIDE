@@ -1,6 +1,6 @@
 package decide;
 
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class LIC {
@@ -17,21 +17,24 @@ public class LIC {
     }
 
     /**
-     * There exists at least one set of three consecutive data points that are the vertices of a triangle
-     * with area greater than AREA1
-     * @param points Array containing the coordinates of data points
-     * @param AREA1 Area in LICs
-     * @return true iff LIC 3 is met
+     * A method for LIC 3.
+     * There exists at least one set of three consecutive data points that are the vertices of a
+     * triangle with area greater than AREA1
+     @param points Array containing the coordinates of data points
+     @param area1 Area in LICs
+     @return true iff LIC 3 is met
      */
-    protected boolean LIC_3(final ArrayList<Point> points, final int AREA1){
-        Point A, B, C;
+    protected boolean lic3(final ArrayList<Point> points, final int area1) {
+        Point a;
+        Point b;
+        Point c;
         int area;
-        for(int i = 0; i < points.size() - 2; i++){
-            A = points.get(i);
-            B = points.get(i + 1);
-            C = points.get(i + 2);
-            area = Math.abs((A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y)))/2;
-            if(area > AREA1){
+        for (int i = 0; i < points.size() - 2; i++) {
+            a = points.get(i);
+            b = points.get(i + 1);
+            c = points.get(i + 2);
+            area = Math.abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))) / 2;
+            if (area > area1) {
                 return true;
             }
         }
