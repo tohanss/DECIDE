@@ -69,6 +69,7 @@ public class Lic {
    *
    * @return the CMV
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   public boolean[] calculateCmv() {
     boolean[] cmv = new boolean[15];
 
