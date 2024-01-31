@@ -202,18 +202,23 @@ public class LIC {
       Point a = points.get(i);
       Point b = points.get(i + apts);
       Point c = points.get(i + apts + bpts);
-      double d1 = distance(a, b);
-      double d2 = distance(b, c);
-      double d3 = distance(a, c);
-      double max = Math.max(d1, Math.max(d2, d3));
-      if(radius1 * 2 < max){
+      Point center = new Point((a.x + b.x + c.x) / 3, (a.y + b.y + c.y) / 3);
+      if (
+          distance(a, center) > radius1
+              && distance(b, center) > radius1
+              && distance(c, center) > radius1
+      ) {
         isOutside = true;
       }
-      if(radius2 * 2 >= max){
+      if (
+          distance(a, center) <= radius1
+              && distance(b, center) <= radius1
+              && distance(c, center) <= radius1
+      ) {
         isInside = true;
       }
     }
-
+    
     return isOutside && isInside;
   }
 
