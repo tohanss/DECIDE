@@ -27,7 +27,7 @@ public class LicTest extends LIC{
             ));
     final double radius1 = 1;
 
-    assertTrue(lic2(testPoints, radius1));
+    assertTrue(lic1(testPoints, radius1));
   }
 
   @Test
@@ -41,7 +41,7 @@ public class LicTest extends LIC{
             ));
     final double radius1 = 2;
 
-    assertFalse(lic2(testPoints, radius1));
+    assertFalse(lic1(testPoints, radius1));
   }
 
   @Test
@@ -55,7 +55,7 @@ public class LicTest extends LIC{
             ));
     final double radius1 = 1;
 
-    assertFalse(lic2(testPoints, radius1));
+    assertFalse(lic1(testPoints, radius1));
   }
 
   @Test(expected = AssertionError.class)
@@ -69,6 +69,6 @@ public class LicTest extends LIC{
             ));
     final double radius1 = -1;
 
-    lic2(testPoints, radius1);
+    lic1(testPoints, radius1);
   }
 }

@@ -11,10 +11,6 @@ public class LIC {
     return false;
   }
 
-  private boolean lic1() {
-    return false;
-  }
-
   /**
    * There exists at least one set of three consecutive data points that
    * cannot all be contained within or on a circle of radius RADIUS1.
@@ -25,7 +21,7 @@ public class LIC {
    * @return True if LIC2 is met
    */
   @SuppressWarnings("checkstyle:MagicNumber")
-  protected boolean lic2(final ArrayList<Point> points, final double radius1) {
+  protected boolean lic1(final ArrayList<Point> points, final double radius1) {
     assert (radius1 >= 0);
     Point a;
     Point b;
@@ -43,6 +39,10 @@ public class LIC {
         return true;
       }
     }
+    return false;
+  }
+
+  private boolean lic2() {
     return false;
   }
 
@@ -109,8 +109,8 @@ public class LIC {
     boolean[] cmv = new boolean[15];
 
     cmv[0] = lic0();
-    cmv[1] = lic1();
-    //cmv[2] = lic2();
+    //cmv[1] = lic1();
+    cmv[2] = lic2();
     cmv[3] = lic3();
     cmv[4] = lic4();
     cmv[5] = lic5();
