@@ -131,6 +131,7 @@ public class LicTest extends LIC {
     public void testLIC5TrueWhenEnoughPointsOnQuadrants() {
         final ArrayList<Point> testPoints =
                 new ArrayList<Point>(Arrays.asList(
+                        new Point(1, -1),
                         new Point(1, 1),
                         new Point(-1,1),
                         new Point(-1, -1)
@@ -138,7 +139,7 @@ public class LicTest extends LIC {
 
         final int QUADS = 2;
         final int Q_PTS = 3;
-        final int NUMPOINTS = 3;
+        final int NUMPOINTS = 4;
 
         assertTrue(lic5(testPoints, Q_PTS, QUADS, NUMPOINTS));
     }
