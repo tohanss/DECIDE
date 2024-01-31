@@ -183,7 +183,6 @@ public final class Parameters {
 
   /**
    * Constructor for Parameters class.
-   * @return the parameter
    */
   @SuppressWarnings({ "checkstyle:HiddenField",
       "checkstyle:MissingJavadocMethod" })
