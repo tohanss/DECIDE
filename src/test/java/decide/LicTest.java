@@ -205,7 +205,7 @@ public class LicTest extends LIC {
         final int NUMPOINTS = 10;
 
         final ArrayList<Point> points = new ArrayList<Point>();
-        for (int i = 0; i < NUMPOINTS; i++) {
+        for (int i = 0; i < NUMPOINTS-1; i++) {
             points.add(i, new Point(i, i));
         }
         points.set(0, new Point(2, 4));
