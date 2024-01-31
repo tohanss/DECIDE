@@ -68,7 +68,44 @@ public class LIC {
         return false;
     }
 
-    private boolean LIC_10() {
+    /**
+     * There exists at least one set of three data points separated by exactly
+     * E PTS and F PTS consecutive intervening points, respectively, that are
+     * the vertices of a triangle with area greater
+     * than AREA1. The condition is not met when NUMPOINTS < 5.
+     * @param points Array containing the coordinates of data points
+     * @param numpoints The number of planar data points
+     * @param area1 Area in LICs
+     * @param epts Number of points between the 1st and the 2nd data point
+     * @param fpts Number of points between the 2nd and the 3rd data point
+     * @return true iff LIC 10 is met
+     */
+    @SuppressWarnings("checkstyle:magicnumber")
+    protected boolean lic10(
+            final ArrayList<Point> points,
+            final int numpoints,
+            final int area1,
+            final int epts,
+            final int fpts
+    ) {
+        if (numpoints < 5) {
+            return false;
+        }
+        Point a;
+        Point b;
+        Point c;
+        int area;
+        for (int i = 0; i < numpoints - epts - fpts; i++) {
+            a = points.get(i);
+            b = points.get(i + epts);
+            c = points.get(i + epts + fpts);
+            area = Math.abs(
+                    (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
+            ) / 2;
+            if (area > area1) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -102,7 +139,7 @@ public class LIC {
         CMV[7] = LIC_7();
         CMV[8] = LIC_8();
         CMV[9] = LIC_9();
-        CMV[10] = LIC_10();
+        //CMV[10] = LIC_10();
         CMV[11] = LIC_11();
         CMV[12] = LIC_12();
         CMV[13] = LIC_13();
