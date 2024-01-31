@@ -3,7 +3,7 @@ package decide;
 /**
  * Class for the LIC functions.
  */
-public class Lic {
+public class LIC {
   private boolean lic0() {
     return false;
   }
