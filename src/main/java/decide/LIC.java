@@ -174,6 +174,29 @@ public class LIC {
     return false;
   }
 
+  protected boolean lic14(final ArrayList<Point> points, final int numpoints, final int radius1, final int radius2, final int apts, final int bpts){
+    if(numpoints < 5){ return false; }
+    boolean isOutside = false;
+    boolean isInside = false;
+    for(int i = 0; i < numpoints - apts - bpts; i++){
+      Point a = points.get(i);
+      Point b = points.get(i + apts);
+      Point c = points.get(i + apts + bpts);
+      double d1 = distance(a, b);
+      double d2 = distance(b, c);
+      double d3 = distance(a, c);
+      double max = Math.max(d1, Math.max(d2, d3));
+      if(radius1 * 2 < max){
+        isOutside = true;
+      }
+      if(radius2 * 2 >= max){
+        isInside = true;
+      }
+    }
+
+    return isOutside && isInside;
+  }
+
   /**
    * There exists at least one set of three data points, separated by
    * exactly E_PTS and F_PTS consecutive intervening points, respectively,
