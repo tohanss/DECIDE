@@ -1,9 +1,12 @@
 package decide;
 
+import java.awt.Point;
+import java.util.ArrayList;
+
 /**
  * Class for the LIC functions.
  */
-public class Lic {
+public class LIC {
   private boolean lic0() {
     return false;
   }
@@ -12,7 +15,33 @@ public class Lic {
     return false;
   }
 
-  private boolean lic2() {
+  /**
+   * There exists at least one set of three consecutive data points that
+   * cannot all be contained within or on a circle of radius RADIUS1.
+   * (0 ≤ RADIUS1)
+   *
+   * @param points Array containing the coordinates of data points.
+   * @param radius1 Radius of circle that should not cover the points.
+   * @return True if LIC2 is met
+   */
+  protected boolean lic2(final ArrayList<Point> points, final double radius1) {
+    assert (radius1 >= 0);
+    Point a;
+    Point b;
+    Point c;
+    for (int i = 0; i < points.size() - 2; i++) {
+      a = points.get(i);
+      b = points.get(i + 1);
+      c = points.get(i + 2);
+      Point center = new Point((a.x + b.x + c.x)/3, (a.y + b.y + c.y)/3);
+      if (
+          distance(a, center) >= radius1 &&
+          distance(b, center) >= radius1 &&
+          distance(c, center) >= radius1
+      ) {
+        return true;
+      }
+    }
     return false;
   }
 
@@ -64,6 +93,11 @@ public class Lic {
     return false;
   }
 
+  private double distance(Point a, Point b) {
+    Point distVec = new Point(a.x - b.x, a.y - b.y);
+    return Math.sqrt(distVec.x * distVec.x + distVec.y * distVec.y);
+  }
+
   /**
    * Method to calculate the CMV.
    *
@@ -75,7 +109,7 @@ public class Lic {
 
     cmv[0] = lic0();
     cmv[1] = lic1();
-    cmv[2] = lic2();
+    //cmv[2] = lic2();
     cmv[3] = lic3();
     cmv[4] = lic4();
     cmv[5] = lic5();
