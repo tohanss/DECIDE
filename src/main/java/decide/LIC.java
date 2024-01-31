@@ -22,6 +22,7 @@ public class LIC {
    * @return True if LIC 1 is met
    */
   protected boolean LIC1(final ArrayList<Point> points, final double length1) {
+    assert (length1 >= 0);
     for (int i = 0; i < points.size() - 1; i++) {
       Point a = points.get(i);
       Point b = points.get(i + 1);
