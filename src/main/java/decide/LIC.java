@@ -12,6 +12,14 @@ public class LIC {
         return false;
     }
 
+    /* There exists at least one set of three consecutive data points which form an angle such that:
+    angle < (PI−EPSILON) or angle > (PI+EPSILON)
+    The second of the three consecutive points is always the vertex of the angle. If either the first
+    point or the last point (or both) coincides with the vertex, the angle is undefined and the LIC
+    is not satisfied by those three points.
+            (0 ≤ EPSILON < PI)
+    @return true if all the conditions are met
+    */
     private boolean LIC_2() {
         double EPSILON = 1; //temp value
         Point[] points = new Point[3]; //temp value
@@ -20,7 +28,7 @@ public class LIC {
         if ( EPSILON <= 0 || EPSILON > Math.PI) return false;
         for (int i = 0; i < (points.length-2); i++) {
             A = points[i];
-            B = points[i+1]; //vertex
+            B = points[i+1];
             C = points[i+2];
             if (A.equals(B) || C.equals(B))
                return false;
