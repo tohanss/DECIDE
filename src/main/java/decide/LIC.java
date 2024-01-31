@@ -20,22 +20,18 @@ public class LIC {
             (0 ≤ EPSILON < PI)
     @return true if all the conditions are met
     */
-    private boolean LIC_2() {
-        double EPSILON = 1; //temp value
-        Point[] points = new Point[3]; //temp value
+    protected boolean LIC_2(final ArrayList<Point>points, final double EPSILON ) {
         Point A, B, C;
-        double angle;
         if ( EPSILON <= 0 || EPSILON > Math.PI) return false;
-        for (int i = 0; i < (points.length-2); i++) {
-            A = points[i];
-            B = points[i+1];
-            C = points[i+2];
-            if (A.equals(B) || C.equals(B))
-               return false;
+        for (int i = 0; i < (points.size()-2); i++) {
+            A = points.get(i);
+            B = points.get(i+1);
+            C = points.get(i+2);
+            if (A.equals(B) || C.equals(B)) return false;
             double ab = A.distance(B);
             double bc = B.distance(C);
             double ac = A.distance(C);
-            angle = Math.acos((ab*ab + bc*bc - ac*ac)/(2*ab*bc));
+            double angle = Math.acos((ab*ab + bc*bc - ac*ac)/(2*ab*bc));
             if (angle < Math.PI - EPSILON|| angle > Math.PI + EPSILON){
                 return true;
             }
@@ -96,7 +92,7 @@ public class LIC {
 
         CMV[0] = LIC_0();
         CMV[1] = LIC_1();
-        CMV[2] = LIC_2();
+        //CMV[2] = LIC_2();
         CMV[3] = LIC_3();
         CMV[4] = LIC_4();
         CMV[5] = LIC_5();
