@@ -132,14 +132,20 @@ public class LIC {
     return false;
   }
 
-  /** There exists at least one set of three data points separated by exactly C PTS and D PTS
-   *consecutive intervening points, respectively, that form an angle such that:
-   *angle < (PI−EPSILON) or angle > (PI+EPSILON)
-   *The second point of the set of three points is always the vertex of the angle. If either the first
-   *point or the last point (or both) coincide with the vertex, the angle is undefined and the LIC
-   *is not satisfied by those three points. When NUMPOINTS < 5, the condition is not met.
-   *1 ≤ C PTS, 1 ≤ D PTS
-   *C PTS+D PTS ≤ NUMPOINTS−3
+  /**
+   * There exists at least one set of three data points separated by exactly
+   * cpts and dpts consecutive intervening points, respectively,
+   * that form an angle such that:
+   * angle < (PI − EPSILON) or angle > (PI + EPSILON)
+   * The second point of the set of three points is always the vertex
+   * of the angle. If either the first point or the last point
+   * (or both) coincide with the vertex,
+   * the angle is undefined and the LIC
+   * is not satisfied by those three points.
+   * When numpoints < 5, the condition is not met.
+   * 1 ≤ C PTS, 1 ≤ D PTS
+   * C PTS+D PTS ≤ numpoints − 3
+   *
    * @param cpts Number of intervening points
    * @param dpts Number of intervening points
    * @param epsilon Deviation from pi
@@ -147,6 +153,7 @@ public class LIC {
    * @param points Array containing the coordinates of data points
    * @return true if lic 10 is met
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic10(
           final ArrayList<Point> points,
           final int numpoints,
@@ -154,16 +161,20 @@ public class LIC {
           final int dpts,
           final double epsilon
   ) {
-    if (numpoints < 5 || cpts <= 1 || dpts <= 1 || cpts + dpts > (numpoints - 3)) {
+    if (numpoints < 5 || cpts <= 1 || dpts <= 1
+            || cpts + dpts > (numpoints - 3)) {
       return false;
     }
-    Point a, b, c;
-    for (int i = 0; i < points.size() - cpts- dpts - 2; i++) {
+    Point a;
+    Point b;
+    Point c;
+    for (int i = 0; i < points.size() - cpts - dpts - 2; i++) {
       a = points.get(i);
       b = points.get(i + cpts + 1);
       c = points.get(i + cpts + dpts + 2);
-      if (a.equals(b) || c.equals(b))
+      if (a.equals(b) || c.equals(b)) {
         return false;
+      }
       double ab = a.distance(b);
       double bc = b.distance(c);
       double ac = a.distance(c);
