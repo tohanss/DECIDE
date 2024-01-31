@@ -66,11 +66,11 @@ public class Lic {
 
   /**
    * Method to calculate the CMV.
-   *
+   * @param parameters Input parameters matrix
    * @return the CMV
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  public boolean[] calculateCmv() {
+  public boolean[] calculateCmv(final Parameters parameters) {
     boolean[] cmv = new boolean[15];
 
     cmv[0] = lic0();
