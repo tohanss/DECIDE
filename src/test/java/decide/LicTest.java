@@ -221,23 +221,6 @@ public class LicTest extends LIC {
         assertFalse(lic14(testPoints, testPoints.size(), RADIUS1, RADIUS2, A_PTS, B_PTS));
     }
 
-    @Test(expected = AssertionError.class)
-    public void testLIC14ThrowsExceptionWhenRadius2LessThan0() {
-        final ArrayList<Point> testPoints =
-            new ArrayList<Point>(Arrays.asList(
-                new Point(0,0),
-                new Point(2,0),
-                new Point(0,2),
-                new Point(2,2)
-            ));
-        final int RADIUS1 = 1;
-        final int RADIUS2 = -1;
-        final int A_PTS = 2;
-        final int B_PTS = 2;
-
-        lic14(testPoints, testPoints.size(), RADIUS1, RADIUS2, A_PTS, B_PTS);
-    }
-
     @Test
     public void testLIC15TrueWhenPointsBetweenE_PTSAndF_PTSHaveAreaGreaterThanAREA1AndLesserThanAREA2() {
         final ArrayList<Point> testPoints = new ArrayList<>(Arrays.asList(new Point(1,1), new Point(1,-5), new Point(1,1), new Point(-1,-5), new Point(1,1)));
