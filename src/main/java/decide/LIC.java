@@ -33,11 +33,7 @@ public class LIC {
       a = points.get(i);
       b = points.get(i + 1);
       c = points.get(i + 2);
-      int pointsToCheck = 3;
-      Point center = new Point(
-              (a.x + b.x + c.x) / pointsToCheck,
-              (a.y + b.y + c.y) / pointsToCheck
-      );
+      Point center = new Point((a.x + b.x + c.x) / 3, (a.y + b.y + c.y) / 3);
       if (
           distance(a, center) >= radius1
           && distance(b, center) >= radius1
