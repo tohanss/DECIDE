@@ -10,11 +10,7 @@ import org.junit.Test;
 /**
  * Class with testes of all LICs.
  */
-public class LicTest extends LIC{
-  @Test
-  public void test() {
-    assertTrue(true);
-  }
+public class LicTest extends LIC {
 
     @Test
     public void testLIC1TrueWhenPointsHaveGreaterDistanceThanLength1() {
@@ -128,6 +124,58 @@ public class LicTest extends LIC{
         final int area1 = 4;
 
         assertFalse(lic4(testPoints, area1));
+    }
+
+
+    @Test
+    public void testLIC5TrueWhenEnoughPointsOnQuadrants() {
+        final ArrayList<Point> testPoints =
+                new ArrayList<Point>(Arrays.asList(
+                        new Point(1, -1),
+                        new Point(1, 1),
+                        new Point(-1,1),
+                        new Point(-1, -1)
+                ));
+
+        final int QUADS = 2;
+        final int Q_PTS = 3;
+        final int NUMPOINTS = 4;
+
+        assertTrue(lic5(testPoints, Q_PTS, QUADS, NUMPOINTS));
+    }
+
+    @Test
+    public void testLIC5FalseWhenPointsAreNotOnQUADSQuadrants() {
+        final ArrayList<Point> testPoints =
+                new ArrayList<Point>(Arrays.asList(
+                        new Point(0,0),
+                        new Point(-1, 1),
+                        new Point(1,0),
+                        new Point(-1, 1)
+                ));
+
+        final int QUADS = 3;
+        final int Q_PTS = 3;
+        final int NUMPOINTS = 4;
+
+        assertFalse(lic5(testPoints, Q_PTS, QUADS, NUMPOINTS));
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testLIC5ThrowsExceptionWhenInvalidInput() {
+        final ArrayList<Point> testPoints =
+                new ArrayList<Point>(Arrays.asList(
+                        new Point(0,0),
+                        new Point(1, 1),
+                        new Point(1,0),
+                        new Point(-1, 1)
+                ));
+
+        final int QUADS = 4;
+        final int Q_PTS = 5;
+        final int NUMPOINTS = 4;
+
+        lic5(testPoints, Q_PTS, QUADS, NUMPOINTS);
     }
 
     @Test
