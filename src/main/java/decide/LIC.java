@@ -186,7 +186,7 @@ public class LIC {
    * and B PTS consecutive intervening points, respectively,
    * that can be contained in or on a circle of radius RADIUS2.
    * Both parts must be true for the LIC to be true. The condition is
-   * not met when NUMPOINTS < 5.
+   * not met when NUMPOINTS is less than 5.
    * (0 ≤ RADIUS2)
    *
    * @param points Array containing the coordinates of data points
@@ -195,7 +195,7 @@ public class LIC {
    * @param radius2 2nd Radius in LICs
    * @param apts Number of points between the 1st and the 2nd data points
    * @param bpts Number of points between the 2nd and the 3rd data points
-   * @return true iff LIC 10 is met
+   * @return true iff LIC 14 is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic14(
