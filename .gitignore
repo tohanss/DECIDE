@@ -1,7 +1,12 @@
 ### Maven ###
 target/
 
+## Java ###
+.classpath
+.settings
+.project
+
 ## Additional Ignores ###
 .DS_Store
 .vscode/
-
+.idea/

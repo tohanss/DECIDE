@@ -1,6 +1,6 @@
 package decide;
 
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class LIC {
@@ -16,9 +16,33 @@ public class LIC {
         return false;
     }
 
-    private boolean LIC_3() {
-        return false;
+  /**
+   * A method for LIC 3.
+   * There exists at least one set of three consecutive data points that are
+   * the vertices of a triangle with area greater than AREA1
+   *
+   * @param points Array containing the coordinates of data points
+   * @param area1  Area in LICs
+   * @return true iff LIC 3 is met
+   */
+  protected boolean lic3(final ArrayList<Point> points, final int area1) {
+    Point a;
+    Point b;
+    Point c;
+    int area;
+    for (int i = 0; i < points.size() - 2; i++) {
+      a = points.get(i);
+      b = points.get(i + 1);
+      c = points.get(i + 2);
+      area = Math.abs(
+              (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
+      ) / 2;
+      if (area > area1) {
+        return true;
+      }
     }
+    return false;
+  }
 
     private boolean LIC_4() {
         return false;
@@ -45,25 +69,40 @@ public class LIC {
     }
 
     /**
-     * There exists at least one set of three data points separated by exactly E PTS and F PTS consecutive intervening points, respectively, that are the vertices of a triangle with area greater
+     * There exists at least one set of three data points separated by exactly
+     * E PTS and F PTS consecutive intervening points, respectively, that are
+     * the vertices of a triangle with area greater
      * than AREA1. The condition is not met when NUMPOINTS < 5.
      * @param points Array containing the coordinates of data points
-     * @param NUMPOINTS The number of planar data points
-     * @param AREA1 Area in LICs
-     * @param E_PTS Number of points between the 1st and the 2nd data point
-     * @param F_PTS Number of points between the 2nd and the 3rd data point
+     * @param numpoints The number of planar data points
+     * @param area1 Area in LICs
+     * @param epts Number of points between the 1st and the 2nd data point
+     * @param fpts Number of points between the 2nd and the 3rd data point
      * @return true iff LIC 10 is met
      */
-    protected boolean LIC_10(final ArrayList<Point> points, final int NUMPOINTS, final int AREA1, final int E_PTS, final int F_PTS) {
-        if(NUMPOINTS < 5){ return false; }
-        Point A, B, C;
+    @SuppressWarnings("checkstyle:magicnumber")
+    protected boolean lic10(
+            final ArrayList<Point> points,
+            final int numpoints,
+            final int area1,
+            final int epts,
+            final int fpts
+    ) {
+        if (numpoints < 5) {
+            return false;
+        }
+        Point a;
+        Point b;
+        Point c;
         int area;
-        for(int i = 0; i < NUMPOINTS - E_PTS - F_PTS; i++){
-            A = points.get(i);
-            B = points.get(i + E_PTS);
-            C = points.get(i + E_PTS + F_PTS);
-            area = Math.abs((A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y)))/2;
-            if(area > AREA1){
+        for (int i = 0; i < numpoints - epts - fpts; i++) {
+            a = points.get(i);
+            b = points.get(i + epts);
+            c = points.get(i + epts + fpts);
+            area = Math.abs(
+                    (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
+            ) / 2;
+            if (area > area1) {
                 return true;
             }
         }
@@ -86,13 +125,14 @@ public class LIC {
         return false;
     }
 
+    @SuppressWarnings("checkstyle:magicnumber")
     public boolean[] calculateCMV() {
         boolean[] CMV = new boolean[15];
 
         CMV[0] = LIC_0();
         CMV[1] = LIC_1();
         CMV[2] = LIC_2();
-        CMV[3] = LIC_3();
+        //CMV[3] = LIC_3();
         CMV[4] = LIC_4();
         CMV[5] = LIC_5();
         CMV[6] = LIC_6();
