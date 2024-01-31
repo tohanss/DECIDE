@@ -165,6 +165,7 @@ public class LIC {
             || cpts + dpts > (numpoints - 3)) {
       return false;
     }
+
     Point a;
     Point b;
     Point c;

@@ -213,6 +213,32 @@ public class LicTest extends LIC {
         points.set(C_PTS + C_PTS + 2, new Point(2,0));
         assertFalse(lic10(points, NUMPOINTS, C_PTS, D_PTS, EPSILON));
     }
+    @Test
+    public void testLIC10FalseWhenVertexSameAsOtherPoint() {
+        final int C_PTS = 3;
+        final int D_PTS = 4;
+        final double EPSILON = 1;
+        final int NUMPOINTS = 10;
+
+        final ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < NUMPOINTS - 1; i++) {
+            points.add(i, new Point(i, i));
+        }
+        points.set(0, new Point(1, 1));
+        points.set(C_PTS +1, new Point(1, 1));
+        points.set(C_PTS + C_PTS + 2, new Point(2,0));
+        assertFalse(lic10(points, NUMPOINTS, C_PTS, D_PTS, EPSILON));
+    }
+    @Test
+    public void testLIC10FalseWhenValuesTooSmall() {
+        final ArrayList<Point> POINTS = new ArrayList<>(Arrays.asList(new Point(1,1), new Point(2,2), new Point(3,3),
+        new Point(4,4), new Point(5,5)));
+        final int C_PTS = 1;
+        final int D_PTS = 1;
+        final double EPSILON = 1;
+        final int NUMPOINTS = 5;
+        assertFalse(lic10(POINTS,NUMPOINTS, C_PTS, D_PTS, EPSILON));
+    }
 
     @Test
     public void testLIC11TrueWhenPointsBetweenE_PTSAndF_PTSHaveAreaGreaterThanAREA1() {
