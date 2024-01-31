@@ -1,15 +1,49 @@
 package decide;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.junit.Test;
 
 /**
  * A class to test the methods in the Lic-class.
  */
-public class LicTest {
+public class LicTest extends LIC {
   @Test
   public void test() {
     assertTrue(true);
+  }
+
+  @Test
+  public void testLIC1TrueWhenPointsHaveGreaterDistanceThanLength1() {
+    final ArrayList<Point> testPoints =
+            new ArrayList<Point>(Arrays.asList(new Point(1, 5), new Point(1, 1), new Point(5, 1)));
+
+    final int length1 = 3;
+
+    assertTrue(LIC1(testPoints, length1));
+  }
+
+  @Test
+  public void testLIC1FalseWhenPointsHaveShorterDistanceThanLength1() {
+    final ArrayList<Point> testPoints =
+            new ArrayList<Point>(Arrays.asList(new Point(1, 5), new Point(1, 1), new Point(5, 1)));
+
+    final int length1 = 5;
+
+    assertFalse(LIC1(testPoints, length1));
+  }
+
+  @Test
+  public void testLIC1FalseWhenPointsHaveEqualDistanceToLength1() {
+    final ArrayList<Point> testPoints =
+            new ArrayList<Point>(Arrays.asList(new Point(1, 5), new Point(1, 1), new Point(5, 1)));
+
+    final int length1 = 4;
+
+    assertFalse(LIC1(testPoints, length1));
   }
 }
