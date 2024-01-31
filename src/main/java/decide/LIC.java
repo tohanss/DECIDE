@@ -18,8 +18,8 @@ public class LIC {
 
   /**
    * A method for LIC 3.
-   * There exists at least one set of three consecutive data points that are the vertices of a
-   * triangle with area greater than AREA1
+   * There exists at least one set of three consecutive data points that are
+   * the vertices of a triangle with area greater than AREA1
    *
    * @param points Array containing the coordinates of data points
    * @param area1  Area in LICs
@@ -34,7 +34,9 @@ public class LIC {
       a = points.get(i);
       b = points.get(i + 1);
       c = points.get(i + 2);
-      area = Math.abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))) / 2;
+      area = Math.abs(
+              (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
+      ) / 2;
       if (area > area1) {
         return true;
       }
@@ -86,6 +88,7 @@ public class LIC {
         return false;
     }
 
+    @SuppressWarnings("checkstyle:magicnumber")
     public boolean[] calculateCMV() {
         boolean[] CMV = new boolean[15];
 
