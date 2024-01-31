@@ -181,37 +181,37 @@ public class LicTest extends LIC {
     an angle that is either less than (PI - EPSILON) or more than (PI + EPSILON)*/
     @Test
     public void testLIC10TrueWhenAngleIsMoreThanAdditionOfPiAndEpsilon() {
-        final int cpts=3;
-        final int dpts=4;
-        final double epsilon = 1;
-        final int numpoints = 10;
+        final int C_PTS = 3;
+        final int D_PTS = 4;
+        final double EPSILON = 1;
+        final int NUMPOINTS = 10;
 
         final ArrayList<Point> points = new ArrayList<Point>();
-        for (int i = 0; i < numpoints; i++) {
+        for (int i = 0; i < NUMPOINTS; i++) {
             points.add(i, new Point(i, i));
         }
         points.set(0, new Point(1, 2));
-        points.set(cpts +1, new Point(1, 1));
-        points.set(cpts + cpts + 2, new Point(2,1));
-        assertTrue(lic10(points, numpoints, cpts, dpts, epsilon));
+        points.set(C_PTS +1, new Point(1, 1));
+        points.set(C_PTS + C_PTS + 2, new Point(2,1));
+        assertTrue(lic10(points, NUMPOINTS, C_PTS, D_PTS, EPSILON));
     }
     /*Test that lic10 is false when there does not exist at least three consecutive data points that form
      an angle that is either less than (PI-EPSILON) or more than (PI + EPSILON)*/
     @Test
     public void testLIC10FalseWhenAngleIsLessThanAdditionOfPiAndEpsilon() {
-        final int cpts=3;
-        final int dpts=4;
-        final double epsilon = 1;
-        final int numpoints = 10;
+        final int C_PTS = 3;
+        final int D_PTS = 4;
+        final double EPSILON = 1;
+        final int NUMPOINTS = 10;
 
         final ArrayList<Point> points = new ArrayList<Point>();
-        for (int i = 0; i < numpoints; i++) {
+        for (int i = 0; i < NUMPOINTS; i++) {
             points.add(i, new Point(i, i));
         }
         points.set(0, new Point(2, 4));
-        points.set(cpts +1, new Point(2, 2));
-        points.set(cpts + cpts + 2, new Point(2,0));
-        assertFalse(lic10(points, numpoints, cpts, dpts, epsilon));
+        points.set(C_PTS +1, new Point(2, 2));
+        points.set(C_PTS + C_PTS + 2, new Point(2,0));
+        assertFalse(lic10(points, NUMPOINTS, C_PTS, D_PTS, EPSILON));
     }
 
     @Test
