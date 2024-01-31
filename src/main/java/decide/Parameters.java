@@ -3,180 +3,188 @@ package decide;
 /**
  * Class for the different parameters.
  */
-@SuppressWarnings("checkstyle:ParameterNumber")
+@SuppressWarnings({
+    "checkstyle:ParameterNumber",
+    "checkstyle:JavadocVariable",
+    "checkstyle:JavadocMethod" })
 public final class Parameters {
-  /**
-   * Length in LICs 0, 7, 12.
-   */
   private final double length1;
-  /**
-   * Radius in LICs 1, 8, 13.
-   */
   private final double radius1;
-  /**
-   * Deviation from PI in LICs 2, 9.
-   */
   private final double epsilon;
-  /**
-   * Area in LICs 3, 10, 14.
-   */
   private final double area1;
-  /**
-   * No. of consecutive points in LIC 4.
-   */
   private final int qpts;
-  /**
-   * No. of quadrants in LIC 4.
-   */
   private final int quads;
-  /**
-   * Distance in LIC 6.
-   */
   private final double dist;
-  /**
-   * No. of consecutive pts . in LIC 6.
-   */
   private final int npts;
-  /**
-   * No. of int. pts. in LICs 7, 12.
-   */
   private final int kpts;
-  /**
-   * No. of int. pts. in LICs 8, 13.
-   */
   private final int apts;
-  /**
-   * No. of int. pts. in LICs 8, 13.
-   */
   private final int bpts;
-  /**
-   * No. of int. pts. in LIC 9.
-   */
   private final int cpts;
-  /**
-   * No. of int. pts. in LIC 9.
-   */
   private final int dpts;
-  /**
-   * No. of int. pts. in LICs 10, 14.
-   */
   private final int epts;
-  /**
-   * No. of int. pts. in LICs 10, 14.
-   */
   private final int fpts;
-  /**
-   * No. of int. pts. in LIC 11.
-   */
   private final int gpts;
-  /**
-   * Maximum length in LIC 12.
-   */
   private final double length2;
-  /**
-   * Maximum radius in LIC 13.
-   */
   private final double radius2;
-  /**
-   * Maximum area in LIC 14.
-   */
   private final double area2;
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * Length in LICs 0, 7, 12.
+   * @return the parameter
+   */
   public double getLength1() {
     return length1;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * Radius in LICs 1, 8, 13.
+   * @return the parameter
+   */
   public double getRadius1() {
     return radius1;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * Deviation from PI in LICs 2, 9.
+   * @return the parameter
+   */
   public double getEpsilon() {
     return epsilon;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * Area in LICs 3, 10, 14.
+   * @return the parameter
+   */
   public double getArea1() {
     return area1;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of consecutive points in LIC 4.
+   * @return the parameter
+   */
   public int getQpts() {
     return qpts;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of quadrants in LIC 4.
+   * @return the parameter
+   */
   public int getQuads() {
     return quads;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * Distance in LIC 6.
+   * @return the parameter
+   */
   public double getDist() {
     return dist;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of consecutive pts . in LIC 6.
+   * @return the parameter
+   */
   public int getNpts() {
     return npts;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of int. pts. in LICs 7, 12.
+   * @return the parameter
+   */
   public int getKpts() {
     return kpts;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of int. pts. in LICs 8, 13.
+
+   * @return the parameter
+   */
   public int getApts() {
     return apts;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of int. pts. in LICs 8, 13.
+   * @return the parameter
+   */
   public int getBpts() {
     return bpts;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of int. pts. in LIC 9.
+   * @return the parameter
+   */
   public int getCpts() {
     return cpts;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of int. pts. in LIC 9.
+   * @return the parameter
+   */
   public int getDpts() {
     return dpts;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of int. pts. in LICs 10, 14.
+   * @return the parameter
+   */
   public int getEpts() {
     return epts;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of int. pts. in LICs 10, 14.
+   * @return the parameter
+   */
   public int getFpts() {
     return fpts;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * No of int. pts. in LIC 11.
+   * @return the parameter
+   */
   public int getGpts() {
     return gpts;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * Maximum length in LIC 12.
+   * @return the parameter
+   */
   public double getLength2() {
     return length2;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * Maximum radius in LIC 13.
+   * @return the parameter
+   */
   public double getRadius2() {
     return radius2;
   }
 
-  @SuppressWarnings("checkstyle:MissingJavadocMethod")
+  /**
+   * Maximum area in LIC 14.
+   * @return the parameter
+   */
   public double getArea2() {
     return area2;
   }
 
+  /**
+   * Constructor for Parameters class.
+   * @return the parameter
+   */
   @SuppressWarnings({ "checkstyle:HiddenField",
       "checkstyle:MissingJavadocMethod" })
   public Parameters(final double length1,
