@@ -192,6 +192,7 @@ public class LIC {
    * @param bpts Number of points between the 2nd and the 3rd data points
    * @return true iff LIC 10 is met
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic14(final ArrayList<Point> points, final int numpoints, final int radius1, final int radius2, final int apts, final int bpts){
     assert(radius2 >= 0);
     if(numpoints < 5){ return false; }
