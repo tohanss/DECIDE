@@ -33,11 +33,11 @@ public class LIC {
       a = points.get(i);
       b = points.get(i + 1);
       c = points.get(i + 2);
-      Point center = new Point((a.x + b.x + c.x)/3, (a.y + b.y + c.y)/3);
+      Point center = new Point((a.x + b.x + c.x) / 3, (a.y + b.y + c.y) / 3);
       if (
-          distance(a, center) >= radius1 &&
-          distance(b, center) >= radius1 &&
-          distance(c, center) >= radius1
+          distance(a, center) >= radius1
+          && distance(b, center) >= radius1
+          && distance(c, center) >= radius1
       ) {
         return true;
       }
@@ -93,7 +93,7 @@ public class LIC {
     return false;
   }
 
-  private double distance(Point a, Point b) {
+  private double distance(final Point a, final Point b) {
     Point distVec = new Point(a.x - b.x, a.y - b.y);
     return Math.sqrt(distVec.x * distVec.x + distVec.y * distVec.y);
   }
