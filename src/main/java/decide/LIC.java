@@ -1,5 +1,8 @@
 package decide;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class LIC {
     private boolean LIC_0() {
         return false;
@@ -10,6 +13,25 @@ public class LIC {
     }
 
     private boolean LIC_2() {
+        double EPSILON = 1; //temp value
+        Point[] points = new Point[3]; //temp value
+        Point A, B, C;
+        double angle;
+        if ( EPSILON <= 0 || EPSILON > Math.PI) return false;
+        for (int i = 0; i < (points.length-2); i++) {
+            A = points[i];
+            B = points[i+1]; //vertex
+            C = points[i+2];
+            if (A.equals(B) || C.equals(B))
+               return false;
+            double ab = A.distance(B);
+            double bc = B.distance(C);
+            double ac = A.distance(C);
+            angle = Math.acos((ab*ab + bc*bc - ac*ac)/(2*ab*bc));
+            if (angle < Math.PI - EPSILON|| angle > Math.PI + EPSILON){
+                return true;
+            }
+        }
         return false;
     }
 
