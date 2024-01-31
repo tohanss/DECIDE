@@ -174,7 +174,26 @@ public class LIC {
     return false;
   }
 
+  /**
+   * There exists at least one set of three data points, separated by exactly A PTS and B PTS
+   * consecutive intervening points, respectively, that cannot be contained within or on a circle of
+   * radius RADIUS1. In addition, there exists at least one set of three data points (which can be
+   * the same or different from the three data points just mentioned) separated by exactly A PTS
+   * and B PTS consecutive intervening points, respectively, that can be contained in or on a
+   * circle of radius RADIUS2. Both parts must be true for the LIC to be true. The condition is
+   * not met when NUMPOINTS < 5.
+   * (0 ≤ RADIUS2)
+   *
+   * @param points Array containing the coordinates of data points
+   * @param numpoints The number of planar data points
+   * @param radius1 1st Radius in LICs
+   * @param radius2 2nd Radius in LICs
+   * @param apts Number of points between the 1st and the 2nd data points
+   * @param bpts Number of points between the 2nd and the 3rd data points
+   * @return true iff LIC 10 is met
+   */
   protected boolean lic14(final ArrayList<Point> points, final int numpoints, final int radius1, final int radius2, final int apts, final int bpts){
+    assert(radius2 >= 0);
     if(numpoints < 5){ return false; }
     boolean isOutside = false;
     boolean isInside = false;
