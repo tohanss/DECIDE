@@ -24,6 +24,7 @@ public class LIC {
    * @param radius1 Radius of circle that should not cover the points.
    * @return True if LIC2 is met
    */
+  @SuppressWarnings("checkstyle:MagicNumber")
   protected boolean lic2(final ArrayList<Point> points, final double radius1) {
     assert (radius1 >= 0);
     Point a;
