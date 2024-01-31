@@ -193,12 +193,21 @@ public class LIC {
    * @return true iff LIC 10 is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic14(final ArrayList<Point> points, final int numpoints, final int radius1, final int radius2, final int apts, final int bpts){
-    assert(radius2 >= 0);
-    if(numpoints < 5){ return false; }
+  protected boolean lic14(
+      final ArrayList<Point> points,
+      final int numpoints,
+      final int radius1,
+      final int radius2,
+      final int apts,
+      final int bpts
+  ) {
+    assert (radius2 >= 0);
+    if (numpoints < 5) {
+      return false;
+    }
     boolean isOutside = false;
     boolean isInside = false;
-    for(int i = 0; i < numpoints - apts - bpts; i++){
+    for (int i = 0; i < numpoints - apts - bpts; i++) {
       Point a = points.get(i);
       Point b = points.get(i + apts);
       Point c = points.get(i + apts + bpts);
@@ -218,7 +227,7 @@ public class LIC {
         isInside = true;
       }
     }
-    
+
     return isOutside && isInside;
   }
 
