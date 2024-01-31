@@ -7,10 +7,6 @@ import java.util.ArrayList;
  * Class for the LIC functions.
  */
 public class LIC {
-  private boolean lic0() {
-    return false;
-  }
-
   /**
    * Method for LIC 1
    * There exists at least one set of two consecutive data points that
@@ -21,7 +17,7 @@ public class LIC {
    * @param length1 Distance that two points need to be from each other
    * @return True if LIC 1 is met
    */
-  protected boolean lic1(final ArrayList<Point> points, final double length1) {
+  protected boolean lic0(final ArrayList<Point> points, final double length1) {
     assert (length1 >= 0);
     for (int i = 0; i < points.size() - 1; i++) {
       Point a = points.get(i);
@@ -32,6 +28,10 @@ public class LIC {
         return true;
       }
     }
+    return false;
+  }
+
+  private boolean lic1() {
     return false;
   }
 

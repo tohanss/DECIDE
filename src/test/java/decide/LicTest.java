@@ -23,7 +23,7 @@ public class LicTest extends LIC {
 
     final int length1 = 3;
 
-    assertTrue(lic1(testPoints, length1));
+    assertTrue(lic0(testPoints, length1));
   }
 
   @Test
@@ -33,7 +33,7 @@ public class LicTest extends LIC {
 
     final int length1 = 5;
 
-    assertFalse(lic1(testPoints, length1));
+    assertFalse(lic0(testPoints, length1));
   }
 
   @Test
@@ -43,7 +43,7 @@ public class LicTest extends LIC {
 
     final int length1 = 4;
 
-    assertFalse(lic1(testPoints, length1));
+    assertFalse(lic0(testPoints, length1));
   }
   
   @Test(expected = AssertionError.class)
@@ -53,6 +53,6 @@ public class LicTest extends LIC {
 
     final int length1 = -1;
 
-    lic1(testPoints, length1);
+    lic0(testPoints, length1);
   }
 }
