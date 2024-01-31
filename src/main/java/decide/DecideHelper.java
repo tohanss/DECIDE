@@ -23,7 +23,6 @@ public final class DecideHelper {
     boolean[][] pum = new boolean[len][len];
     for (int i = 0; i < len; i++) {
       for (int j = 0; j < len; j++) {
-        assert (lcm[i].length == len);
         if (lcm[i][j] == "ANDD") {
           pum[i][j] = cmv[i] & cmv[j];
         } else if (lcm[i][j] == "ORR") {
@@ -34,5 +33,38 @@ public final class DecideHelper {
       }
     }
     return pum;
+  }
+
+  /**
+   * Calculate PUV based on PUM.
+   *
+   * @param pum PUM matrix
+   * @param puv PUV vector
+   * @return FUV vector
+   */
+  public static boolean[] calculateFuv(
+      final boolean[][] pum,
+      final boolean[] puv) {
+    int len = pum.length;
+    assert (puv.length == len);
+    boolean[] fuv = new boolean[len];
+    for (int i = 0; i < len; i++) {
+      if (!puv[i]) {
+        fuv[i] = true;
+        continue;
+      }
+
+      boolean row = true;
+      for (int j = 0; j < len; j++) {
+        row &= pum[i][j];
+      }
+
+      if (row) {
+        fuv[i] = true;
+      } else {
+        fuv[i] = false;
+      }
+    }
+    return fuv;
   }
 }
