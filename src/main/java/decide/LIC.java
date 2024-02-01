@@ -54,9 +54,9 @@ public class LIC {
       c = points.get(i + 2);
       Point center = new Point((a.x + b.x + c.x) / 3, (a.y + b.y + c.y) / 3);
       if (
-          distance(a, center) >= radius1
-          && distance(b, center) >= radius1
-          && distance(c, center) >= radius1
+          distance(a, center) > radius1
+          && distance(b, center) > radius1
+          && distance(c, center) > radius1
       ) {
         return true;
       }

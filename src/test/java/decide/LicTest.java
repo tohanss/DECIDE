@@ -84,10 +84,10 @@ public class LicTest extends LIC {
     public void testLIC2FalseWhenPointsOnCircle() {
         final ArrayList<Point> testPoints =
                 new ArrayList<Point>(Arrays.asList(
-                        new Point(0,0),
+                        new Point(0,1),
                         new Point(1,0),
-                        new Point(2,0),
-                        new Point(0,0)
+                        new Point(0,-1),
+                        new Point(-1,0)
                 ));
         final double radius1 = 1;
 
