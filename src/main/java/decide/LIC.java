@@ -54,11 +54,9 @@ public class LIC {
       b = points.get(i + 1);
       c = points.get(i + 2);
       Point center = new Point((a.x + b.x + c.x) / 3, (a.y + b.y + c.y) / 3);
-      if (
-          distance(a, center) > radius1
+      if (distance(a, center) > radius1
           && distance(b, center) > radius1
-          && distance(c, center) > radius1
-      ) {
+          && distance(c, center) > radius1) {
         return true;
       }
     }
@@ -172,7 +170,6 @@ public class LIC {
     return false;
   }
 
-  /**
    /**
    * There exists at least one set of two consecutive data points, (X[i], Y[i])
    * and (X[j], Y[j]), such that X[j] - X[i] &lt; 0. (where i = j - 1)
@@ -211,11 +208,10 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic7(
-          final ArrayList<Point2D> points,
-          final int numpoints,
-          final int npts,
-          final double dist
-  ) {
+      final ArrayList<Point2D> points,
+      final int numpoints,
+      final int npts,
+      final double dist) {
 
     if (numpoints < 3) {
       return false;
@@ -238,10 +234,9 @@ public class LIC {
       if (isLine) {
         for (int j = i + 1; j < i + npts - 1; j++) {
           double distance = pointToLineDistance(
-                  points.get(j),
-                  firstPoint,
-                  lastPoint
-          );
+              points.get(j),
+              firstPoint,
+              lastPoint);
           if (Double.compare(distance, dist) == 1) {
             return true;
           }
@@ -258,6 +253,39 @@ public class LIC {
     return false;
   }
 
+    /**
+     * There exists at least one set of two data points separated by exactly
+     * K_PTS consecutive intervening points that are a distance greater than
+     * the length, LENGTH1, apart. The condition is not met when
+     * NUMPOINTS &lt; 3.
+     *
+     * @param points    Array containing the coordinates of data points
+     * @param numpoints The number of planar data points
+     * @param kpts      Number of intervening points
+     * @param length1   Distance that two points need to be from each other
+     * @return true iff LIC 8 is met
+     */
+    @SuppressWarnings("checkstyle:magicnumber")
+    protected boolean lic8(
+            final ArrayList<Point> points,
+            final int numpoints,
+            final int kpts,
+            final double length1) {
+        if (numpoints < 3) {
+            return false;
+        }
+
+        double distance;
+
+        for (int i = 0; i < numpoints - kpts - 1; i++) {
+            distance = distance(points.get(i), points.get(i + kpts + 1));
+            if (Double.compare(distance, length1) == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
   /**
    * There exists at least one set of three data points separated by exactly
    * cpts and dpts consecutive intervening points, respectively,
@@ -272,23 +300,22 @@ public class LIC {
    * 1 ≤ C PTS, 1 ≤ D PTS
    * C PTS+D PTS ≤ numpoints − 3
    *
-   * @param cpts Number of intervening points
-   * @param dpts Number of intervening points
-   * @param epsilon Deviation from pi
+   * @param cpts      Number of intervening points
+   * @param dpts      Number of intervening points
+   * @param epsilon   Deviation from pi
    * @param numpoints Number of planar data points
-   * @param points Array containing the coordinates of data points
+   * @param points    Array containing the coordinates of data points
    * @return true if lic 10 is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic10(
-          final ArrayList<Point> points,
-          final int numpoints,
-          final int cpts,
-          final int dpts,
-          final double epsilon
-  ) {
+      final ArrayList<Point> points,
+      final int numpoints,
+      final int cpts,
+      final int dpts,
+      final double epsilon) {
     if (numpoints < 5 || cpts <= 1 || dpts <= 1
-            || cpts + dpts > (numpoints - 3)) {
+        || cpts + dpts > (numpoints - 3)) {
       return false;
     }
 
@@ -431,8 +458,7 @@ public class LIC {
       final int radius1,
       final int radius2,
       final int apts,
-      final int bpts
-  ) {
+      final int bpts) {
     assert (radius2 >= 0);
     if (numpoints < 5) {
       return false;
@@ -444,18 +470,14 @@ public class LIC {
       Point b = points.get(i + apts);
       Point c = points.get(i + apts + bpts);
       Point center = new Point((a.x + b.x + c.x) / 3, (a.y + b.y + c.y) / 3);
-      if (
-          distance(a, center) > radius1
-              && distance(b, center) > radius1
-              && distance(c, center) > radius1
-      ) {
+      if (distance(a, center) > radius1
+          && distance(b, center) > radius1
+          && distance(c, center) > radius1) {
         isOutside = true;
       }
-      if (
-          distance(a, center) <= radius2
-              && distance(b, center) <= radius2
-              && distance(c, center) <= radius2
-      ) {
+      if (distance(a, center) <= radius2
+          && distance(b, center) <= radius2
+          && distance(c, center) <= radius2) {
         isInside = true;
       }
     }
@@ -528,7 +550,6 @@ public class LIC {
 
   /**
    * Method to get which quadrant around the origin a point is.
-   *
    * @param point Point
    * @return The quadrant as 1, 2, 3, or 4
    */
@@ -554,10 +575,9 @@ public class LIC {
    * @return the distance
    */
   private double pointToLineDistance(
-          final Point2D point,
-          final Point2D lineStart,
-          final Point2D lineEnd
-  ) {
+      final Point2D point,
+      final Point2D lineStart,
+      final Point2D lineEnd) {
     double i = pointToPointDistance(point, lineStart);
     double j = pointToPointDistance(lineStart, lineEnd);
     double k = pointToPointDistance(point, lineEnd);
@@ -576,9 +596,8 @@ public class LIC {
    * @return the distance
    */
   private double pointToPointDistance(
-          final Point2D point1,
-          final Point2D point2
-  ) {
+      final Point2D point1,
+      final Point2D point2) {
     double x1 = point1.getX();
     double y1 = point1.getY();
 
