@@ -17,11 +17,11 @@ public class DecideHelperTest {
         false, true, true, true, false
     };
     String[][] lcm = {
-        { "ANDD", "ANDD", "ORR", "ANDD", "NOTUSED" },
-        { "ANDD", "ANDD", "ORR", "ORR", "NOTUSED" },
-        { "ORR", "ORR", "ANDD", "ANDD", "NOTUSED" },
-        { "ANDD", "ORR", "ANDD", "ANDD", "NOTUSED" },
-        { "NOTUSED", "NOTUSED", "NOTUSED", "NOTUSED", "NOTUSED" }
+        {"ANDD", "ANDD", "ORR", "ANDD", "NOTUSED"},
+        {"ANDD", "ANDD", "ORR", "ORR", "NOTUSED"},
+        {"ORR", "ORR", "ANDD", "ANDD", "NOTUSED"},
+        {"ANDD", "ORR", "ANDD", "ANDD", "NOTUSED"},
+        {"NOTUSED", "NOTUSED", "NOTUSED", "NOTUSED", "NOTUSED"}
     };
 
     boolean[][] pum = DecideHelper.calculatePum(cmv, lcm);
@@ -35,9 +35,9 @@ public class DecideHelperTest {
   @Test
   public void fuvTest() {
     boolean[][] pum = {
-        { true, true, false },
-        { true, true, true },
-        { true, true, true },
+        {true, true, false},
+        {true, true, true},
+        {true, true, true},
     };
     boolean[] puv = {
         true, true, false
