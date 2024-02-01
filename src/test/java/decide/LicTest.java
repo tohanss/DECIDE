@@ -109,6 +109,34 @@ public class LicTest extends LIC {
     }
 
     @Test
+    public void testLIC3TrueIfAngleIsLessThanPI(){
+        ArrayList<Point> points = new ArrayList<Point>(Arrays.asList(new Point(0, 0), new Point(1, 1),
+                new Point(1, 0)));
+        double EPSILON = 1;
+        assertTrue(lic3(points, EPSILON));
+    }
+     @Test
+    public void testLIC3FalseIfAngleIsUndefined(){
+        ArrayList<Point> points = new ArrayList<Point>(Arrays.asList(new Point(1, 1), new Point(1, 1),
+                new Point(0, 0)));
+        double EPSILON = 1;
+        assertFalse(lic3(points, EPSILON));
+    }
+    @Test
+    public void testLIC3FalseIfEpsilonNotBetweenPiAndZero(){
+        ArrayList<Point> points = new ArrayList<Point>(Arrays.asList(new Point(1, 1), new Point(1, 1),
+                new Point(0, 0)));
+        double EPSILON = 5;
+        assertFalse(lic3(points, EPSILON));
+    }
+    @Test
+    public void testLIC3FalseIfAngleIsMoreThanPI(){
+        ArrayList<Point> points = new ArrayList<Point>(Arrays.asList(new Point(1, 0), new Point(2, 0),
+                new Point(3, 0)));
+        double EPSILON = 1;
+        assertFalse(lic3(points, EPSILON));
+    }
+    @Test
     public void testLic4TrueWhenPointsHaveAreaGreaterThanArea1() {
         final ArrayList<Point> testPoints =
             new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(1, -5), new Point(-1, -5)));
