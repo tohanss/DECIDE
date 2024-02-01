@@ -186,7 +186,7 @@ public class LIC {
    * and B PTS consecutive intervening points, respectively,
    * that can be contained in or on a circle of radius RADIUS2.
    * Both parts must be true for the LIC to be true. The condition is
-   * not met when NUMPOINTS is less than 5.
+   * not met when NUMPOINTS is &lt; 5.
    * (0 ≤ RADIUS2)
    *
    * @param points Array containing the coordinates of data points
