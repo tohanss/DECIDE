@@ -14,7 +14,7 @@ public class LIC {
    * Method for LIC 1
    * There exists at least one set of two consecutive data points that
    * are a distance greater than the length, LENGTH1, apart.
-   * (0 ≤ LENGTH1)
+   * (0 &le; LENGTH1)
    *
    * @param points  Array containing the coordinates of data points
    * @param length1 Distance that two points need to be from each other
@@ -37,7 +37,7 @@ public class LIC {
   /**
    * There exists at least one set of three consecutive data points that
    * cannot all be contained within or on a circle of radius RADIUS1.
-   * (0 ≤ RADIUS1)
+   * (0 &le; RADIUS1)
    *
    * @param points  Array containing the coordinates of data points.
    * @param radius1 Radius of circle that should not cover the points.
@@ -65,12 +65,12 @@ public class LIC {
 
   /**
    * There exists at least one set of three consecutive data points which form
-   * an angle such that angle < (PI−EPSILON) or angle > (PI+EPSILON)
+   * an angle such that angle &lt; (PI−EPSILON) or angle &gt; (PI+EPSILON)
    * The second of the three consecutive points is always the vertex of the
    * angle. If either the first point or the last point (or both) coincides
    * with the vertex, the angle is undefined and the LIC
    * is not satisfied by those three points.
-   *     (0 ≤ EPSILON < PI)
+   *     (0 &le; EPSILON &le; PI)
    * @param points Array containing coordinates of data points
    * @param epsilon Deviation from pi
    * @return true if all the conditions are met
@@ -139,7 +139,7 @@ public class LIC {
    * quadrant number, i.e., I, II, III, IV. For example, the data point (0,0)
    * is in quadrant I, the point (-l,0) is in quadrant II, the point (0,-l)
    * is in quadrant III, the point (0,1) is in quadrant I and the point (1,0)
-   * is in quadrant I. (2 ≤ Q PTS ≤ NUMPOINTS), (1 ≤ QUADS ≤ 3)
+   * is in quadrant I. (2 &le; Q PTS &le; NUMPOINTS), (1 &le; QUADS &le; 3)
    *
    * @param points    Array containing the coordinates of data points
    * @param qpts      Number of consecutive points
@@ -196,8 +196,8 @@ public class LIC {
    * points of these N_PTS are identical, then the calculated distance to
    * compare with DIST will be the distance from the coincident point to all
    * other points of the N_PTS consecutive points. The condition is not met
-   * when NUMPOINTS < 3.
-   * (3 ≤ N_PTS ≤ NUMPOINTS), (0 ≤ DIST)
+   * when NUMPOINTS &lt; 3.
+   * (3 &le; N_PTS &le; NUMPOINTS), (0 &le; DIST)
    *
    * @param points    Array containing the coordinates of data points
    * @param numpoints The number of planar data points
@@ -290,15 +290,15 @@ public class LIC {
    * There exists at least one set of three data points separated by exactly
    * cpts and dpts consecutive intervening points, respectively,
    * that form an angle such that:
-   * angle < (PI − EPSILON) or angle > (PI + EPSILON)
+   * angle &lt; (PI − EPSILON) or angle &gt; (PI + EPSILON)
    * The second point of the set of three points is always the vertex
    * of the angle. If either the first point or the last point
    * (or both) coincide with the vertex,
    * the angle is undefined and the LIC
    * is not satisfied by those three points.
-   * When numpoints < 5, the condition is not met.
-   * 1 ≤ C PTS, 1 ≤ D PTS
-   * C PTS+D PTS ≤ numpoints − 3
+   * When numpoints &lt; 5, the condition is not met.
+   * 1 &le; C PTS, 1 &le; D PTS
+   * C PTS+D PTS &le; numpoints − 3
    *
    * @param cpts      Number of intervening points
    * @param dpts      Number of intervening points
@@ -389,8 +389,8 @@ public class LIC {
    * the two data points just mentioned), separated by exactly K PTS
    * consecutive intervening points, that are a distance less than the length,
    * LENGTH2, apart. Both parts must be true
-   * for the LIC to be true. The condition is not met when NUMPOINTS < 3.
-   * 0 ≤ LENGTH2
+   * for the LIC to be true. The condition is not met when NUMPOINTS &lt; 3.
+   * 0 &le; LENGTH2
    *
    * @param points Array containing coordinates of data points
    * @param kpts Number separating the 2 data points
@@ -440,8 +440,8 @@ public class LIC {
   * and B PTS consecutive intervening points, respectively,
   * that can be contained in or on a circle of radius RADIUS2.
   * Both parts must be true for the LIC to be true. The condition is
-  * not met when NUMPOINTS is < 5.
-  * (0 ≤ RADIUS2)
+  * not met when NUMPOINTS is &lt; 5.
+  * (0 &le; RADIUS2)
   *
   * @param points Array containing the coordinates of data points
   * @param numpoints The number of planar data points
@@ -493,7 +493,7 @@ public class LIC {
    * exactly E PTS and F PTS consecutive intervening points, respectively,
    * that are the vertices of a triangle with area less than AREA2. Both
    * parts must be true for the LIC to be true. The condition is not met
-   * when NUMPOINTS < 5.
+   * when NUMPOINTS &lt; 5.
    *
    * @param points    Array containing the coordinates of data points
    * @param numpoints The number of planar data points
