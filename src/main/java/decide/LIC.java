@@ -102,7 +102,7 @@ public class LIC {
    *
    * @param points    Array containing the coordinates of data points
    * @param qpts      Number of consecutive points
-   * @param quads     Least number of quadrants that should be inhabited minus one
+   * @param quads     Least number of quadrants that should be covered minus 1
    * @param numpoints Number of points in points array
    * @return True if LIC 5 is met
    */
@@ -133,28 +133,38 @@ public class LIC {
    * There exists at least one set of N_PTS consecutive data points such that at
    * least one of the points lies a distance greater than DIST from the line
    * joining the first and last of these N_PTS points. If the first and last
-   * points of these N_PTS are identical, then the calculated distance to compare
-   * with DIST will be the distance from the coincident point to all other points
-   * of the N_PTS consecutive points. The condition is not met when NUMPOINTS < 3.
+   * points of these N_PTS are identical, then the calculated distance to
+   * compare with DIST will be the distance from the coincident point to all
+   * other points of the N_PTS consecutive points. The condition is not met
+   * when NUMPOINTS < 3.
    * (3 ≤ N_PTS ≤ NUMPOINTS), (0 ≤ DIST)
-   * 
+   *
    * @param points    Array containing the coordinates of data points
    * @param numpoints The number of planar data points
    * @param npts      Number of consecutive points
    * @param dist      Distance
-   * 
+   *
    * @return true iff LIC 7 is satisfied
    */
-  protected boolean lic7(final ArrayList<Point2D> points, final int numpoints, final int npts, final double dist) {
+  @SuppressWarnings("checkstyle:magicnumber")
+  protected boolean lic7(
+          final ArrayList<Point2D> points,
+          final int numpoints,
+          final int npts,
+          final double dist
+  ) {
 
-    if (numpoints < 3)
+    if (numpoints < 3) {
       return false;
+    }
 
-    if (npts > numpoints || npts < 3)
+    if (npts > numpoints || npts < 3) {
       return false;
+    }
 
-    if (dist < 0)
+    if (dist < 0) {
       return false;
+    }
 
     for (int i = 0; i < numpoints - npts + 1; i++) {
       Point2D firstPoint = points.get(i);
@@ -162,23 +172,27 @@ public class LIC {
 
       boolean isLine = !firstPoint.equals(lastPoint);
 
-      if (isLine)
+      if (isLine) {
         for (int j = i + 1; j < i + npts - 1; j++) {
-          double distance = pointToLineDistance(points.get(j), firstPoint, lastPoint);
-          if (Double.compare(distance, dist) == 1)
+          double distance = pointToLineDistance(
+                  points.get(j),
+                  firstPoint,
+                  lastPoint
+          );
+          if (Double.compare(distance, dist) == 1) {
             return true;
+          }
         }
-      else
+      } else {
         for (int j = i + 1; j < i + npts - 1; j++) {
-          double distance = pointToPointdistance(points.get(j), firstPoint);
-          if (Double.compare(distance, dist) == 1)
+          double distance = pointToPointDistance(points.get(j), firstPoint);
+          if (Double.compare(distance, dist) == 1) {
             return true;
+          }
         }
-
+      }
     }
-
     return false;
-
   }
 
   /**
@@ -287,7 +301,7 @@ public class LIC {
 
   /**
    * Method to get which quadrant around the origin a point is.
-   * 
+   *
    * @param point Point
    * @return The quadrant as 1, 2, 3, or 4
    */
@@ -306,34 +320,43 @@ public class LIC {
 
   /**
    * Calculates the distance between a point and a line using Heron's formula.
-   * 
+   *
    * @param point
    * @param lineStart
    * @param lineEnd
    * @return the distance
    */
-  private double pointToLineDistance(Point2D point, Point2D lineStart, Point2D lineEnd) {
-    double i = pointToPointdistance(point, lineStart);
-    double j = pointToPointdistance(lineStart, lineEnd);
-    double k = pointToPointdistance(point, lineEnd);
+  private double pointToLineDistance(
+          final Point2D point,
+          final Point2D lineStart,
+          final Point2D lineEnd
+  ) {
+    double i = pointToPointDistance(point, lineStart);
+    double j = pointToPointDistance(lineStart, lineEnd);
+    double k = pointToPointDistance(point, lineEnd);
 
     double s = (i + j + k) / 2;
     double area = Math.sqrt(s * (s - i) * (s - j) * (s - k));
 
-    double distance = (2 * area) / j;
-    return distance;
+    return (2 * area) / j;
   }
 
   /**
    * Calculates the distance between two points.
-   * 
+   *
    * @param point1
    * @param point2
    * @return the distance
    */
-  private double pointToPointdistance(Point2D point1, Point2D point2) {
-    double x1 = point1.getX(), y1 = point1.getY();
-    double x2 = point2.getX(), y2 = point2.getY();
+  private double pointToPointDistance(
+          final Point2D point1,
+          final Point2D point2
+  ) {
+    double x1 = point1.getX();
+    double y1 = point1.getY();
+    
+    double x2 = point2.getX();
+    double y2 = point2.getY();
 
     double i = x2 - x1;
     double j = y2 - y1;
