@@ -115,17 +115,7 @@ public class LIC {
         }
         return false;
       }
-      double ab = a.distance(b);
-      double bc = b.distance(c);
-      double ac = a.distance(c);
-      double angle = Math.acos((ab * ab + bc * bc - ac * ac)
-          / (2 * ab * bc));
-      if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
-        return true;
-      }
-    }
-    return false;
-  }
+
 
   /**
    * A method for LIC 4.
@@ -308,8 +298,6 @@ public class LIC {
         }
         return false;
     }
-    return false;
-  }
 
   /**
    * There exists at least one set of three data points separated by exactly
