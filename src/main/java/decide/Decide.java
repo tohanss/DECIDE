@@ -12,6 +12,8 @@ public final class Decide {
    * @param args command line arguments
    */
   public static void main(final String[] args) {
+
     System.out.println("");
+    InputReader inputReader = new InputReader("data.JSON");
   }
 }
