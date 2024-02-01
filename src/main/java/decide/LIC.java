@@ -354,7 +354,7 @@ public class LIC {
   ) {
     double x1 = point1.getX();
     double y1 = point1.getY();
-    
+
     double x2 = point2.getX();
     double y2 = point2.getY();
 
