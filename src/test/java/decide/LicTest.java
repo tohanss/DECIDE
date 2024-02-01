@@ -236,6 +236,57 @@ public class LicTest extends LIC {
     assertFalse(lic7(testPoints, NUMPOINTS, N_PTS, DIST));
   }
 
+  @Test
+  public void testLIC7TrueWhenPointsHaveGreaterDistanceThanDist() {
+    final ArrayList<Point2D> testPoints = new ArrayList<>();
+    testPoints.add(new Point2D.Double(60.6843, 92.1812));
+    testPoints.add(new Point2D.Double(45.6490, 93.5470));
+    testPoints.add(new Point2D.Double(200.5971, 200.8203));
+    testPoints.add(new Point2D.Double(63.6430, 72.4545));
+    testPoints.add(new Point2D.Double(31.2304, 82.3123));
+    testPoints.add(new Point2D.Double(49.1230, 22.3912));
+
+    final int NUMPOINTS = testPoints.size();
+    final int N_PTS = 3;
+    final int DIST = 40;
+
+    assertTrue(lic7(testPoints, NUMPOINTS, N_PTS, DIST));
+  }
+
+  @Test(expected = AssertionError.class)
+  public void testLIC7ThrowsWhenDistanceLessThan0() {
+    final ArrayList<Point2D> testPoints = new ArrayList<>();
+    testPoints.add(new Point2D.Double(60.6843, 92.1812));
+    testPoints.add(new Point2D.Double(45.6490, 93.5470));
+    testPoints.add(new Point2D.Double(200.5971, 200.8203));
+    testPoints.add(new Point2D.Double(63.6430, 72.4545));
+    testPoints.add(new Point2D.Double(31.2304, 82.3123));
+    testPoints.add(new Point2D.Double(49.1230, 22.3912));
+
+    final int NUMPOINTS = testPoints.size();
+    final int N_PTS = 3;
+    final int DIST = -1;
+
+    lic7(testPoints, NUMPOINTS, N_PTS, DIST);
+  }
+
+  @Test(expected = AssertionError.class)
+  public void testLIC7ThrowsWhenNumPtsWrong() {
+    final ArrayList<Point2D> testPoints = new ArrayList<>();
+    testPoints.add(new Point2D.Double(60.6843, 92.1812));
+    testPoints.add(new Point2D.Double(45.6490, 93.5470));
+    testPoints.add(new Point2D.Double(200.5971, 200.8203));
+    testPoints.add(new Point2D.Double(63.6430, 72.4545));
+    testPoints.add(new Point2D.Double(31.2304, 82.3123));
+    testPoints.add(new Point2D.Double(49.1230, 22.3912));
+
+    final int NUMPOINTS = testPoints.size();
+    final int N_PTS = 1;
+    final int DIST = 3;
+
+    lic7(testPoints, NUMPOINTS, N_PTS, DIST);
+  }
+
     @Test
     public void testLIC8TrueWhenPointsThatAreK_PTSApartHaveDistanceGreaterThanLength1() {
         final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
