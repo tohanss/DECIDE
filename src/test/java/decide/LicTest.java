@@ -209,6 +209,28 @@ public class LicTest extends LIC {
     }
 
     @Test
+    public void testLIC6TrueWhenConsecutivePointsHaveXDistanceBelow0() {
+        final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(3, 0),
+                new Point(2, 0)));
+
+        assertTrue(lic6(testPoints, testPoints.size()));
+    }
+
+    @Test
+    public void testLIC6FalseWhenConsecutivePointsHaveXDistanceAbove0() {
+        final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0)));
+
+        assertFalse(lic6(testPoints, testPoints.size()));
+    }
+
+    @Test
     public void testLIC7FalseWhenPointsHaveShorterDistanceThanDIST() {
         final ArrayList<Point2D> testPoints = new ArrayList<>();
         testPoints.add(new Point2D.Double(60.6843, 92.1812));

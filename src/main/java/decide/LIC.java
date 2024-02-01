@@ -145,7 +145,7 @@ public class LIC {
    *
    * @param points    Array containing the coordinates of data points
    * @param qpts      Number of consecutive points
-   * @param quads     Least number of quadrants that should be covered minus 1
+   * @param quads     Least number of quadrants that should be inhabited -1
    * @param numpoints Number of points in points array
    * @return True if LIC 5 is met
    */
@@ -170,6 +170,26 @@ public class LIC {
       }
     }
     return false;
+  }
+
+  /**
+   /**
+   * There exists at least one set of two consecutive data points, (X[i], Y[i])
+   * and (X[j], Y[j]), such that X[j] - X[i] &lt; 0. (where i = j - 1)
+   * @param points    Array containing the coordinates of data points
+   * @param numpoints The number of planar data points
+   * @return true iff LIC 6 is met
+   */
+  protected boolean lic6(final ArrayList<Point> points, final int numpoints) {
+      for (int i = 0; i < numpoints - 1; i++) {
+          double x1 = points.get(i).getX();
+          double x2 = points.get(i + 1).getX();
+
+          if (Double.compare(x2 - x1, 0) == -1) {
+              return true;
+          }
+      }
+      return false;
   }
 
   /**
