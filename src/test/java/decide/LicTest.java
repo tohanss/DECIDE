@@ -177,6 +177,68 @@ public class LicTest extends LIC {
 
         lic5(testPoints, Q_PTS, QUADS, NUMPOINTS);
     }
+    /*Test that lic10 is true when there exist at least three consecutive data points that form
+    an angle that is either less than (PI - EPSILON) or more than (PI + EPSILON)*/
+    @Test
+    public void testLIC10TrueWhenAngleIsMoreThanAdditionOfPiAndEpsilon() {
+        final int C_PTS = 3;
+        final int D_PTS = 4;
+        final double EPSILON = 1;
+        final int NUMPOINTS = 10;
+
+        final ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < NUMPOINTS; i++) {
+            points.add(i, new Point(i, i));
+        }
+        points.set(0, new Point(1, 2));
+        points.set(C_PTS +1, new Point(1, 1));
+        points.set(C_PTS + C_PTS + 2, new Point(2,1));
+        assertTrue(lic10(points, NUMPOINTS, C_PTS, D_PTS, EPSILON));
+    }
+    /*Test that lic10 is false when there does not exist at least three consecutive data points that form
+     an angle that is either less than (PI-EPSILON) or more than (PI + EPSILON)*/
+    @Test
+    public void testLIC10FalseWhenAngleIsLessThanAdditionOfPiAndEpsilon() {
+        final int C_PTS = 3;
+        final int D_PTS = 4;
+        final double EPSILON = 1;
+        final int NUMPOINTS = 10;
+
+        final ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < NUMPOINTS-1; i++) {
+            points.add(i, new Point(i, i));
+        }
+        points.set(0, new Point(2, 4));
+        points.set(C_PTS +1, new Point(2, 2));
+        points.set(C_PTS + C_PTS + 2, new Point(2,0));
+        assertFalse(lic10(points, NUMPOINTS, C_PTS, D_PTS, EPSILON));
+    }
+    @Test
+    public void testLIC10FalseWhenVertexSameAsOtherPoint() {
+        final int C_PTS = 3;
+        final int D_PTS = 4;
+        final double EPSILON = 1;
+        final int NUMPOINTS = 10;
+
+        final ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < NUMPOINTS - 1; i++) {
+            points.add(i, new Point(i, i));
+        }
+        points.set(0, new Point(1, 1));
+        points.set(C_PTS +1, new Point(1, 1));
+        points.set(C_PTS + C_PTS + 2, new Point(2,0));
+        assertFalse(lic10(points, NUMPOINTS, C_PTS, D_PTS, EPSILON));
+    }
+    @Test
+    public void testLIC10FalseWhenValuesTooSmall() {
+        final ArrayList<Point> POINTS = new ArrayList<>(Arrays.asList(new Point(1,1), new Point(2,2), new Point(3,3),
+        new Point(4,4), new Point(5,5)));
+        final int C_PTS = 1;
+        final int D_PTS = 1;
+        final double EPSILON = 1;
+        final int NUMPOINTS = 5;
+        assertFalse(lic10(POINTS,NUMPOINTS, C_PTS, D_PTS, EPSILON));
+    }
 
     @Test
     public void testLIC11TrueWhenPointsBetweenE_PTSAndF_PTSHaveAreaGreaterThanAREA1() {
