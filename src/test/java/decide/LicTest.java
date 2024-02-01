@@ -177,6 +177,54 @@ public class LicTest extends LIC {
 
         lic5(testPoints, Q_PTS, QUADS, NUMPOINTS);
     }
+    @Test
+    public void testLIC9TrueIfCantBeContained() {
+        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(5,-5), new Point(1,0),
+                new Point(4,1), new Point(10,3), new Point(1,2)));
+
+        final int NUMPOINTS = points.size();
+        final int RADIUS1 = 3;
+        final int A_PTS = 1;
+        final int B_PTS = 1;
+
+        assertTrue(lic9(points, NUMPOINTS, RADIUS1, A_PTS, B_PTS));
+    }
+    @Test
+    public void testLIC9TrueOnLineBiggerThanRadius() {
+        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(1,0), new Point(4,0),
+                new Point(4,0), new Point(5,0), new Point(1,2)));
+        final int NUMPOINTS = points.size();
+        final int RADIUS1 = 3;
+        final int A_PTS = 1;
+        final int B_PTS = 1;
+
+        assertTrue(lic9(points, NUMPOINTS, RADIUS1, A_PTS, B_PTS));
+    }
+
+    @Test
+    public void testLIC9FalseIfContainedByRadius() {
+        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(0,0), new Point(1,1),
+                new Point(1,0), new Point(1,1), new Point(1,1)));
+
+        final int NUMPOINTS = points.size();
+        final int RADIUS1 = 5;
+        final int A_PTS = 1;
+        final int B_PTS = 1;
+
+        assertFalse(lic9(points, NUMPOINTS, RADIUS1, A_PTS, B_PTS));
+    }
+    @Test
+    public void testLIC9FalseWhenParameterA_PTSValueTooSmall() {
+        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(1,1),
+                new Point(2,2), new Point(3,3)));
+
+        final int NUMPOINTS = points.size();
+        final int RADIUS1 = 3;
+        final int A_PTS = 0;
+        final int B_PTS = 0;
+
+        assertFalse(lic9(points, NUMPOINTS, RADIUS1, A_PTS, B_PTS));
+    }
 
     @Test
     public void testLIC11TrueWhenPointsBetweenE_PTSAndF_PTSHaveAreaGreaterThanAREA1() {
