@@ -404,6 +404,38 @@ public class LicTest extends LIC {
   }
 
   @Test
+  public void testLIC12TrueWhenDifferenceLesserThan0() {
+      final ArrayList<Point2D> testPoints = new ArrayList<>(
+              Arrays.asList(
+                      new Point2D.Double(0, 100),
+                      new Point2D.Double(20, 100),
+                      new Point2D.Double(5, 100),
+                      new Point2D.Double(5, 100)
+              )
+      );
+
+      final int gpts = 1;
+
+      assertTrue(lic12(testPoints, gpts));
+  }
+
+  @Test
+  public void testLIC12FalseWhenDifferenceGreaterThan0() {
+      final ArrayList<Point2D> testPoints = new ArrayList<>(
+              Arrays.asList(
+                      new Point2D.Double(0, 100),
+                      new Point2D.Double(10, 100),
+                      new Point2D.Double(5, 100),
+                      new Point2D.Double(20, 100)
+              )
+      );
+
+      final int gpts = 1;
+
+      assertFalse(lic12(testPoints, gpts));
+  }
+
+  @Test
   public void testLIC14TrueWhenPointsBetweenA_PTSAndB_PTSAreOutsideRADIUS1AndInsideRADIUS2() {
     ArrayList<Point> testPoints = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(2, 1), new Point(2, -1), new Point(1, 2)));
