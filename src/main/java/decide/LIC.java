@@ -8,7 +8,14 @@ import java.util.HashSet;
  * Class for the LIC functions.
  */
 public class LIC {
-  protected LIC() {
+  Parameters parameters;
+  ArrayList<Point2D> points;
+  int numPoints;
+
+  protected LIC(Parameters parameters, ArrayList<Point2D> points, int numPoints) {
+    this.parameters = parameters;
+    this.points = points;
+    this.numPoints = numPoints;
   }
 
   /**
@@ -126,7 +133,7 @@ public class LIC {
    * @param area1  Area in LICs
    * @return true iff LIC 4 is met
    */
-  protected boolean lic4(final ArrayList<Point2D> points, final int area1) {
+  protected boolean lic4(final ArrayList<Point2D> points, final double area1) {
     assert (0 <= area1);
 
     Point2D a;
@@ -376,7 +383,7 @@ public class LIC {
   protected boolean lic9(
           final ArrayList<Point2D> points,
           final int numpoints,
-          final int radius1,
+          final double radius1,
           final int apts,
           final int bpts
   ) {
@@ -433,7 +440,7 @@ public class LIC {
   protected boolean lic11(
       final ArrayList<Point2D> points,
       final int numpoints,
-      final int area1,
+      final double area1,
       final int epts,
       final int fpts) {
     assert (1 <= epts);
@@ -519,8 +526,8 @@ public class LIC {
   protected boolean lic13(
           final ArrayList<Point2D> points,
           final int kpts,
-          final int length1,
-          final int length2,
+          final double length1,
+          final double length2,
           final int numpoints
   ) {
     assert (0 <= length2);
@@ -573,8 +580,8 @@ public class LIC {
   protected boolean lic14(
       final ArrayList<Point2D> points,
       final int numpoints,
-      final int radius1,
-      final int radius2,
+      final double radius1,
+      final double radius2,
       final int apts,
       final int bpts) {
     assert (radius2 >= 0);
@@ -627,8 +634,8 @@ public class LIC {
   protected boolean lic15(
       final ArrayList<Point2D> points,
       final int numpoints,
-      final int area1,
-      final int area2,
+      final double area1,
+      final double area2,
       final int epts,
       final int fpts) {
     assert (0 <= area2);
@@ -746,6 +753,75 @@ public class LIC {
   @SuppressWarnings("checkstyle:magicnumber")
   public boolean[] calculateCmv() {
     boolean[] cmv = new boolean[15];
+
+    cmv[0] = lic1(points, parameters.getLength1());
+    cmv[1] = lic2(points, parameters.getRadius1());
+    cmv[2] = lic3(points, parameters.getEpsilon());
+    cmv[3] = lic4(points, parameters.getArea1());
+    cmv[4] = lic5(
+            points,
+            parameters.getQpts(),
+            parameters.getQuads(),
+            numPoints
+    );
+    cmv[5] = lic6(points, numPoints);
+    cmv[6] = lic7(
+            points,
+            numPoints,
+            parameters.getNpts(),
+            parameters.getDist()
+    );
+    cmv[7] = lic8(
+            points,
+            numPoints,
+            parameters.getKpts(),
+            parameters.getLength1()
+    );
+    cmv[8] = lic9(
+            points,
+            numPoints,
+            parameters.getRadius1(),
+            parameters.getApts(),
+            parameters.getBpts()
+    );
+    cmv[9] = lic10(
+            points,
+            numPoints,
+            parameters.getCpts(),
+            parameters.getDpts(),
+            parameters.getEpsilon()
+    );
+    cmv[10] = lic11(
+            points,
+            numPoints,
+            parameters.getArea1(),
+            parameters.getEpts(),
+            parameters.getFpts()
+    );
+    cmv[11] = lic12(points, parameters.getGpts());
+    cmv[12] = lic13(
+            points,
+            parameters.getKpts(),
+            parameters.getLength1(),
+            parameters.getLength2(),
+            numPoints
+    );
+    cmv[13] = lic14(
+            points,
+            numPoints,
+            parameters.getRadius1(),
+            parameters.getRadius2(),
+            parameters.getApts(),
+            parameters.getBpts()
+    );
+    cmv[14] = lic15(
+            points,
+            numPoints,
+            parameters.getArea1(),
+            parameters.getArea2(),
+            parameters.getEpts(),
+            parameters.getFpts()
+    );
 
     return cmv;
   }
