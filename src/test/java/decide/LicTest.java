@@ -6,7 +6,6 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.Test;
 
@@ -218,5 +217,39 @@ public class LicTest extends LIC {
     final int F_PTS = 1;
 
     assertFalse(lic15(testPoints, NUMPOINTS, AREA1, AREA2, E_PTS, F_PTS));
+  }
+
+  @Test
+  public void testLIC6TrueWhenPointsHaveGreaterDistanceThanDIST() {
+    final ArrayList<Point2D> testPoints = new ArrayList<>();
+    testPoints.add(new Point2D.Double(60.6843, 92.1812));
+    testPoints.add(new Point2D.Double(45.6490, 93.5470));
+    testPoints.add(new Point2D.Double(48.5971, 73.8203));
+    testPoints.add(new Point2D.Double(63.6430, 72.4545));
+    testPoints.add(new Point2D.Double(31.2304, 82.3123));
+    testPoints.add(new Point2D.Double(49.1230, 22.3912));
+
+    final int NUMPOINTS = testPoints.size();
+    final int N_PTS = 3;
+    final int DIST = 20;
+
+    assertTrue(lic6(testPoints, NUMPOINTS, N_PTS, DIST));
+  }
+
+  @Test
+  public void testLIC6FalseWhenPointsHaveShorterDistanceThanDIST() {
+    final ArrayList<Point2D> testPoints = new ArrayList<>();
+    testPoints.add(new Point2D.Double(60.6843, 92.1812));
+    testPoints.add(new Point2D.Double(45.6490, 93.5470));
+    testPoints.add(new Point2D.Double(48.5971, 73.8203));
+    testPoints.add(new Point2D.Double(63.6430, 72.4545));
+    testPoints.add(new Point2D.Double(31.2304, 82.3123));
+    testPoints.add(new Point2D.Double(49.1230, 22.3912));
+
+    final int NUMPOINTS = testPoints.size();
+    final int N_PTS = 3;
+    final int DIST = 40;
+
+    assertFalse(lic6(testPoints, NUMPOINTS, N_PTS, DIST));
   }
 }
