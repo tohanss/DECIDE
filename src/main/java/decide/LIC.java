@@ -132,6 +132,45 @@ public class LIC {
     return false;
   }
 
+  protected boolean lic9(
+          final ArrayList<Point> points,
+          final int numpoints,
+          final int radius1,
+          final int apts,
+          final int bpts
+  ) {
+    if (numpoints < 5 || 0 > apts || 0 > bpts || apts + bpts > (numpoints - 3)) {
+      return false;
+    }
+    Point a;
+    Point b;
+    Point c;
+    for (int i = 0; i < points.size() - apts - bpts -2; i++) {
+      a = points.get(i);
+      b = points.get(i + 1 + apts);
+      c = points.get(i + 2 + bpts);
+      double ab = a.distance(b);
+      double bc = b.distance(c);
+      double ac = a.distance(c);
+      double area = Math.abs(((a.x - c.x) * (b.x - a.x)
+              - (a.x - b.x) * (c.y - a.y)) * 0.5);
+      double longestLine = 0;
+      double radiusOfPoints = 0;
+      if(area == 0){
+        longestLine = Math.max(ab, Math.max(ac, bc)) / 2;
+      }
+      else {
+        radiusOfPoints = (ab * bc * ac) / Math.sqrt((ab + bc + ac) * (ab + bc - ac) * (ab + bc + ac) * (ab + bc - ac));
+      }
+      //if radius of circumscribed circle is bigger then they cant be contained
+      if(radiusOfPoints >radius1 || longestLine > radius1){
+        return true;
+      }
+
+    }
+    return false;
+  }
+
   /**
    * There exists at least one set of three data points separated by exactly
    * E PTS and F PTS consecutive intervening points, respectively, that are
