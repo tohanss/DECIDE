@@ -66,6 +66,47 @@ public class LIC {
   }
 
   /**
+   * There exists at least one set of three consecutive data points which form
+   * an angle such that angle < (PI−EPSILON) or angle > (PI+EPSILON)
+   * The second of the three consecutive points is always the vertex of the
+   * angle. If either the first point or the last point (or both) coincides
+   * with the vertex, the angle is undefined and the LIC
+   * is not satisfied by those three points.
+   *     (0 ≤ EPSILON < PI)
+   * @param points Array containing coordinates of data points
+   * @param epsilon Deviation from pi
+   * @return true if all the conditions are met
+   */
+    protected boolean lic3(
+            final ArrayList<Point> points,
+            final double epsilon
+    ) {
+        Point a;
+        Point b;
+        Point c;
+        if (epsilon <= 0 || epsilon > Math.PI) {
+          return false;
+        }
+        for (int i = 0; i < (points.size() - 2); i++) {
+            a = points.get(i);
+            b = points.get(i + 1);
+            c = points.get(i + 2);
+            if (a.equals(b) || c.equals(b)) {
+              return false;
+            }
+            double ab = a.distance(b);
+            double bc = b.distance(c);
+            double ac = a.distance(c);
+            double angle = Math.acos((ab * ab + bc * bc - ac * ac)
+                    / (2 * ab * bc));
+            if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+  /**
    * A method for LIC 4.
    * There exists at least one set of three consecutive data points that are
    * the vertices of a triangle with area greater than AREA1
@@ -542,3 +583,4 @@ public class LIC {
     return cmv;
   }
 }
+
