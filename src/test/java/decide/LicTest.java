@@ -103,6 +103,38 @@ public class LicTest extends LIC {
   }
 
   @Test
+  public void testLIC3TrueIfAngleIsLessThanPI(){
+    ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(0, 0), new Point(1, 1),
+            new Point(1, 0)));
+    double EPSILON = 1;
+    assertTrue(lic3(points, EPSILON));
+  }
+
+  @Test
+  public void testLIC3FalseIfAngleIsUndefined(){
+    ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(1, 1),
+            new Point(0, 0)));
+    double EPSILON = 1;
+    assertFalse(lic3(points, EPSILON));
+  }
+
+  @Test(expected = AssertionError.class)
+  public void testLIC3FalseIfEpsilonNotBetweenPiAndZero(){
+    ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(1, 1),
+            new Point(0, 0)));
+    double EPSILON = 5;
+    lic3(points, EPSILON);
+  }
+
+  @Test
+  public void testLIC3FalseIfAngleIsMoreThanPI(){
+    ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(1, 0), new Point(2, 0),
+            new Point(3, 0)));
+    double EPSILON = 1;
+    assertFalse(lic3(points, EPSILON));
+  }
+
+  @Test
   public void testLic4TrueWhenPointsHaveAreaGreaterThanArea1() {
     final ArrayList<Point2D> testPoints = new ArrayList<>(
         Arrays.asList(new Point2D.Double(1, 1), new Point2D.Double(1, -5), new Point2D.Double(-1, -5)));
@@ -202,6 +234,57 @@ public class LicTest extends LIC {
     final int DIST = 40;
 
     assertFalse(lic7(testPoints, NUMPOINTS, N_PTS, DIST));
+  }
+
+  @Test
+  public void testLIC7TrueWhenPointsHaveGreaterDistanceThanDist() {
+    final ArrayList<Point2D> testPoints = new ArrayList<>();
+    testPoints.add(new Point2D.Double(60.6843, 92.1812));
+    testPoints.add(new Point2D.Double(45.6490, 93.5470));
+    testPoints.add(new Point2D.Double(200.5971, 200.8203));
+    testPoints.add(new Point2D.Double(63.6430, 72.4545));
+    testPoints.add(new Point2D.Double(31.2304, 82.3123));
+    testPoints.add(new Point2D.Double(49.1230, 22.3912));
+
+    final int NUMPOINTS = testPoints.size();
+    final int N_PTS = 3;
+    final int DIST = 40;
+
+    assertTrue(lic7(testPoints, NUMPOINTS, N_PTS, DIST));
+  }
+
+  @Test(expected = AssertionError.class)
+  public void testLIC7ThrowsWhenDistanceLessThan0() {
+    final ArrayList<Point2D> testPoints = new ArrayList<>();
+    testPoints.add(new Point2D.Double(60.6843, 92.1812));
+    testPoints.add(new Point2D.Double(45.6490, 93.5470));
+    testPoints.add(new Point2D.Double(200.5971, 200.8203));
+    testPoints.add(new Point2D.Double(63.6430, 72.4545));
+    testPoints.add(new Point2D.Double(31.2304, 82.3123));
+    testPoints.add(new Point2D.Double(49.1230, 22.3912));
+
+    final int NUMPOINTS = testPoints.size();
+    final int N_PTS = 3;
+    final int DIST = -1;
+
+    lic7(testPoints, NUMPOINTS, N_PTS, DIST);
+  }
+
+  @Test(expected = AssertionError.class)
+  public void testLIC7ThrowsWhenNumPtsWrong() {
+    final ArrayList<Point2D> testPoints = new ArrayList<>();
+    testPoints.add(new Point2D.Double(60.6843, 92.1812));
+    testPoints.add(new Point2D.Double(45.6490, 93.5470));
+    testPoints.add(new Point2D.Double(200.5971, 200.8203));
+    testPoints.add(new Point2D.Double(63.6430, 72.4545));
+    testPoints.add(new Point2D.Double(31.2304, 82.3123));
+    testPoints.add(new Point2D.Double(49.1230, 22.3912));
+
+    final int NUMPOINTS = testPoints.size();
+    final int N_PTS = 1;
+    final int DIST = 3;
+
+    lic7(testPoints, NUMPOINTS, N_PTS, DIST);
   }
 
     @Test
