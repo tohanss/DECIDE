@@ -82,8 +82,54 @@ public class Lic {
     return false;
   }
 
+  /**
+   * Calculates LIC6. The LIC is satisfied if there exists at least one set of
+   * nPts consecutive data points such that at least one of the points lies a
+   * distance greater than DIST from the line joining the first and last of these
+   * nPts points.
+   * 
+   * @return true if the LIC is satisfied, false otherwise
+   */
   private boolean lic6() {
+    int minNPts = 3;
+
+    int numPoints = points.length;
+    if (numPoints < minNPts)
+      return false;
+
+    int nPts = parameters.getNpts();
+    if (nPts > numPoints || nPts < minNPts)
+      return false;
+
+    double dist = parameters.getDist();
+    if (dist < 0)
+      return false;
+
+    for (int i = 0; i < numPoints - nPts + 1; i++) {
+      Point2D firstPoint = points[i];
+      Point2D lastPoint = points[i + nPts - 1];
+
+      boolean isLine = !firstPoint.equals(lastPoint);
+
+      if (isLine)
+        for (int j = i + 1; j < i + nPts - 1; j++) {
+          double distance = pointToLineDistance(points[j], firstPoint, lastPoint);
+          if (Double.compare(distance, dist) == 1)
+            return true;
+        }
+      else
+        for (int j = i + 1; j < i + nPts - 1; j++) {
+          Point2D point = points[j];
+          double distance = pointToPointdistance(point, firstPoint);
+
+          if (Double.compare(distance, dist) == 1)
+            return true;
+        }
+
+    }
+
     return false;
+
   }
 
   private boolean lic7() {
