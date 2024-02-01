@@ -458,8 +458,8 @@ public class LIC {
    * Method for LIC 12
    * There exists at least one set of two data points, (X[i],Y[i])
    * and (X[j],Y[j]), separated by exactly G PTS consecutive intervening
-   * points, such that X[j] - X[i] < 0. (where i < j ) The
-   * condition is not met when NUMPOINTS < 3.
+   * points, such that X[j] - X[i] &lt; 0. (where i &lt; j ) The
+   * condition is not met when NUMPOINTS &lt; 3.
    * 1 ≤ G PTS ≤ NUMPOINTS−2
    *
    * @param points ArrayList of points
