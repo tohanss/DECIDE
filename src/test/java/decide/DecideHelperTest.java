@@ -8,6 +8,9 @@ import org.junit.Test;
  * A class to test the methods in the DecideHelper-class.
  */
 public class DecideHelperTest {
+  /**
+   * Test calculatePum
+   */
   @Test
   public void pumTest() {
     boolean[] cmv = {
