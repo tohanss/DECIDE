@@ -94,4 +94,24 @@ public class InputReader {
     }
     return parsedPreliminaryUnlockingVector;
   }
+
+  public int getNumPoints() {
+    return numPoints;
+  }
+
+  public ArrayList<Point2D> getPoints() {
+    return points;
+  }
+
+  public Parameters getParameters() {
+    return parameters;
+  }
+
+  public String[][] getLogicalConnectorMatrix() {
+    return logicalConnectorMatrix;
+  }
+
+  public boolean[] getPreliminaryUnlockingVector() {
+    return preliminaryUnlockingVector;
+  }
 }
