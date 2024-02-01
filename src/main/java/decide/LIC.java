@@ -175,10 +175,14 @@ public class LIC {
   }
 
   /**
-   * There exists at least one set of two data points, separated by exactly K PTS consecutive
-   * intervening points, which are a distance greater than the length, LENGTH1, apart. In addition, there exists at least one set of two data points (which can be the same or different from
-   * the two data points just mentioned), separated by exactly K PTS consecutive intervening
-   * points, that are a distance less than the length, LENGTH2, apart. Both parts must be true
+   * There exists at least one set of two data points,
+   * separated by exactly K PTS consecutive intervening points,
+   * which are a distance greater than the length, LENGTH1, apart.
+   * In addition, there exists at least one set of two data points
+   * (which can be the same or different from
+   * the two data points just mentioned), separated by exactly K PTS
+   * consecutive intervening points, that are a distance less than the length,
+   * LENGTH2, apart. Both parts must be true
    * for the LIC to be true. The condition is not met when NUMPOINTS < 3.
    * 0 ≤ LENGTH2
    *
@@ -187,14 +191,15 @@ public class LIC {
    * @param length1 Minimum distance
    * @param length2 Maximum distance
    * @param numpoints Number of planar data points
-   * @return
+   * @return true if the conditions of lic13 is met
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic13(
           final ArrayList<Point> points,
-          int kpts,
-          int length1,
-          int length2,
-          int numpoints
+          final int kpts,
+          final int length1,
+          final int length2,
+          final int numpoints
   ) {
     if (numpoints < 3 || length2 < 0) {
       return false;
@@ -203,14 +208,14 @@ public class LIC {
     boolean distandeLesserThanLength2 = false;
     for (int i = 0; i < points.size() - kpts - 1; i++) {
 
-      double distance = points.get(i).distance(points.get(i+kpts));
-      if( distance > length1) {
+      double distance = points.get(i).distance(points.get(i + kpts));
+      if (distance > length1) {
         distanceGreaterThanLength1 = true;
       }
-      if(distance < length2) {
+      if (distance < length2) {
         distandeLesserThanLength2 = true;
       }
-      if (distanceGreaterThanLength1 && distandeLesserThanLength2){
+      if (distanceGreaterThanLength1 && distandeLesserThanLength2) {
         return true;
       }
     }
