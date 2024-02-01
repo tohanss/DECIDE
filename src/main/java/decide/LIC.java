@@ -313,28 +313,76 @@ public class LIC {
   }
 
   /**
-   * There exists at least one set of three data points,
-   * separated by exactly A PTS and B PTS
-   * consecutive intervening points, respectively,
-   * that cannot be contained within or on a circle of
-   * radius RADIUS1. In addition, there exists at least
-   * one set of three data points (which can be
-   * the same or different from the three data points
-   * just mentioned) separated by exactly A PTS
-   * and B PTS consecutive intervening points, respectively,
-   * that can be contained in or on a circle of radius RADIUS2.
-   * Both parts must be true for the LIC to be true. The condition is
-   * not met when NUMPOINTS is &lt; 5.
-   * (0 ≤ RADIUS2)
+   * There exists at least one set of two data points,
+   * separated by exactly K PTS consecutive intervening points,
+   * which are a distance greater than the length, LENGTH1, apart.
+   * In addition, there exists at least one set of two data points
+   * (which can be the same or different from
+   * the two data points just mentioned), separated by exactly K PTS
+   * consecutive intervening points, that are a distance less than the length,
+   * LENGTH2, apart. Both parts must be true
+   * for the LIC to be true. The condition is not met when NUMPOINTS < 3.
+   * 0 ≤ LENGTH2
    *
-   * @param points    Array containing the coordinates of data points
-   * @param numpoints The number of planar data points
-   * @param radius1   1st Radius in LICs
-   * @param radius2   2nd Radius in LICs
-   * @param apts      Number of points between the 1st and the 2nd data points
-   * @param bpts      Number of points between the 2nd and the 3rd data points
-   * @return true iff LIC 14 is met
+   * @param points Array containing coordinates of data points
+   * @param kpts Number separating the 2 data points
+   * @param length1 Minimum distance
+   * @param length2 Maximum distance
+   * @param numpoints Number of planar data points
+   * @return true if the conditions of lic13 is met
    */
+  @SuppressWarnings("checkstyle:magicnumber")
+  protected boolean lic13(
+          final ArrayList<Point> points,
+          final int kpts,
+          final int length1,
+          final int length2,
+          final int numpoints
+  ) {
+    if (numpoints < 3 || length2 < 0) {
+      return false;
+    }
+    boolean distanceGreaterThanLength1 = false;
+    boolean distandeLesserThanLength2 = false;
+    for (int i = 0; i < points.size() - kpts - 1; i++) {
+
+      double distance = points.get(i).distance(points.get(i + kpts));
+      if (distance > length1) {
+        distanceGreaterThanLength1 = true;
+      }
+      if (distance < length2) {
+        distandeLesserThanLength2 = true;
+      }
+      if (distanceGreaterThanLength1 && distandeLesserThanLength2) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+ /**
+  * There exists at least one set of three data points,
+  * separated by exactly A PTS and B PTS
+  * consecutive intervening points, respectively,
+  * that cannot be contained within or on a circle of
+  * radius RADIUS1. In addition, there exists at least
+  * one set of three data points (which can be
+  * the same or different from the three data points
+  * just mentioned) separated by exactly A PTS
+  * and B PTS consecutive intervening points, respectively,
+  * that can be contained in or on a circle of radius RADIUS2.
+  * Both parts must be true for the LIC to be true. The condition is
+  * not met when NUMPOINTS is < 5.
+  * (0 ≤ RADIUS2)
+  *
+  * @param points Array containing the coordinates of data points
+  * @param numpoints The number of planar data points
+  * @param radius1 1st Radius in LICs
+  * @param radius2 2nd Radius in LICs
+  * @param apts Number of points between the 1st and the 2nd data points
+  * @param bpts Number of points between the 2nd and the 3rd data points
+  * @return true iff LIC 14 is met
+  */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic14(
       final ArrayList<Point> points,
@@ -365,7 +413,6 @@ public class LIC {
         isInside = true;
       }
     }
-
     return isOutside && isInside;
   }
 
@@ -378,7 +425,7 @@ public class LIC {
    * exactly E PTS and F PTS consecutive intervening points, respectively,
    * that are the vertices of a triangle with area less than AREA2. Both
    * parts must be true for the LIC to be true. The condition is not met
-   * when NUMPOINTS &lt; 5.
+   * when NUMPOINTS < 5.
    *
    * @param points    Array containing the coordinates of data points
    * @param numpoints The number of planar data points

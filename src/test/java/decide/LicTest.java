@@ -240,6 +240,51 @@ public class LicTest extends LIC {
     points.set(C_PTS + C_PTS + 2, new Point(2, 0));
     assertFalse(lic10(points, NUMPOINTS, C_PTS, D_PTS, EPSILON));
   }
+      
+    @Test
+    public void testLIC13TrueWhenDistanceIsGreaterThanLength1andLessThanLength2(){
+        final ArrayList<Point> points =
+                new ArrayList<>(Arrays.asList(new Point(1,1), new Point(2,2), new Point(3,3), new Point(1,4), new Point(5,5)));
+        final int NUMPOINTS = 5;
+        final int KPTS = 1;
+        final int LENGTH1 = 2;
+        final int LENGTH2 = 2;
+
+        assertTrue(lic13(points, KPTS, LENGTH1, LENGTH2, NUMPOINTS));
+    }
+    @Test
+    public void testLIC13FalseWhenDistanceIsLesserThanLength1OrGreaterThanLength2(){
+        final ArrayList<Point> points =
+                new ArrayList<>(Arrays.asList(new Point(1,1), new Point(2,2), new Point(1,1), new Point(2,2), new Point(1,1)));
+        final int NUMPOINTS = 5;
+        final int KPTS = 1;
+        final int LENGTH1 = 2;
+        final int LENGTH2 = 2;
+
+        assertFalse(lic13(points, KPTS, LENGTH1, LENGTH2, NUMPOINTS));
+    }
+    @Test
+    public void testLIC13FalseWhenLength2OrNumpointsTooSmall(){
+        final ArrayList<Point> points =
+                new ArrayList<>(Arrays.asList(new Point(1,1), new Point(2,2), new Point(3,3), new Point(1,4), new Point(5,5)));
+        final int NUMPOINTS = 3;
+        final int KPTS = 1;
+        final int LENGTH1 = 2;
+        final int LENGTH2 = 1;
+
+        assertFalse(lic13(points, KPTS, LENGTH1, LENGTH2, NUMPOINTS));
+    }
+
+    @Test
+    public void testLIC14TrueWhenPointsBetweenA_PTSAndB_PTSAreOutsideRADIUS1AndInsideRADIUS2() {
+        ArrayList<Point> testPoints = new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(2, 1), new Point(2, -1), new Point(1, 2)));
+        final int RADIUS1 = 1;
+        final int RADIUS2 = 2;
+        final int A_PTS = 2;
+        final int B_PTS = 1;
+        assertFalse(lic14(testPoints, testPoints.size(), RADIUS1, RADIUS2, A_PTS, B_PTS));
+    }
+    
 
   @Test
   public void testLIC10FalseWhenVertexSameAsOtherPoint() {
