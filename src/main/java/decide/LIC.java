@@ -410,7 +410,7 @@ public class LIC {
    * exactly E PTS and F PTS consecutive intervening points, respectively,
    * that are the vertices of a triangle with area less than AREA2. Both
    * parts must be true for the LIC to be true. The condition is not met
-   * when NUMPOINTS &lt; 5.
+   * when NUMPOINTS < 5.
    *
    * @param points    Array containing the coordinates of data points
    * @param numpoints The number of planar data points
