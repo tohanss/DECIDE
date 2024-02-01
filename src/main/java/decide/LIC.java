@@ -254,9 +254,11 @@ public class LIC {
   }
 
     /**
-     * There exists at least one set of two data points separated by exactly K_PTS
-     * consecutive intervening points that are a distance greater than the length,
-     * LENGTH1, apart. The condition is not met when NUMPOINTS &lt; 3.
+     * There exists at least one set of two data points separated by exactly
+     * K_PTS consecutive intervening points that are a distance greater than
+     * the length, LENGTH1, apart. The condition is not met when
+     * NUMPOINTS &lt; 3.
+     *
      * @param points    Array containing the coordinates of data points
      * @param numpoints The number of planar data points
      * @param kpts      Number of intervening points
