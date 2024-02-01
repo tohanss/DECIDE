@@ -143,9 +143,9 @@ public class LIC {
    * @param npts      Number of consecutive points
    * @param dist      Distance
    * 
-   * @return true iff LIC 6 is satisfied
+   * @return true iff LIC 7 is satisfied
    */
-  protected boolean lic6(final ArrayList<Point2D> points, final int numpoints, final int npts, final double dist) {
+  protected boolean lic7(final ArrayList<Point2D> points, final int numpoints, final int npts, final double dist) {
 
     if (numpoints < 3)
       return false;
