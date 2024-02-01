@@ -7,6 +7,20 @@ import java.awt.geom.Point2D;
  */
 public class Lic {
 
+  private Parameters parameters;
+  private Point2D[] points;
+
+  /**
+   * Constructor for the Lic class.
+   * 
+   * @param parameters
+   * @param points
+   */
+  public Lic(final Parameters parameters, Point2D[] points) {
+    this.parameters = parameters;
+    this.points = points;
+  }
+
   /**
    * Calculates the distance between a point and a line using Heron's formula.
    * 
