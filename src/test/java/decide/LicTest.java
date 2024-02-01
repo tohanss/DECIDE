@@ -220,7 +220,7 @@ public class LicTest extends LIC {
     }
     @Test
     public void testLIC9TrueIfCantBeContained() {
-        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(5,-5), new Point(1,0),
+        final ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(5,-5), new Point(1,0),
                 new Point(4,1), new Point(10,3), new Point(1,2)));
 
         final int NUMPOINTS = points.size();
@@ -232,7 +232,7 @@ public class LicTest extends LIC {
     }
     @Test
     public void testLIC9TrueOnLineBiggerThanRadius() {
-        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(1,0), new Point(4,0),
+        final ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(1,0), new Point(4,0),
                 new Point(4,0), new Point(5,0), new Point(1,2)));
         final int NUMPOINTS = points.size();
         final int RADIUS1 = 3;
@@ -244,7 +244,7 @@ public class LicTest extends LIC {
 
     @Test
     public void testLIC9FalseIfContainedByRadius() {
-        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(0,0), new Point(1,1),
+        final ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(0,0), new Point(1,1),
                 new Point(1,0), new Point(1,1), new Point(1,1)));
 
         final int NUMPOINTS = points.size();
@@ -256,7 +256,7 @@ public class LicTest extends LIC {
     }
     @Test
     public void testLIC9FalseWhenParameterA_PTSValueTooSmall() {
-        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(1,1),
+        final ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(1,1),
                 new Point(2,2), new Point(3,3)));
 
         final int NUMPOINTS = points.size();
