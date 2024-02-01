@@ -16,8 +16,8 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC1TrueWhenPointsHaveGreaterDistanceThanLength1() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(
-        Arrays.asList(new Point(1, 5), new Point(1, 1), new Point(5, 1)));
+    final ArrayList<Point2D> testPoints = new ArrayList<Point2D>(
+        Arrays.asList(new Point2D.Double(1, 5), new Point2D.Double(1, 1), new Point2D.Double(5, 1)));
 
     final int length1 = 3;
 
@@ -26,8 +26,8 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC1FalseWhenPointsHaveShorterDistanceThanLength1() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(
-        Arrays.asList(new Point(1, 5), new Point(1, 1), new Point(5, 1)));
+    final ArrayList<Point2D> testPoints = new ArrayList<Point2D>(
+        Arrays.asList(new Point2D.Double(1, 5), new Point2D.Double(1, 1), new Point2D.Double(5, 1)));
 
     final int length1 = 5;
 
@@ -36,8 +36,8 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC1FalseWhenPointsHaveEqualDistanceToLength1() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(
-        Arrays.asList(new Point(1, 5), new Point(1, 1), new Point(5, 1)));
+    final ArrayList<Point2D> testPoints = new ArrayList<Point2D>(
+        Arrays.asList(new Point2D.Double(1, 5), new Point2D.Double(1, 1), new Point2D.Double(5, 1)));
 
     final int length1 = 4;
 
@@ -46,8 +46,8 @@ public class LicTest extends LIC {
 
   @Test(expected = AssertionError.class)
   public void testLIC1ExceptionThrownWhenLengthLessThan0() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(
-        Arrays.asList(new Point(1, 5), new Point(1, 1), new Point(5, 1)));
+    final ArrayList<Point2D> testPoints = new ArrayList<Point2D>(
+        Arrays.asList(new Point2D.Double(1, 5), new Point2D.Double(1, 1), new Point2D.Double(5, 1)));
 
     final int length1 = -1;
 
@@ -56,19 +56,19 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC2TrueWhenPointsNotContainedInCircle() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
+    final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
         new Point(0, 0),
         new Point(2, 0),
         new Point(0, 2),
         new Point(2, 2)));
-    final double radius1 = 1;
+    final double radius1 = 0.5;
 
     assertTrue(lic2(testPoints, radius1));
   }
 
   @Test
   public void testLIC2FalseWhenPointsContainedInCircle() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
+    final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
         new Point(0, 0),
         new Point(2, 0),
         new Point(0, 2),
@@ -80,11 +80,11 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC2FalseWhenPointsOnCircle() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
-        new Point(0, 1),
-        new Point(1, 0),
-        new Point(0, -1),
-        new Point(-1, 0)));
+    final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
+        new Point2D.Double(0, 1),
+        new Point2D.Double(1, 0),
+        new Point2D.Double(0, -1),
+        new Point2D.Double(-1, 0)));
     final double radius1 = 1;
 
     assertFalse(lic2(testPoints, radius1));
@@ -92,11 +92,11 @@ public class LicTest extends LIC {
 
   @Test(expected = AssertionError.class)
   public void testLIC2ExceptionThrownWhenRadiusLessThan0() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
-        new Point(0, 0),
-        new Point(2, 0),
-        new Point(0, 2),
-        new Point(2, 2)));
+    final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
+        new Point2D.Double(0, 0),
+        new Point2D.Double(2, 0),
+        new Point2D.Double(0, 2),
+        new Point2D.Double(2, 2)));
     final double radius1 = -1;
 
     lic2(testPoints, radius1);
@@ -104,8 +104,8 @@ public class LicTest extends LIC {
 
   @Test
   public void testLic4TrueWhenPointsHaveAreaGreaterThanArea1() {
-    final ArrayList<Point> testPoints = new ArrayList<>(
-        Arrays.asList(new Point(1, 1), new Point(1, -5), new Point(-1, -5)));
+    final ArrayList<Point2D> testPoints = new ArrayList<>(
+        Arrays.asList(new Point2D.Double(1, 1), new Point2D.Double(1, -5), new Point2D.Double(-1, -5)));
     final int area1 = 5;
 
     assertTrue(lic4(testPoints, area1));
@@ -113,8 +113,8 @@ public class LicTest extends LIC {
 
   @Test
   public void testLic4FalseWhenPointsDoesntHaveAreaGreaterThanArea1() {
-    final ArrayList<Point> testPoints = new ArrayList<>(
-        Arrays.asList(new Point(1, 1), new Point(2, 2), new Point(3, 3)));
+    final ArrayList<Point2D> testPoints = new ArrayList<>(
+        Arrays.asList(new Point2D.Double(1, 1), new Point2D.Double(2, 2), new Point2D.Double(3, 3)));
     final int area1 = 4;
 
     assertFalse(lic4(testPoints, area1));
@@ -122,11 +122,11 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC5TrueWhenEnoughPointsOnQuadrants() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
-        new Point(1, -1),
-        new Point(1, 1),
-        new Point(-1, 1),
-        new Point(-1, -1)));
+    final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
+        new Point2D.Double(1, -1),
+        new Point2D.Double(1, 1),
+        new Point2D.Double(-1, 1),
+        new Point2D.Double(-1, -1)));
 
     final int QUADS = 2;
     final int Q_PTS = 3;
@@ -137,11 +137,11 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC5FalseWhenPointsAreNotOnQUADSQuadrants() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
-        new Point(0, 0),
-        new Point(-1, 1),
-        new Point(1, 0),
-        new Point(-1, 1)));
+    final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
+        new Point2D.Double(0, 0),
+        new Point2D.Double(-1, 1),
+        new Point2D.Double(1, 0),
+        new Point2D.Double(-1, 1)));
 
     final int QUADS = 3;
     final int Q_PTS = 3;
@@ -152,11 +152,11 @@ public class LicTest extends LIC {
 
   @Test(expected = AssertionError.class)
   public void testLIC5ThrowsExceptionWhenInvalidInput() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
-        new Point(0, 0),
-        new Point(1, 1),
-        new Point(1, 0),
-        new Point(-1, 1)));
+    final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
+        new Point2D.Double(0, 0),
+        new Point2D.Double(1, 1),
+        new Point2D.Double(1, 0),
+        new Point2D.Double(-1, 1)));
 
     final int QUADS = 4;
     final int Q_PTS = 5;
@@ -167,22 +167,22 @@ public class LicTest extends LIC {
 
     @Test
     public void testLIC6TrueWhenConsecutivePointsHaveXDistanceBelow0() {
-        final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
-                new Point(0, 0),
-                new Point(1, 0),
-                new Point(3, 0),
-                new Point(2, 0)));
+        final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
+                new Point2D.Double(0, 0),
+                new Point2D.Double(1, 0),
+                new Point2D.Double(3, 0),
+                new Point2D.Double(2, 0)));
 
         assertTrue(lic6(testPoints, testPoints.size()));
     }
 
     @Test
     public void testLIC6FalseWhenConsecutivePointsHaveXDistanceAbove0() {
-        final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
-                new Point(0, 0),
-                new Point(1, 0),
-                new Point(2, 0),
-                new Point(3, 0)));
+        final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
+                new Point2D.Double(0, 0),
+                new Point2D.Double(1, 0),
+                new Point2D.Double(2, 0),
+                new Point2D.Double(3, 0)));
 
         assertFalse(lic6(testPoints, testPoints.size()));
     }
@@ -206,11 +206,11 @@ public class LicTest extends LIC {
 
     @Test
     public void testLIC8TrueWhenPointsThatAreK_PTSApartHaveDistanceGreaterThanLength1() {
-        final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
-                new Point(0, 0),
-                new Point(1, 1),
-                new Point(1, 0),
-                new Point(-1, 1)));
+        final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
+                new Point2D.Double(0, 0),
+                new Point2D.Double(1, 1),
+                new Point2D.Double(1, 0),
+                new Point2D.Double(-1, 1)));
 
         final int K_PTS = 2;
         final int NUMPOINTS = 4;
@@ -220,7 +220,7 @@ public class LicTest extends LIC {
     }
     @Test
     public void testLIC9TrueIfCantBeContained() {
-        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(5,-5), new Point(1,0),
+        final ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(5,-5), new Point(1,0),
                 new Point(4,1), new Point(10,3), new Point(1,2)));
 
         final int NUMPOINTS = points.size();
@@ -232,7 +232,7 @@ public class LicTest extends LIC {
     }
     @Test
     public void testLIC9TrueOnLineBiggerThanRadius() {
-        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(1,0), new Point(4,0),
+        final ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(1,0), new Point(4,0),
                 new Point(4,0), new Point(5,0), new Point(1,2)));
         final int NUMPOINTS = points.size();
         final int RADIUS1 = 3;
@@ -244,7 +244,7 @@ public class LicTest extends LIC {
 
     @Test
     public void testLIC9FalseIfContainedByRadius() {
-        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(0,0), new Point(1,1),
+        final ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(0,0), new Point(1,1),
                 new Point(1,0), new Point(1,1), new Point(1,1)));
 
         final int NUMPOINTS = points.size();
@@ -256,7 +256,7 @@ public class LicTest extends LIC {
     }
     @Test
     public void testLIC9FalseWhenParameterA_PTSValueTooSmall() {
-        final ArrayList<Point> points = new ArrayList<>(Arrays.asList(new Point(1,1),
+        final ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(1,1),
                 new Point(2,2), new Point(3,3)));
 
         final int NUMPOINTS = points.size();
@@ -279,7 +279,7 @@ public class LicTest extends LIC {
     final double EPSILON = 1;
     final int NUMPOINTS = 10;
 
-    final ArrayList<Point> points = new ArrayList<Point>();
+    final ArrayList<Point2D> points = new ArrayList<>();
     for (int i = 0; i < NUMPOINTS; i++) {
       points.add(i, new Point(i, i));
     }
@@ -301,7 +301,7 @@ public class LicTest extends LIC {
     final double EPSILON = 1;
     final int NUMPOINTS = 10;
 
-    final ArrayList<Point> points = new ArrayList<Point>();
+    final ArrayList<Point2D> points = new ArrayList<>();
     for (int i = 0; i < NUMPOINTS - 1; i++) {
       points.add(i, new Point(i, i));
     }
@@ -313,7 +313,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC13TrueWhenDistanceIsGreaterThanLength1andLessThanLength2() {
-    final ArrayList<Point> points = new ArrayList<>(
+    final ArrayList<Point2D> points = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(1, 4), new Point(5, 5)));
     final int NUMPOINTS = 5;
     final int KPTS = 1;
@@ -325,7 +325,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC13FalseWhenDistanceIsLesserThanLength1OrGreaterThanLength2() {
-    final ArrayList<Point> points = new ArrayList<>(
+    final ArrayList<Point2D> points = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(2, 2), new Point(1, 1), new Point(2, 2), new Point(1, 1)));
     final int NUMPOINTS = 5;
     final int KPTS = 1;
@@ -337,7 +337,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC13FalseWhenLength2OrNumpointsTooSmall() {
-    final ArrayList<Point> points = new ArrayList<>(
+    final ArrayList<Point2D> points = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(1, 4), new Point(5, 5)));
     final int NUMPOINTS = 3;
     final int KPTS = 1;
@@ -354,7 +354,7 @@ public class LicTest extends LIC {
     final double EPSILON = 1;
     final int NUMPOINTS = 10;
 
-    final ArrayList<Point> points = new ArrayList<Point>();
+    final ArrayList<Point2D> points = new ArrayList<>();
     for (int i = 0; i < NUMPOINTS - 1; i++) {
       points.add(i, new Point(i, i));
     }
@@ -366,7 +366,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC10FalseWhenValuesTooSmall() {
-    final ArrayList<Point> POINTS = new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(2, 2), new Point(3, 3),
+    final ArrayList<Point2D> POINTS = new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(2, 2), new Point(3, 3),
         new Point(4, 4), new Point(5, 5)));
     final int C_PTS = 1;
     final int D_PTS = 1;
@@ -377,7 +377,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC8FalseWhenPointsThatAreK_PTSApartDoesntHaveDistanceGreaterThanLength1() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
+    final ArrayList<Point2D> testPoints = new ArrayList<>(Arrays.asList(
         new Point(0, 0),
         new Point(1, 1),
         new Point(1, 0),
@@ -392,7 +392,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC11TrueWhenPointsBetweenE_PTSAndF_PTSHaveAreaGreaterThanAREA1() {
-    final ArrayList<Point> testPoints = new ArrayList<>(
+    final ArrayList<Point2D> testPoints = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(1, -5), new Point(1, 1), new Point(-1, -5), new Point(1, 1)));
     final int NUMPOINTS = testPoints.size();
 
@@ -462,7 +462,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC14TrueWhenPointsBetweenA_PTSAndB_PTSAreOutsideRADIUS1AndInsideRADIUS2() {
-    ArrayList<Point> testPoints = new ArrayList<>(
+    ArrayList<Point2D> testPoints = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(2, 1), new Point(2, -1), new Point(1, 2)));
     final int RADIUS1 = 1;
     final int RADIUS2 = 2;
@@ -473,7 +473,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC14FalseWhenPointsBetweenA_PTSAndB_PTSAreNotOutsideRADIUS1OrInsideRADIUS2() {
-    ArrayList<Point> testPoints = new ArrayList<>(
+    ArrayList<Point2D> testPoints = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(2, 1), new Point(2, -1), new Point(1, 2), new Point(2, 2)));
     final int RADIUS1 = 1;
     final int RADIUS2 = 2;
@@ -484,7 +484,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC11FalseWhenPointsBetweenE_PTSAndF_PTSDoesntHaveAreaGreaterThanAREA1() {
-    final ArrayList<Point> testPoints = new ArrayList<>(
+    final ArrayList<Point2D> testPoints = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(1, 2), new Point(1, 3), new Point(1, 4), new Point(1, 5)));
     final int NUMPOINTS = testPoints.size();
 
@@ -497,7 +497,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC15TrueWhenPointsBetweenE_PTSAndF_PTSHaveAreaGreaterThanAREA1AndLesserThanAREA2() {
-    final ArrayList<Point> testPoints = new ArrayList<>(
+    final ArrayList<Point2D> testPoints = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(1, -5), new Point(1, 1), new Point(-1, -5), new Point(1, 1)));
     final int NUMPOINTS = testPoints.size();
 
@@ -511,7 +511,7 @@ public class LicTest extends LIC {
 
   @Test
   public void testLIC15FalseWhenPointsBetweenE_PTSAndF_PTSDoesntHaveAreaGreaterThanAREA1OrLesserThanAREA2() {
-    final ArrayList<Point> testPoints = new ArrayList<>(
+    final ArrayList<Point2D> testPoints = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(1, 2), new Point(1, 3), new Point(1, 4), new Point(1, 5)));
     final int NUMPOINTS = testPoints.size();
 

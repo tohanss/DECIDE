@@ -61,7 +61,7 @@ public final class Parameters {
   }
 
   /**
-   * No of consecutive points in LIC 4.
+   * No{@literal .} of consecutive points in LIC 4.
    * @return the parameter
    */
   public int getQpts() {
@@ -69,7 +69,7 @@ public final class Parameters {
   }
 
   /**
-   * No of quadrants in LIC 4.
+   * No{@literal .} of quadrants in LIC 4.
    * @return the parameter
    */
   public int getQuads() {
@@ -85,7 +85,7 @@ public final class Parameters {
   }
 
   /**
-   * No of consecutive pts . in LIC 6.
+   * No{@literal .} of consecutive pts . in LIC 6.
    * @return the parameter
    */
   public int getNpts() {
@@ -93,7 +93,7 @@ public final class Parameters {
   }
 
   /**
-   * No of int. pts. in LICs 7, 12.
+   * No{@literal .} of int{@literal .} pts{@literal .} in LICs 7, 12.
    * @return the parameter
    */
   public int getKpts() {
@@ -101,7 +101,7 @@ public final class Parameters {
   }
 
   /**
-   * No of int. pts. in LICs 8, 13.
+   * No{@literal .} of int{@literal .} pts{@literal .} in LICs 8, 13.
 
    * @return the parameter
    */
@@ -110,7 +110,7 @@ public final class Parameters {
   }
 
   /**
-   * No of int. pts. in LICs 8, 13.
+   * No{@literal .} of int{@literal .} pts{@literal .} in LICs 8, 13.
    * @return the parameter
    */
   public int getBpts() {
@@ -118,7 +118,7 @@ public final class Parameters {
   }
 
   /**
-   * No of int. pts. in LIC 9.
+   * No{@literal .} of int{@literal .} pts{@literal .} in LIC 9.
    * @return the parameter
    */
   public int getCpts() {
@@ -126,7 +126,7 @@ public final class Parameters {
   }
 
   /**
-   * No of int. pts. in LIC 9.
+   * No{@literal .} of int{@literal .} pts{@literal .} in LIC 9.
    * @return the parameter
    */
   public int getDpts() {
@@ -134,7 +134,7 @@ public final class Parameters {
   }
 
   /**
-   * No of int. pts. in LICs 10, 14.
+   * No{@literal .} of int{@literal .} pts{@literal .} in LICs 10, 14.
    * @return the parameter
    */
   public int getEpts() {
@@ -142,7 +142,7 @@ public final class Parameters {
   }
 
   /**
-   * No of int. pts. in LICs 10, 14.
+   * No{@literal .} of int{@literal .} pts{@literal .} in LICs 10, 14.
    * @return the parameter
    */
   public int getFpts() {
@@ -150,7 +150,7 @@ public final class Parameters {
   }
 
   /**
-   * No of int. pts. in LIC 11.
+   * No{@literal .} of int{@literal .} pts{@literal .} in LIC 11.
    * @return the parameter
    */
   public int getGpts() {
