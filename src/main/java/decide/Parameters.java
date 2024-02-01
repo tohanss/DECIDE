@@ -6,7 +6,7 @@ package decide;
 @SuppressWarnings({
     "checkstyle:ParameterNumber",
     "checkstyle:JavadocVariable",
-    "checkstyle:JavadocMethod" })
+    "checkstyle:JavadocMethod"})
 public final class Parameters {
   private final double length1;
   private final double radius1;
@@ -184,8 +184,8 @@ public final class Parameters {
   /**
    * Constructor for Parameters class.
    */
-  @SuppressWarnings({ "checkstyle:HiddenField",
-      "checkstyle:MissingJavadocMethod" })
+  @SuppressWarnings({"checkstyle:HiddenField",
+      "checkstyle:MissingJavadocMethod"})
   public Parameters(final double length1,
       final double radius1,
       final double epsilon,
