@@ -14,6 +14,5 @@ public final class Decide {
   public static void main(final String[] args) {
 
     System.out.println("");
-    InputReader inputReader = new InputReader("src/main/java/decide/data.JSON");
   }
 }

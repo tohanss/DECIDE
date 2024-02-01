@@ -35,6 +35,10 @@ public class InputReader {
 
       points = parsePoints((JSONArray) inputVariables.get("POINTS"));
 
+      if(numPoints != points.size()){
+        throw new Exception("The amount of points and numpoints is not equal");
+      }
+
       parameters = parseParameters((JSONObject) inputVariables.get("PARAMETERS"));
 
       logicalConnectorMatrix = parseLogicalConnectorMatrix((JSONArray) inputVariables.get("LCM"));
@@ -43,6 +47,8 @@ public class InputReader {
 
     } catch (IOException | ParseException e) {
       e.printStackTrace();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
   }
 
@@ -103,9 +109,11 @@ public class InputReader {
    * @return parsed LCM
    */
   private String[][] parseLogicalConnectorMatrix(final JSONArray jsonLogicalConnectorMatrix){
+    assert jsonLogicalConnectorMatrix.size() == 15;
     String[][] parsedLogicalConnectorMatrix = new String[15][15];
     for(int i = 0; i < jsonLogicalConnectorMatrix.size(); i++){
       JSONArray jsonLogicalConnectorArray = (JSONArray) jsonLogicalConnectorMatrix.get(i);
+      assert jsonLogicalConnectorArray.size() == 15;
       for(int j = 0; j < jsonLogicalConnectorArray.size(); j++){
         parsedLogicalConnectorMatrix[i][j] = (String) jsonLogicalConnectorArray.get(j);
       }
@@ -120,6 +128,7 @@ public class InputReader {
    */
   private boolean[] parsePreliminaryUnlockingVector(final JSONArray jsonPreliminaryUnlockingVector){
     boolean[] parsedPreliminaryUnlockingVector = new boolean[15];
+    assert jsonPreliminaryUnlockingVector.size() == 15;
     for(int i = 0; i < jsonPreliminaryUnlockingVector.size(); i++){
       parsedPreliminaryUnlockingVector[i] = (boolean) jsonPreliminaryUnlockingVector.get(i);
     }
