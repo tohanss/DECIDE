@@ -9,6 +9,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * Class to read the input provided from a JSON file
+ */
 public class InputReader {
   private int numPoints;
   private ArrayList<Point2D> points;
@@ -16,6 +19,10 @@ public class InputReader {
   private String[][] logicalConnectorMatrix;
   private boolean[] preliminaryUnlockingVector;
 
+  /**
+   * Constructor to the InputReader class
+   * @param filePath the path to the JSON-file
+   */
   public InputReader(String filePath){
     JSONParser jsonParser = new JSONParser();
 
@@ -39,18 +46,32 @@ public class InputReader {
     }
   }
 
+  /**
+   * Method to parse the JSON-formatted array of points to correct format.
+   * @param jsonPoints JSON-formatted array of points
+   * @return parsed points
+   */
   private ArrayList<Point2D> parsePoints(final JSONArray jsonPoints){
     ArrayList<Point2D> parsedPoints = new ArrayList<>();
     jsonPoints.forEach(point -> parsePoint(parsedPoints, (JSONObject) point));
     return parsedPoints;
   }
 
+  /**
+   * Method to parse the JSON-formatted point to correct format.
+   * @param jsonPoint JSON-formatted point
+   */
   private void parsePoint(ArrayList<Point2D> parsedPoints, final JSONObject jsonPoint){
     final double x = ((Long) jsonPoint.get("x")).doubleValue();
     final double y = ((Long) jsonPoint.get("y")).doubleValue();
     parsedPoints.add(new Point2D.Double(x, y));
   }
 
+  /**
+   * Method to parse the JSON-formatted parameters to correct format.
+   * @param jsonParameters JSON-formatted parameters
+   * @return parsed parameters
+   */
   private Parameters parseParameters(final JSONObject jsonParameters){
     final double length1 = ((Long) jsonParameters.get("LENGTH1")).doubleValue();
     final double radius1 = ((Long) jsonParameters.get("RADIUS1")).doubleValue();
@@ -76,6 +97,11 @@ public class InputReader {
         length2, radius2, area2);
   }
 
+  /**
+   * Method to parse the JSON-formatted LCM to correct format.
+   * @param jsonLogicalConnectorMatrix matrix of JSON-formatted LCM
+   * @return parsed LCM
+   */
   private String[][] parseLogicalConnectorMatrix(final JSONArray jsonLogicalConnectorMatrix){
     String[][] parsedLogicalConnectorMatrix = new String[15][15];
     for(int i = 0; i < jsonLogicalConnectorMatrix.size(); i++){
@@ -87,6 +113,11 @@ public class InputReader {
     return parsedLogicalConnectorMatrix;
   }
 
+  /**
+   * Method to parse the JSON-formatted PUV to correct format
+   * @param jsonPreliminaryUnlockingVector array of JSON-formatted PUV
+   * @return parsed PUV
+   */
   private boolean[] parsePreliminaryUnlockingVector(final JSONArray jsonPreliminaryUnlockingVector){
     boolean[] parsedPreliminaryUnlockingVector = new boolean[15];
     for(int i = 0; i < jsonPreliminaryUnlockingVector.size(); i++){
