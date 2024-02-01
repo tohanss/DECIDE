@@ -13,15 +13,15 @@ import org.json.simple.parser.ParseException;
  * Class to read the input provided from a JSON file.
  */
 public class InputReader {
-  /** The number of planar data points */
+  /** The number of planar data points. */
   private int numPoints;
-  /** Array containing the coordinates of data points */
+  /** Array containing the coordinates of data points. */
   private ArrayList<Point2D> points;
-  /** Class holding parameters for LIC’s  */
+  /** Class holding parameters for LIC’s.  */
   private Parameters parameters;
-  /** Logical Connector Matrix */
+  /** Logical Connector Matrix. */
   private String[][] logicalConnectorMatrix;
-  /** Preliminary Unlocking Vector */
+  /** Preliminary Unlocking Vector. */
   private boolean[] preliminaryUnlockingVector;
 
   /**
@@ -149,14 +149,17 @@ public class InputReader {
   }
 
   /**
-   * A get-method for numPoints
+   * A get-method for numPoints.
+   *
    * @return numPoints
    */
   public int getNumPoints() {
     return numPoints;
   }
+
   /**
-   * A get-method for points
+   * A get-method for points.
+   *
    * @return points
    */
   public ArrayList<Point2D> getPoints() {
@@ -164,7 +167,8 @@ public class InputReader {
   }
 
   /**
-   * A get-method for parameters
+   * A get-method for parameters.
+   *
    * @return parameters
    */
   public Parameters getParameters() {
@@ -172,7 +176,8 @@ public class InputReader {
   }
 
   /**
-   * A get-method for LCM
+   * A get-method for LCM.
+   *
    * @return LCM
    */
   public String[][] getLogicalConnectorMatrix() {
@@ -180,7 +185,8 @@ public class InputReader {
   }
 
   /**
-   * A get-method for PUV
+   * A get-method for PUV.
+   *
    * @return PUV
    */
   public boolean[] getPreliminaryUnlockingVector() {
