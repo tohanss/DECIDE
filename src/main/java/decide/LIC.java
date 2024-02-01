@@ -64,6 +64,47 @@ public class LIC {
   }
 
   /**
+   * There exists at least one set of three consecutive data points which form
+   * an angle such that angle < (PI−EPSILON) or angle > (PI+EPSILON)
+   * The second of the three consecutive points is always the vertex of the
+   * angle. If either the first point or the last point (or both) coincides
+   * with the vertex, the angle is undefined and the LIC
+   * is not satisfied by those three points.
+   *     (0 ≤ EPSILON < PI)
+   * @param points Array containing coordinates of data points
+   * @param epsilon Deviation from pi
+   * @return true if all the conditions are met
+   */
+    protected boolean lic3(
+            final ArrayList<Point> points,
+            final double epsilon
+    ) {
+        Point a;
+        Point b;
+        Point c;
+        if (epsilon <= 0 || epsilon > Math.PI) {
+          return false;
+        }
+        for (int i = 0; i < (points.size() - 2); i++) {
+            a = points.get(i);
+            b = points.get(i + 1);
+            c = points.get(i + 2);
+            if (a.equals(b) || c.equals(b)) {
+              return false;
+            }
+            double ab = a.distance(b);
+            double bc = b.distance(c);
+            double ac = a.distance(c);
+            double angle = Math.acos((ab * ab + bc * bc - ac * ac)
+                    / (2 * ab * bc));
+            if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+  /**
    * A method for LIC 4.
    * There exists at least one set of three consecutive data points that are
    * the vertices of a triangle with area greater than AREA1
@@ -102,7 +143,7 @@ public class LIC {
    *
    * @param points    Array containing the coordinates of data points
    * @param qpts      Number of consecutive points
-   * @param quads     Least number of quadrants that should be covered minus 1
+   * @param quads     Least number of quadrants that should be inhabited -1
    * @param numpoints Number of points in points array
    * @return True if LIC 5 is met
    */
@@ -129,35 +170,23 @@ public class LIC {
     return false;
   }
 
-  /**
-   * There exists at least one set of two data points separated by exactly K_PTS
-   * consecutive intervening points that are a distance greater than the length,
-   * LENGTH1, apart. The condition is not met when NUMPOINTS &lt; 3.
+   /**
+   * There exists at least one set of two consecutive data points, (X[i], Y[i])
+   * and (X[j], Y[j]), such that X[j] - X[i] &lt; 0. (where i = j - 1)
    * @param points    Array containing the coordinates of data points
    * @param numpoints The number of planar data points
-   * @param kpts      Number of intervening points
-   * @param length1   Distance that two points need to be from each other
-   * @return true iff LIC 8 is met
+   * @return true iff LIC 6 is met
    */
-  @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic8(
-      final ArrayList<Point> points,
-      final int numpoints,
-      final int kpts,
-      final double length1) {
-    if (numpoints < 3) {
-      return false;
-    }
+  protected boolean lic6(final ArrayList<Point> points, final int numpoints) {
+      for (int i = 0; i < numpoints - 1; i++) {
+          double x1 = points.get(i).getX();
+          double x2 = points.get(i + 1).getX();
 
-    double distance;
-
-    for (int i = 0; i < numpoints - kpts - 1; i++) {
-      distance = distance(points.get(i), points.get(i + kpts + 1));
-      if (Double.compare(distance, length1) == 1) {
-        return true;
+          if (Double.compare(x2 - x1, 0) == -1) {
+              return true;
+          }
       }
-    }
-    return false;
+      return false;
   }
 
   /**
@@ -223,6 +252,37 @@ public class LIC {
     }
     return false;
   }
+
+    /**
+     * There exists at least one set of two data points separated by exactly K_PTS
+     * consecutive intervening points that are a distance greater than the length,
+     * LENGTH1, apart. The condition is not met when NUMPOINTS &lt; 3.
+     * @param points    Array containing the coordinates of data points
+     * @param numpoints The number of planar data points
+     * @param kpts      Number of intervening points
+     * @param length1   Distance that two points need to be from each other
+     * @return true iff LIC 8 is met
+     */
+    @SuppressWarnings("checkstyle:magicnumber")
+    protected boolean lic8(
+            final ArrayList<Point> points,
+            final int numpoints,
+            final int kpts,
+            final double length1) {
+        if (numpoints < 3) {
+            return false;
+        }
+
+        double distance;
+
+        for (int i = 0; i < numpoints - kpts - 1; i++) {
+            distance = distance(points.get(i), points.get(i + kpts + 1));
+            if (Double.compare(distance, length1) == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
 
   /**
    * There exists at least one set of three data points separated by exactly
@@ -560,3 +620,4 @@ public class LIC {
     return cmv;
   }
 }
+

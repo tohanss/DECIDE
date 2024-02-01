@@ -165,20 +165,27 @@ public class LicTest extends LIC {
     lic5(testPoints, Q_PTS, QUADS, NUMPOINTS);
   }
 
-  @Test
-  public void testLIC8TrueWhenPointsThatAreK_PTSApartHaveDistanceGreaterThanLength1() {
-    final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
-        new Point(0, 0),
-        new Point(1, 1),
-        new Point(1, 0),
-        new Point(-1, 1)));
+    @Test
+    public void testLIC6TrueWhenConsecutivePointsHaveXDistanceBelow0() {
+        final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(3, 0),
+                new Point(2, 0)));
 
-    final int K_PTS = 2;
-    final int NUMPOINTS = 4;
-    final double LENGTH1 = 1;
+        assertTrue(lic6(testPoints, testPoints.size()));
+    }
 
-    assertTrue(lic8(testPoints, NUMPOINTS, K_PTS, LENGTH1));
-  }
+    @Test
+    public void testLIC6FalseWhenConsecutivePointsHaveXDistanceAbove0() {
+        final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(2, 0),
+                new Point(3, 0)));
+
+        assertFalse(lic6(testPoints, testPoints.size()));
+    }
 
   @Test
   public void testLIC7FalseWhenPointsHaveShorterDistanceThanDIST() {
@@ -196,6 +203,21 @@ public class LicTest extends LIC {
 
     assertFalse(lic7(testPoints, NUMPOINTS, N_PTS, DIST));
   }
+
+    @Test
+    public void testLIC8TrueWhenPointsThatAreK_PTSApartHaveDistanceGreaterThanLength1() {
+        final ArrayList<Point> testPoints = new ArrayList<Point>(Arrays.asList(
+                new Point(0, 0),
+                new Point(1, 1),
+                new Point(1, 0),
+                new Point(-1, 1)));
+
+        final int K_PTS = 2;
+        final int NUMPOINTS = 4;
+        final double LENGTH1 = 1;
+
+        assertTrue(lic8(testPoints, NUMPOINTS, K_PTS, LENGTH1));
+    }
 
   /*
    * Test that lic10 is true when there exist at least three consecutive data
