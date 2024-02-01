@@ -133,23 +133,29 @@ public class LIC {
    * There exists at least one set of two data points separated by exactly K_PTS
    * consecutive intervening points that are a distance greater than the length,
    * LENGTH1, apart. The condition is not met when NUMPOINTS &lt; 3.
-   * 
    * @param points    Array containing the coordinates of data points
    * @param numpoints The number of planar data points
    * @param kpts      Number of intervening points
    * @param length1   Distance that two points need to be from each other
    * @return true iff LIC 8 is met
    */
-  protected boolean lic8(final ArrayList<Point> points, final int numpoints, final int kpts, final double length1) {
-    if (numpoints < 3)
+  @SuppressWarnings("checkstyle:magicnumber")
+  protected boolean lic8(
+      final ArrayList<Point> points,
+      final int numpoints,
+      final int kpts,
+      final double length1) {
+    if (numpoints < 3) {
       return false;
+    }
 
     double distance;
 
     for (int i = 0; i < numpoints - kpts - 1; i++) {
       distance = distance(points.get(i), points.get(i + kpts + 1));
-      if (Double.compare(distance, length1) == 1)
+      if (Double.compare(distance, length1) == 1) {
         return true;
+      }
     }
     return false;
   }
@@ -482,7 +488,6 @@ public class LIC {
 
   /**
    * Method to get which quadrant around the origin a point is.
-   * 
    * @param point Point
    * @return The quadrant as 1, 2, 3, or 4
    */
