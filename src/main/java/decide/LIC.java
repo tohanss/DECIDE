@@ -341,6 +341,62 @@ public class LIC {
   }
 
   /**
+   * There exists at least one set of three data points separated
+   * by exactly A PTS and B PTS
+   * consecutive intervening points, respectively,
+   * that cannot be contained within or on a circle of
+   * radius RADIUS1. The condition is not met when NUMPOINTS is less than 5.
+   * A PTS and B PTS must be more or equal to 1.
+   * A PTS + B PTS ≤ (NUMPOINTS−3)
+   *
+   * @param points Array with coordinates of datapoints
+   * @param numpoints Number of points in array
+   * @param radius1 First radius of lic
+   * @param apts Number of points separating data points
+   * @param bpts Number of points separating data points
+   * @return true if the conditions are met
+   */
+  @SuppressWarnings("checkstyle:magicnumber")
+  protected boolean lic9(
+          final ArrayList<Point> points,
+          final int numpoints,
+          final int radius1,
+          final int apts,
+          final int bpts
+  ) {
+    if (numpoints < 5 || 0 > apts || 0 > bpts
+            || apts + bpts > (numpoints - 3)) {
+      return false;
+    }
+    Point a;
+    Point b;
+    Point c;
+    for (int i = 0; i < points.size() - apts - bpts - 2; i++) {
+      a = points.get(i);
+      b = points.get(i + 1 + apts);
+      c = points.get(i + 2 + bpts);
+      double ab = a.distance(b);
+      double bc = b.distance(c);
+      double ac = a.distance(c);
+      double area = Math.abs(((a.x - c.x) * (b.x - a.x)
+              - (a.x - b.x) * (c.y - a.y)) * 0.5);
+      double longestLine = 0;
+      double radiusOfPoints = 0;
+      if (area == 0) {
+        longestLine = Math.max(ab, Math.max(ac, bc)) / 2;
+      } else {
+        radiusOfPoints = (ab * bc * ac) / Math.sqrt((ab + bc + ac)
+                * (ab + bc - ac) * (ab + bc + ac) * (ab + bc - ac));
+      }
+      if (radiusOfPoints > radius1 || longestLine > radius1) {
+        return true;
+      }
+
+    }
+    return false;
+  }
+
+  /**
    * There exists at least one set of three data points separated by exactly
    * E PTS and F PTS consecutive intervening points, respectively, that are
    * the vertices of a triangle with area greater
