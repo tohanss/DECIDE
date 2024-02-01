@@ -225,9 +225,9 @@ public class LIC {
         isOutside = true;
       }
       if (
-          distance(a, center) <= radius1
-              && distance(b, center) <= radius1
-              && distance(c, center) <= radius1
+          distance(a, center) <= radius2
+              && distance(b, center) <= radius2
+              && distance(c, center) <= radius2
       ) {
         isInside = true;
       }
