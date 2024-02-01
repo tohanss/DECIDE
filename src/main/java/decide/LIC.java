@@ -1,6 +1,5 @@
 package decide;
 
-import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,19 +15,25 @@ public class LIC {
    * Method for LIC 1
    * There exists at least one set of two consecutive data points that
    * are a distance greater than the length, LENGTH1, apart.
-   * (0 ≤ LENGTH1)
+   * (0 &le; LENGTH1)
    *
    * @param points  Array containing the coordinates of data points
    * @param length1 Distance that two points need to be from each other
    * @return True if LIC 1 is met
    */
-  protected boolean lic1(final ArrayList<Point> points, final double length1) {
+  protected boolean lic1(
+      final ArrayList<Point2D> points,
+      final double length1) {
     assert (length1 >= 0);
     for (int i = 0; i < points.size() - 1; i++) {
-      Point a = points.get(i);
-      Point b = points.get(i + 1);
-      Point distVec = new Point(a.x - b.x, a.y - b.y);
-      double dist = Math.sqrt(distVec.x * distVec.x + distVec.y * distVec.y);
+      Point2D a = points.get(i);
+      Point2D b = points.get(i + 1);
+      Point2D distVec = new Point2D.Double(
+          a.getX() - b.getX(), a.getY() - b.getY());
+      double x = distVec.getX();
+      double y = distVec.getY();
+
+      double dist = Math.sqrt(x * x + y * y);
       if (dist > length1) {
         return true;
       }
@@ -39,26 +44,31 @@ public class LIC {
   /**
    * There exists at least one set of three consecutive data points that
    * cannot all be contained within or on a circle of radius RADIUS1.
-   * (0 ≤ RADIUS1)
+   * (0 &le; RADIUS1)
    *
    * @param points  Array containing the coordinates of data points.
    * @param radius1 Radius of circle that should not cover the points.
    * @return True if LIC2 is met
    */
   @SuppressWarnings("checkstyle:MagicNumber")
-  protected boolean lic2(final ArrayList<Point> points, final double radius1) {
+  protected boolean lic2(
+      final ArrayList<Point2D> points,
+      final double radius1) {
     assert (radius1 >= 0);
-    Point a;
-    Point b;
-    Point c;
+    Point2D a;
+    Point2D b;
+    Point2D c;
     for (int i = 0; i < points.size() - 2; i++) {
       a = points.get(i);
       b = points.get(i + 1);
       c = points.get(i + 2);
-      Point center = new Point((a.x + b.x + c.x) / 3, (a.y + b.y + c.y) / 3);
-      if (distance(a, center) > radius1
-          && distance(b, center) > radius1
-          && distance(c, center) > radius1) {
+      Point2D center = new Point2D.Double(
+          (a.getX() + b.getX() + c.getX()) / 3,
+          (a.getY() + b.getY() + c.getY()) / 3);
+
+      if (a.distance(center) > radius1
+          && b.distance(center) > radius1
+          && c.distance(center) > radius1) {
         return true;
       }
     }
@@ -72,18 +82,18 @@ public class LIC {
    * angle. If either the first point or the last point (or both) coincides
    * with the vertex, the angle is undefined and the LIC
    * is not satisfied by those three points.
-   * (0 ≤ EPSILON &lt; PI)
+   * (0 &le; EPSILON &le; PI)
    *
    * @param points  Array containing coordinates of data points
    * @param epsilon Deviation from pi
    * @return true if all the conditions are met
    */
   protected boolean lic3(
-      final ArrayList<Point> points,
+      final ArrayList<Point2D> points,
       final double epsilon) {
-    Point a;
-    Point b;
-    Point c;
+    Point2D a;
+    Point2D b;
+    Point2D c;
     if (epsilon <= 0 || epsilon > Math.PI) {
       return false;
     }
@@ -115,17 +125,20 @@ public class LIC {
    * @param area1  Area in LICs
    * @return true iff LIC 4 is met
    */
-  protected boolean lic4(final ArrayList<Point> points, final int area1) {
-    Point a;
-    Point b;
-    Point c;
-    int area;
+  protected boolean lic4(final ArrayList<Point2D> points, final int area1) {
+    Point2D a;
+    Point2D b;
+    Point2D c;
+    double area;
     for (int i = 0; i < points.size() - 2; i++) {
       a = points.get(i);
       b = points.get(i + 1);
       c = points.get(i + 2);
       area = Math.abs(
-          (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))) / 2;
+          (a.getX() * (b.getY() - c.getY())
+              + b.getX() * (c.getY() - a.getY()) + c.getX()
+                  * (a.getY() - b.getY())))
+          / 2;
       if (area > area1) {
         return true;
       }
@@ -141,7 +154,7 @@ public class LIC {
    * quadrant number, i.e., I, II, III, IV. For example, the data point (0,0)
    * is in quadrant I, the point (-l,0) is in quadrant II, the point (0,-l)
    * is in quadrant III, the point (0,1) is in quadrant I and the point (1,0)
-   * is in quadrant I. (2 ≤ Q PTS ≤ NUMPOINTS), (1 ≤ QUADS ≤ 3)
+   * is in quadrant I. (2 &le; Q PTS &le; NUMPOINTS), (1 &le; QUADS &le; 3)
    *
    * @param points    Array containing the coordinates of data points
    * @param qpts      Number of consecutive points
@@ -151,7 +164,7 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic5(
-      final ArrayList<Point> points,
+      final ArrayList<Point2D> points,
       final int qpts,
       final int quads,
       final int numpoints) {
@@ -180,7 +193,7 @@ public class LIC {
    * @param numpoints The number of planar data points
    * @return true iff LIC 6 is met
    */
-  protected boolean lic6(final ArrayList<Point> points, final int numpoints) {
+  protected boolean lic6(final ArrayList<Point2D> points, final int numpoints) {
     for (int i = 0; i < numpoints - 1; i++) {
       double x1 = points.get(i).getX();
       double x2 = points.get(i + 1).getX();
@@ -200,7 +213,7 @@ public class LIC {
    * compare with DIST will be the distance from the coincident point to all
    * other points of the N_PTS consecutive points. The condition is not met
    * when NUMPOINTS &lt; 3.
-   * (3 ≤ N_PTS ≤ NUMPOINTS), (0 ≤ DIST)
+   * (3 &le; N_PTS &le; NUMPOINTS), (0 &le; DIST)
    *
    * @param points    Array containing the coordinates of data points
    * @param numpoints The number of planar data points
@@ -270,7 +283,7 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic8(
-      final ArrayList<Point> points,
+      final ArrayList<Point2D> points,
       final int numpoints,
       final int kpts,
       final double length1) {
@@ -300,8 +313,8 @@ public class LIC {
    * the angle is undefined and the LIC
    * is not satisfied by those three points.
    * When numpoints &lt; 5, the condition is not met.
-   * 1 ≤ C PTS, 1 ≤ D PTS
-   * C PTS+D PTS ≤ numpoints − 3
+   * 1 &le; C PTS, 1 &le; D PTS
+   * C PTS+D PTS &le; numpoints − 3
    *
    * @param cpts      Number of intervening points
    * @param dpts      Number of intervening points
@@ -312,7 +325,7 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic10(
-      final ArrayList<Point> points,
+      final ArrayList<Point2D> points,
       final int numpoints,
       final int cpts,
       final int dpts,
@@ -322,9 +335,9 @@ public class LIC {
       return false;
     }
 
-    Point a;
-    Point b;
-    Point c;
+    Point2D a;
+    Point2D b;
+    Point2D c;
     for (int i = 0; i < points.size() - cpts - dpts - 2; i++) {
       a = points.get(i);
       b = points.get(i + cpts + 1);
@@ -344,6 +357,61 @@ public class LIC {
   }
 
   /**
+   * There exists at least one set of three data points separated
+   * by exactly A PTS and B PTS
+   * consecutive intervening points, respectively,
+   * that cannot be contained within or on a circle of
+   * radius RADIUS1. The condition is not met when NUMPOINTS is less than 5.
+   * A PTS and B PTS must be more or equal to 1.
+   * A PTS + B PTS ≤ (NUMPOINTS−3)
+   *
+   * @param points    Array with coordinates of datapoints
+   * @param numpoints Number of points in array
+   * @param radius1   First radius of lic
+   * @param apts      Number of points separating data points
+   * @param bpts      Number of points separating data points
+   * @return true if the conditions are met
+   */
+  @SuppressWarnings("checkstyle:magicnumber")
+  protected boolean lic9(
+      final ArrayList<Point2D> points,
+      final int numpoints,
+      final int radius1,
+      final int apts,
+      final int bpts) {
+    if (numpoints < 5 || 0 > apts || 0 > bpts
+        || apts + bpts > (numpoints - 3)) {
+      return false;
+    }
+    Point2D a;
+    Point2D b;
+    Point2D c;
+    for (int i = 0; i < points.size() - apts - bpts - 2; i++) {
+      a = points.get(i);
+      b = points.get(i + 1 + apts);
+      c = points.get(i + 2 + bpts);
+      double ab = a.distance(b);
+      double bc = b.distance(c);
+      double ac = a.distance(c);
+      double area = Math.abs(((a.getX() - c.getX()) * (b.getX() - a.getX())
+          - (a.getX() - b.getX()) * (c.getY() - a.getY())) * 0.5);
+      double longestLine = 0;
+      double radiusOfPoints = 0;
+      if (area == 0) {
+        longestLine = Math.max(ab, Math.max(ac, bc)) / 2;
+      } else {
+        radiusOfPoints = (ab * bc * ac) / Math.sqrt((ab + bc + ac)
+            * (ab + bc - ac) * (ab + bc + ac) * (ab + bc - ac));
+      }
+      if (radiusOfPoints > radius1 || longestLine > radius1) {
+        return true;
+      }
+
+    }
+    return false;
+  }
+
+  /**
    * There exists at least one set of three data points separated by exactly
    * E PTS and F PTS consecutive intervening points, respectively, that are
    * the vertices of a triangle with area greater
@@ -358,7 +426,7 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic11(
-      final ArrayList<Point> points,
+      final ArrayList<Point2D> points,
       final int numpoints,
       final int area1,
       final int epts,
@@ -366,16 +434,19 @@ public class LIC {
     if (numpoints < 5) {
       return false;
     }
-    Point a;
-    Point b;
-    Point c;
-    int area;
+    Point2D a;
+    Point2D b;
+    Point2D c;
+    double area;
     for (int i = 0; i < numpoints - epts - fpts; i++) {
       a = points.get(i);
       b = points.get(i + epts);
       c = points.get(i + epts + fpts);
       area = Math.abs(
-          (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))) / 2;
+          (a.getX() * (b.getY() - c.getY())
+              + b.getX() * (c.getY() - a.getY())
+              + c.getX() * (a.getY() - b.getY())))
+          / 2;
       if (area > area1) {
         return true;
       }
@@ -393,7 +464,7 @@ public class LIC {
    * consecutive intervening points, that are a distance less than the length,
    * LENGTH2, apart. Both parts must be true
    * for the LIC to be true. The condition is not met when NUMPOINTS &lt; 3.
-   * 0 ≤ LENGTH2
+   * 0 &le; LENGTH2
    *
    * @param points    Array containing coordinates of data points
    * @param kpts      Number separating the 2 data points
@@ -404,7 +475,7 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic13(
-      final ArrayList<Point> points,
+      final ArrayList<Point2D> points,
       final int kpts,
       final int length1,
       final int length2,
@@ -413,7 +484,7 @@ public class LIC {
       return false;
     }
     boolean distanceGreaterThanLength1 = false;
-    boolean distandeLesserThanLength2 = false;
+    boolean distanceLesserThanLength2 = false;
     for (int i = 0; i < points.size() - kpts - 1; i++) {
 
       double distance = points.get(i).distance(points.get(i + kpts));
@@ -421,9 +492,9 @@ public class LIC {
         distanceGreaterThanLength1 = true;
       }
       if (distance < length2) {
-        distandeLesserThanLength2 = true;
+        distanceLesserThanLength2 = true;
       }
-      if (distanceGreaterThanLength1 && distandeLesserThanLength2) {
+      if (distanceGreaterThanLength1 && distanceLesserThanLength2) {
         return true;
       }
     }
@@ -443,7 +514,7 @@ public class LIC {
    * that can be contained in or on a circle of radius RADIUS2.
    * Both parts must be true for the LIC to be true. The condition is
    * not met when NUMPOINTS is &lt; 5.
-   * (0 ≤ RADIUS2)
+   * (0 &le; RADIUS2)
    *
    * @param points    Array containing the coordinates of data points
    * @param numpoints The number of planar data points
@@ -455,7 +526,7 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic14(
-      final ArrayList<Point> points,
+      final ArrayList<Point2D> points,
       final int numpoints,
       final int radius1,
       final int radius2,
@@ -468,10 +539,12 @@ public class LIC {
     boolean isOutside = false;
     boolean isInside = false;
     for (int i = 0; i < numpoints - apts - bpts; i++) {
-      Point a = points.get(i);
-      Point b = points.get(i + apts);
-      Point c = points.get(i + apts + bpts);
-      Point center = new Point((a.x + b.x + c.x) / 3, (a.y + b.y + c.y) / 3);
+      Point2D a = points.get(i);
+      Point2D b = points.get(i + apts);
+      Point2D c = points.get(i + apts + bpts);
+      Point2D center = new Point2D.Double(
+          (a.getX() + b.getX() + c.getX()) / 3,
+          (a.getY() + b.getY() + c.getY()) / 3);
       if (distance(a, center) > radius1
           && distance(b, center) > radius1
           && distance(c, center) > radius1) {
@@ -507,7 +580,7 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic15(
-      final ArrayList<Point> points,
+      final ArrayList<Point2D> points,
       final int numpoints,
       final int area1,
       final int area2,
@@ -516,9 +589,9 @@ public class LIC {
     if (numpoints < 5) {
       return false;
     }
-    Point a;
-    Point b;
-    Point c;
+    Point2D a;
+    Point2D b;
+    Point2D c;
     double area;
     boolean isGreater = false;
     boolean isLesser = false;
@@ -527,7 +600,10 @@ public class LIC {
       b = points.get(i + epts);
       c = points.get(i + epts + fpts);
       area = Math.abs(
-          (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))) / 2.0;
+          (a.getX() * (b.getY() - c.getY())
+              + b.getX() * (c.getY() - a.getY())
+              + c.getX() * (a.getY() - b.getY())))
+          / 2.0;
       if (area > area1) {
         isGreater = true;
       }
@@ -545,9 +621,11 @@ public class LIC {
    * @param b Point b
    * @return Double
    */
-  private double distance(final Point a, final Point b) {
-    Point distVec = new Point(a.x - b.x, a.y - b.y);
-    return Math.sqrt(distVec.x * distVec.x + distVec.y * distVec.y);
+  private double distance(final Point2D a, final Point2D b) {
+    Point2D distVec = new Point2D.Double(
+        a.getX() - b.getX(), a.getY() - b.getY());
+    return Math.sqrt(distVec.getX() * distVec.getX()
+        + distVec.getY() * distVec.getY());
   }
 
   /**
@@ -557,12 +635,12 @@ public class LIC {
    * @return The quadrant as 1, 2, 3, or 4
    */
   @SuppressWarnings("checkstyle:MagicNumber")
-  private int getQuadFromPoint(final Point point) {
-    if (point.x >= 0 && point.y >= 0) {
+  private int getQuadFromPoint(final Point2D point) {
+    if (point.getX() >= 0 && point.getY() >= 0) {
       return 1;
-    } else if (point.x < 0 && point.y >= 0) {
+    } else if (point.getX() < 0 && point.getY() >= 0) {
       return 2;
-    } else if (point.x <= 0 && point.y < 0) {
+    } else if (point.getX() <= 0 && point.getY() < 0) {
       return 3;
     } else {
       return 4;

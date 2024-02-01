@@ -32,9 +32,6 @@ public class DecideHelperTest {
     assertEquals(pum[3][0], false);
   }
 
-  /**
-   * Test calculateFuv
-   */
   @Test
   public void fuvTest() {
     boolean[][] pum = {
@@ -49,5 +46,18 @@ public class DecideHelperTest {
     assertEquals(fuv[0], false);
     assertEquals(fuv[1], true);
     assertEquals(fuv[2], true);
+  }
+
+  @Test
+  public void launchTest() {
+    boolean[] fuv = {
+        true, false, true, true
+    };
+    boolean[] fuv2 = {
+        true, true, true
+    };
+
+    assertEquals(DecideHelper.calculateLaunch(fuv), false);
+    assertEquals(DecideHelper.calculateLaunch(fuv2), true);
   }
 }
