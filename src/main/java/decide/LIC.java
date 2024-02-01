@@ -437,6 +437,38 @@ public class LIC {
   }
 
   /**
+   * Method for LIC 12
+   * There exists at least one set of two data points, (X[i],Y[i])
+   * and (X[j],Y[j]), separated by exactly G PTS consecutive intervening
+   * points, such that X[j] - X[i] < 0. (where i < j ) The
+   * condition is not met when NUMPOINTS < 3.
+   * 1 ≤ G PTS ≤ NUMPOINTS−2
+   *
+   * @param points ArrayList of points
+   * @param gpts Number of points between pairs of points to check
+   * @return true if condition is met
+   */
+  protected boolean lic12(final ArrayList<Point2D> points, final int gpts) {
+    int numpoints = points.size();
+    if (numpoints < 3) {
+      return false;
+    }
+    assert (gpts >= 1 && gpts <= numpoints - 2);
+
+    for (int i = 0; i < numpoints-gpts-1; i++) {
+      Point2D a = points.get(i);
+      Point2D b = points.get(i+gpts+1);
+      double x1 = a.getX();
+      double x2 = b.getX();
+
+      if (x2 - x1 < 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * There exists at least one set of two data points,
    * separated by exactly K PTS consecutive intervening points,
    * which are a distance greater than the length, LENGTH1, apart.
