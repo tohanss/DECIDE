@@ -436,6 +436,31 @@ public class LicTest extends LIC {
   }
 
   @Test
+  public void testLIC12FalseIfTooFewPoints() {
+    final ArrayList<Point2D> testPoints = new ArrayList<>();
+
+    final int gpts = 0;
+
+    assertFalse(lic12(testPoints, gpts));
+  }
+
+  @Test(expected = AssertionError.class)
+  public void testLIC12ThrowsIfGptsBelowOne() {
+    final ArrayList<Point2D> testPoints = new ArrayList<>(
+            Arrays.asList(
+                    new Point2D.Double(0, 100),
+                    new Point2D.Double(10, 100),
+                    new Point2D.Double(5, 100),
+                    new Point2D.Double(20, 100)
+            )
+    );
+
+    final int gpts = 0;
+
+    lic12(testPoints, gpts);
+  }
+
+  @Test
   public void testLIC14TrueWhenPointsBetweenA_PTSAndB_PTSAreOutsideRADIUS1AndInsideRADIUS2() {
     ArrayList<Point> testPoints = new ArrayList<>(
         Arrays.asList(new Point(1, 1), new Point(2, 1), new Point(2, -1), new Point(1, 2)));
