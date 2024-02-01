@@ -200,6 +200,28 @@ public class LicTest extends LIC {
 
         assertFalse(lic11(testPoints, NUMPOINTS, AREA1, E_PTS, F_PTS));
     }
+    @Test
+    public void testLIC13FalseWhenDistanceIsLesserThanLength1OrGreaterThanLength2(){
+        final ArrayList<Point> points =
+                new ArrayList<>(Arrays.asList(new Point(1,1), new Point(2,2), new Point(1,1), new Point(2,2), new Point(1,1)));
+        final int NUMPOINTS = 5;
+        final int KPTS = 1;
+        final int LENGTH1 = 2;
+        final int LENGTH2 = 2;
+
+        assertFalse(lic13(points, KPTS, LENGTH1, LENGTH2, NUMPOINTS));
+    }
+    @Test
+    public void testLIC13FalseWhenLength2OrNumpointsTooSmall(){
+        final ArrayList<Point> points =
+                new ArrayList<>(Arrays.asList(new Point(1,1), new Point(2,2), new Point(3,3), new Point(1,4), new Point(5,5)));
+        final int NUMPOINTS = 3;
+        final int KPTS = 1;
+        final int LENGTH1 = 2;
+        final int LENGTH2 = 1;
+
+        assertFalse(lic13(points, KPTS, LENGTH1, LENGTH2, NUMPOINTS));
+    }
 
     @Test
     public void testLIC15TrueWhenPointsBetweenE_PTSAndF_PTSHaveAreaGreaterThanAREA1AndLesserThanAREA2() {
