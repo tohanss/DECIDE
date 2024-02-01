@@ -254,8 +254,8 @@ public class LicTest extends LIC {
 
         assertFalse(lic9(points, NUMPOINTS, RADIUS1, A_PTS, B_PTS));
     }
-    @Test
-    public void testLIC9FalseWhenParameterA_PTSValueTooSmall() {
+    @Test(expected = AssertionError.class)
+    public void testLIC9ThrowsExceptioneWhenParameterA_PTSValueTooSmall() {
         final ArrayList<Point2D> points = new ArrayList<>(Arrays.asList(new Point(1,1),
                 new Point(2,2), new Point(3,3)));
 
@@ -264,7 +264,7 @@ public class LicTest extends LIC {
         final int A_PTS = 0;
         final int B_PTS = 0;
 
-        assertFalse(lic9(points, NUMPOINTS, RADIUS1, A_PTS, B_PTS));
+        lic9(points, NUMPOINTS, RADIUS1, A_PTS, B_PTS);
     }
 
   /*
@@ -393,7 +393,7 @@ public class LicTest extends LIC {
   @Test
   public void testLIC11TrueWhenPointsBetweenE_PTSAndF_PTSHaveAreaGreaterThanAREA1() {
     final ArrayList<Point2D> testPoints = new ArrayList<>(
-        Arrays.asList(new Point(1, 1), new Point(1, -5), new Point(1, 1), new Point(-1, -5), new Point(1, 1)));
+        Arrays.asList(new Point(1, 1), new Point(1, -5), new Point(1, 1), new Point(-1, -5), new Point(1, 1), new Point(1, -5), new Point(1, 1)));
     final int NUMPOINTS = testPoints.size();
 
     final int AREA1 = 5;
@@ -485,7 +485,7 @@ public class LicTest extends LIC {
   @Test
   public void testLIC11FalseWhenPointsBetweenE_PTSAndF_PTSDoesntHaveAreaGreaterThanAREA1() {
     final ArrayList<Point2D> testPoints = new ArrayList<>(
-        Arrays.asList(new Point(1, 1), new Point(1, 2), new Point(1, 3), new Point(1, 4), new Point(1, 5)));
+        Arrays.asList(new Point(1, 1), new Point(1, 2), new Point(1, 3), new Point(1, 4), new Point(1, 5), new Point(1, 6), new Point(1, 7)));
     final int NUMPOINTS = testPoints.size();
 
     final int AREA1 = 5;

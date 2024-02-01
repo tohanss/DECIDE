@@ -88,33 +88,34 @@ public class LIC {
    * @param epsilon Deviation from pi
    * @return true if all the conditions are met
    */
-  protected boolean lic3(
-      final ArrayList<Point2D> points,
-      final double epsilon) {
-    Point2D a;
-    Point2D b;
-    Point2D c;
-    if (epsilon <= 0 || epsilon > Math.PI) {
-      return false;
-    }
-    for (int i = 0; i < (points.size() - 2); i++) {
-      a = points.get(i);
-      b = points.get(i + 1);
-      c = points.get(i + 2);
-      if (a.equals(b) || c.equals(b)) {
+    protected boolean lic3(
+            final ArrayList<Point2D> points,
+            final double epsilon
+    ) {
+        assert (0 <= epsilon && epsilon < Math.PI);
+
+        Point2D a;
+        Point2D b;
+        Point2D c;
+        for (int i = 0; i < (points.size() - 2); i++) {
+            a = points.get(i);
+            b = points.get(i + 1);
+            c = points.get(i + 2);
+            if (a.equals(b) || c.equals(b)) {
+              return false;
+            }
+            double ab = a.distance(b);
+            double bc = b.distance(c);
+            double ac = a.distance(c);
+            double angle = Math.acos((ab * ab + bc * bc - ac * ac)
+                    / (2 * ab * bc));
+            if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
+                return true;
+            }
+        }
         return false;
       }
-      double ab = a.distance(b);
-      double bc = b.distance(c);
-      double ac = a.distance(c);
-      double angle = Math.acos((ab * ab + bc * bc - ac * ac)
-          / (2 * ab * bc));
-      if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
-        return true;
-      }
-    }
-    return false;
-  }
+
 
   /**
    * A method for LIC 4.
@@ -126,6 +127,8 @@ public class LIC {
    * @return true iff LIC 4 is met
    */
   protected boolean lic4(final ArrayList<Point2D> points, final int area1) {
+    assert (0 <= area1);
+
     Point2D a;
     Point2D b;
     Point2D c;
@@ -228,16 +231,10 @@ public class LIC {
       final int numpoints,
       final int npts,
       final double dist) {
+    assert (3 <= npts && npts <= numpoints);
+    assert (0 <= dist);
 
     if (numpoints < 3) {
-      return false;
-    }
-
-    if (npts > numpoints || npts < 3) {
-      return false;
-    }
-
-    if (dist < 0) {
       return false;
     }
 
@@ -269,38 +266,38 @@ public class LIC {
     return false;
   }
 
-  /**
-   * There exists at least one set of two data points separated by exactly
-   * K_PTS consecutive intervening points that are a distance greater than
-   * the length, LENGTH1, apart. The condition is not met when
-   * NUMPOINTS &lt; 3.
-   *
-   * @param points    Array containing the coordinates of data points
-   * @param numpoints The number of planar data points
-   * @param kpts      Number of intervening points
-   * @param length1   Distance that two points need to be from each other
-   * @return true iff LIC 8 is met
-   */
-  @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic8(
-      final ArrayList<Point2D> points,
-      final int numpoints,
-      final int kpts,
-      final double length1) {
-    if (numpoints < 3) {
-      return false;
-    }
+    /**
+     * There exists at least one set of two data points separated by exactly
+     * K_PTS consecutive intervening points that are a distance greater than
+     * the length, LENGTH1, apart. The condition is not met when
+     * NUMPOINTS &lt; 3.
+     *
+     * @param points    Array containing the coordinates of data points
+     * @param numpoints The number of planar data points
+     * @param kpts      Number of intervening points
+     * @param length1   Distance that two points need to be from each other
+     * @return true iff LIC 8 is met
+     */
+    @SuppressWarnings("checkstyle:magicnumber")
+    protected boolean lic8(
+            final ArrayList<Point2D> points,
+            final int numpoints,
+            final int kpts,
+            final double length1) {
+        assert (1 <= kpts && kpts <= numpoints - 2);
+        if (numpoints < 3) {
+            return false;
+        }
 
-    double distance;
-
-    for (int i = 0; i < numpoints - kpts - 1; i++) {
-      distance = distance(points.get(i), points.get(i + kpts + 1));
-      if (Double.compare(distance, length1) == 1) {
-        return true;
-      }
+        double distance;
+        for (int i = 0; i < numpoints - kpts - 1; i++) {
+            distance = distance(points.get(i), points.get(i + kpts + 1));
+            if (Double.compare(distance, length1) == 1) {
+                return true;
+            }
+        }
+        return false;
     }
-    return false;
-  }
 
   /**
    * There exists at least one set of three data points separated by exactly
@@ -330,8 +327,11 @@ public class LIC {
       final int cpts,
       final int dpts,
       final double epsilon) {
-    if (numpoints < 5 || cpts <= 1 || dpts <= 1
-        || cpts + dpts > (numpoints - 3)) {
+    assert (1 <= cpts);
+    assert (1 <= dpts);
+    assert (cpts + dpts <= numpoints - 3);
+
+    if (numpoints < 5) {
       return false;
     }
 
@@ -374,15 +374,20 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic9(
-      final ArrayList<Point2D> points,
-      final int numpoints,
-      final int radius1,
-      final int apts,
-      final int bpts) {
-    if (numpoints < 5 || 0 > apts || 0 > bpts
-        || apts + bpts > (numpoints - 3)) {
+          final ArrayList<Point2D> points,
+          final int numpoints,
+          final int radius1,
+          final int apts,
+          final int bpts
+  ) {
+    assert (1 <= apts);
+    assert (1 <= bpts);
+    assert (apts + bpts <= numpoints - 3);
+
+    if (numpoints < 5) {
       return false;
     }
+
     Point2D a;
     Point2D b;
     Point2D c;
@@ -394,7 +399,7 @@ public class LIC {
       double bc = b.distance(c);
       double ac = a.distance(c);
       double area = Math.abs(((a.getX() - c.getX()) * (b.getX() - a.getX())
-          - (a.getX() - b.getX()) * (c.getY() - a.getY())) * 0.5);
+              - (a.getX() - b.getX()) * (c.getY() - a.getY())) * 0.5);
       double longestLine = 0;
       double radiusOfPoints = 0;
       if (area == 0) {
@@ -431,6 +436,10 @@ public class LIC {
       final int area1,
       final int epts,
       final int fpts) {
+    assert (1 <= epts);
+    assert (1 <= fpts);
+    assert (epts + fpts <= numpoints - 3);
+
     if (numpoints < 5) {
       return false;
     }
@@ -508,12 +517,15 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic13(
-      final ArrayList<Point2D> points,
-      final int kpts,
-      final int length1,
-      final int length2,
-      final int numpoints) {
-    if (numpoints < 3 || length2 < 0) {
+          final ArrayList<Point2D> points,
+          final int kpts,
+          final int length1,
+          final int length2,
+          final int numpoints
+  ) {
+    assert (0 <= length2);
+
+    if (numpoints < 3) {
       return false;
     }
     boolean distanceGreaterThanLength1 = false;
@@ -619,6 +631,8 @@ public class LIC {
       final int area2,
       final int epts,
       final int fpts) {
+    assert (0 <= area2);
+
     if (numpoints < 5) {
       return false;
     }
