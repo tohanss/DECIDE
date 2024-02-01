@@ -29,7 +29,8 @@ public class InputReader {
    *
    * @param filePath the path to the JSON-file
    */
-  public InputReader(String filePath) {
+  @SuppressWarnings("checkstyle:magicnumber")
+  public InputReader(final String filePath) {
     JSONParser jsonParser = new JSONParser();
 
     try (FileReader reader = new FileReader(filePath)) {
@@ -45,12 +46,18 @@ public class InputReader {
         throw new Exception("The amount of points and numpoints is not equal");
       }
 
-      parameters = parseParameters((JSONObject) inputVariables.get("PARAMETERS"));
+      parameters = parseParameters(
+          (JSONObject) inputVariables.get("PARAMETERS")
+      );
 
-      logicalConnectorMatrix = parseLogicalConnectorMatrix((JSONArray) inputVariables.get("LCM"));
+      logicalConnectorMatrix = parseLogicalConnectorMatrix(
+          (JSONArray) inputVariables.get("LCM")
+      );
 
       preliminaryUnlockingVector =
-          parsePreliminaryUnlockingVector((JSONArray) inputVariables.get("PUV"));
+          parsePreliminaryUnlockingVector(
+              (JSONArray) inputVariables.get("PUV")
+          );
 
     } catch (IOException | ParseException e) {
       e.printStackTrace();
@@ -65,6 +72,7 @@ public class InputReader {
    * @param jsonPoints JSON-formatted array of points
    * @return parsed points
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   private ArrayList<Point2D> parsePoints(final JSONArray jsonPoints) {
     ArrayList<Point2D> parsedPoints = new ArrayList<>();
     jsonPoints.forEach(point -> parsePoint(parsedPoints, (JSONObject) point));
@@ -74,9 +82,14 @@ public class InputReader {
   /**
    * Method to parse the JSON-formatted point to correct format.
    *
+   * @param parsedPoints correctly formatted points
    * @param jsonPoint JSON-formatted point
    */
-  private void parsePoint(ArrayList<Point2D> parsedPoints, final JSONObject jsonPoint) {
+  @SuppressWarnings("checkstyle:magicnumber")
+  private void parsePoint(
+      final ArrayList<Point2D> parsedPoints,
+      final JSONObject jsonPoint
+  ) {
     final double x = ((Long) jsonPoint.get("x")).doubleValue();
     final double y = ((Long) jsonPoint.get("y")).doubleValue();
     parsedPoints.add(new Point2D.Double(x, y));
@@ -88,6 +101,7 @@ public class InputReader {
    * @param jsonParameters JSON-formatted parameters
    * @return parsed parameters
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   private Parameters parseParameters(final JSONObject jsonParameters) {
     final double length1 = ((Long) jsonParameters.get("LENGTH1")).doubleValue();
     final double radius1 = ((Long) jsonParameters.get("RADIUS1")).doubleValue();
@@ -119,14 +133,19 @@ public class InputReader {
    * @param jsonLogicalConnectorMatrix matrix of JSON-formatted LCM
    * @return parsed LCM
    */
-  private String[][] parseLogicalConnectorMatrix(final JSONArray jsonLogicalConnectorMatrix) {
+  @SuppressWarnings("checkstyle:magicnumber")
+  private String[][] parseLogicalConnectorMatrix(
+      final JSONArray jsonLogicalConnectorMatrix
+  ) {
     assert jsonLogicalConnectorMatrix.size() == 15;
     String[][] parsedLogicalConnectorMatrix = new String[15][15];
     for (int i = 0; i < jsonLogicalConnectorMatrix.size(); i++) {
-      JSONArray jsonLogicalConnectorArray = (JSONArray) jsonLogicalConnectorMatrix.get(i);
+      JSONArray jsonLogicalConnectorArray =
+          (JSONArray) jsonLogicalConnectorMatrix.get(i);
       assert jsonLogicalConnectorArray.size() == 15;
       for (int j = 0; j < jsonLogicalConnectorArray.size(); j++) {
-        parsedLogicalConnectorMatrix[i][j] = (String) jsonLogicalConnectorArray.get(j);
+        parsedLogicalConnectorMatrix[i][j] =
+            (String) jsonLogicalConnectorArray.get(j);
       }
     }
     return parsedLogicalConnectorMatrix;
@@ -138,12 +157,14 @@ public class InputReader {
    * @param jsonPreliminaryUnlockingVector array of JSON-formatted PUV
    * @return parsed PUV
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   private boolean[] parsePreliminaryUnlockingVector(
       final JSONArray jsonPreliminaryUnlockingVector) {
     boolean[] parsedPreliminaryUnlockingVector = new boolean[15];
     assert jsonPreliminaryUnlockingVector.size() == 15;
     for (int i = 0; i < jsonPreliminaryUnlockingVector.size(); i++) {
-      parsedPreliminaryUnlockingVector[i] = (boolean) jsonPreliminaryUnlockingVector.get(i);
+      parsedPreliminaryUnlockingVector[i] =
+          (boolean) jsonPreliminaryUnlockingVector.get(i);
     }
     return parsedPreliminaryUnlockingVector;
   }
@@ -153,6 +174,7 @@ public class InputReader {
    *
    * @return numPoints
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   public int getNumPoints() {
     return numPoints;
   }
@@ -162,6 +184,7 @@ public class InputReader {
    *
    * @return points
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   public ArrayList<Point2D> getPoints() {
     return points;
   }
@@ -171,6 +194,7 @@ public class InputReader {
    *
    * @return parameters
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   public Parameters getParameters() {
     return parameters;
   }
@@ -180,6 +204,7 @@ public class InputReader {
    *
    * @return LCM
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   public String[][] getLogicalConnectorMatrix() {
     return logicalConnectorMatrix;
   }
@@ -189,6 +214,7 @@ public class InputReader {
    *
    * @return PUV
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   public boolean[] getPreliminaryUnlockingVector() {
     return preliminaryUnlockingVector;
   }
