@@ -448,6 +448,7 @@ public class LIC {
    * @param gpts Number of points between pairs of points to check
    * @return true if condition is met
    */
+  @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic12(final ArrayList<Point2D> points, final int gpts) {
     int numpoints = points.size();
     if (numpoints < 3) {
@@ -455,9 +456,9 @@ public class LIC {
     }
     assert (gpts >= 1 && gpts <= numpoints - 2);
 
-    for (int i = 0; i < numpoints-gpts-1; i++) {
+    for (int i = 0; i < numpoints - gpts - 1; i++) {
       Point2D a = points.get(i);
-      Point2D b = points.get(i+gpts+1);
+      Point2D b = points.get(i + gpts + 1);
       double x1 = a.getX();
       double x2 = b.getX();
 
