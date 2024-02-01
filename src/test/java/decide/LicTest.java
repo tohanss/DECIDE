@@ -203,7 +203,7 @@ public class LicTest extends LIC {
 
     @Test
     public void testLIC14TrueWhenPointsBetweenA_PTSAndB_PTSAreOutsideRADIUS1AndInsideRADIUS2() {
-        ArrayList<Point> testPoints = new ArrayList<>(Arrays.asList(new Point(1,1), new Point(2,1), new Point(2,-1), new Point(1,2)));
+        ArrayList<Point> testPoints = new ArrayList<>(Arrays.asList(new Point(1, 1), new Point(2, 1), new Point(2, -1), new Point(1, 2)));
         final int RADIUS1 = 1;
         final int RADIUS2 = 2;
         final int A_PTS = 2;
@@ -213,7 +213,7 @@ public class LicTest extends LIC {
 
     @Test
     public void testLIC14FalseWhenPointsBetweenA_PTSAndB_PTSAreNotOutsideRADIUS1OrInsideRADIUS2() {
-        ArrayList<Point> testPoints = new ArrayList<>(Arrays.asList(new Point(1,1), new Point(2,1), new Point(2,-1), new Point(1,2)));
+        ArrayList<Point> testPoints = new ArrayList<>(Arrays.asList(new Point(1,1), new Point(2,1), new Point(2,-1), new Point(1,2), new Point(2, 2)));
         final int RADIUS1 = 1;
         final int RADIUS2 = 2;
         final int A_PTS = 2;
@@ -223,7 +223,7 @@ public class LicTest extends LIC {
 
     @Test
     public void testLIC15TrueWhenPointsBetweenE_PTSAndF_PTSHaveAreaGreaterThanAREA1AndLesserThanAREA2() {
-        final ArrayList<Point> testPoints = new ArrayList<>(Arrays.asList(new Point(1,1), new Point(1,-5), new Point(1,1), new Point(-1,-5), new Point(1,1)));
+        final ArrayList<Point> testPoints = new ArrayList<>(Arrays.asList(new Point(1,1), new Point(1,-5), new Point(1,1), new Point(-1,-5), new Point(1,1), new Point(5, 5)));
         final int NUMPOINTS = testPoints.size();
 
         final int AREA1 = 3;
