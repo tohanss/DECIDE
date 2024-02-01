@@ -67,4 +67,19 @@ public final class DecideHelper {
     }
     return fuv;
   }
+
+  /**
+   * Calculate Launch.
+   *
+   * @param fuv FUV vector
+   * @return should launch or not
+   */
+  public static boolean calculateLaunch(final boolean[] fuv) {
+    boolean r = true;
+    for (int i = 0; i < fuv.length; i++) {
+      r &= fuv[i];
+    }
+    return r;
+  }
+
 }

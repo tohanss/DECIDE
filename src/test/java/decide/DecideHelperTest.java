@@ -17,11 +17,11 @@ public class DecideHelperTest {
         false, true, true, true, false
     };
     String[][] lcm = {
-        {"ANDD", "ANDD", "ORR", "ANDD", "NOTUSED"},
-        {"ANDD", "ANDD", "ORR", "ORR", "NOTUSED"},
-        {"ORR", "ORR", "ANDD", "ANDD", "NOTUSED"},
-        {"ANDD", "ORR", "ANDD", "ANDD", "NOTUSED"},
-        {"NOTUSED", "NOTUSED", "NOTUSED", "NOTUSED", "NOTUSED"}
+        { "ANDD", "ANDD", "ORR", "ANDD", "NOTUSED" },
+        { "ANDD", "ANDD", "ORR", "ORR", "NOTUSED" },
+        { "ORR", "ORR", "ANDD", "ANDD", "NOTUSED" },
+        { "ANDD", "ORR", "ANDD", "ANDD", "NOTUSED" },
+        { "NOTUSED", "NOTUSED", "NOTUSED", "NOTUSED", "NOTUSED" }
     };
 
     boolean[][] pum = DecideHelper.calculatePum(cmv, lcm);
@@ -32,15 +32,12 @@ public class DecideHelperTest {
     assertEquals(pum[3][0], false);
   }
 
-  /**
-   * Test calculateFuv
-   */
   @Test
   public void fuvTest() {
     boolean[][] pum = {
-        {true, true, false},
-        {true, true, true},
-        {true, true, true},
+        { true, true, false },
+        { true, true, true },
+        { true, true, true },
     };
     boolean[] puv = {
         true, true, false
@@ -49,5 +46,18 @@ public class DecideHelperTest {
     assertEquals(fuv[0], false);
     assertEquals(fuv[1], true);
     assertEquals(fuv[2], true);
+  }
+
+  @Test
+  public void launchTest() {
+    boolean[] fuv = {
+        true, false, true, true
+    };
+    boolean[] fuv2 = {
+        true, true, true
+    };
+
+    assertEquals(DecideHelper.calculateLaunch(fuv), false);
+    assertEquals(DecideHelper.calculateLaunch(fuv2), true);
   }
 }
