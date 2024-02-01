@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build & Unit Test
+name: Test Docs
 
 on:
   push:
@@ -24,11 +24,6 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn package
-    - name: Test with Maven
-      run: mvn test
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4-beta
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    - name: Build Docs with Maven
+      run: mvn javadoc:javadoc --file pom.xml
+

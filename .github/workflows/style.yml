@@ -8,16 +8,21 @@
 
 name: Check Coding Style
 
-on: [pull_request]
+on:
+  push:
 
 jobs:
-  checkstyle:
-    name: runner / checkstyle
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: dbelyaev/action-checkstyle@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          level: warning
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Run CheckStyle
+      run: mvn checkstyle:check
