@@ -91,12 +91,11 @@ public class LIC {
             final ArrayList<Point2D> points,
             final double epsilon
     ) {
+        assert (0 <= epsilon && epsilon < Math.PI);
+
         Point2D a;
         Point2D b;
         Point2D c;
-        if (epsilon <= 0 || epsilon > Math.PI) {
-          return false;
-        }
         for (int i = 0; i < (points.size() - 2); i++) {
             a = points.get(i);
             b = points.get(i + 1);
@@ -126,6 +125,8 @@ public class LIC {
    * @return true iff LIC 4 is met
    */
   protected boolean lic4(final ArrayList<Point2D> points, final int area1) {
+    assert (0 <= area1);
+
     Point2D a;
     Point2D b;
     Point2D c;
@@ -226,16 +227,10 @@ public class LIC {
       final int numpoints,
       final int npts,
       final double dist) {
+    assert (3 <= npts && npts <= numpoints);
+    assert (0 <= dist);
 
     if (numpoints < 3) {
-      return false;
-    }
-
-    if (npts > numpoints || npts < 3) {
-      return false;
-    }
-
-    if (dist < 0) {
       return false;
     }
 
@@ -285,12 +280,12 @@ public class LIC {
             final int numpoints,
             final int kpts,
             final double length1) {
+        assert (1 <= kpts && kpts <= numpoints - 2);
         if (numpoints < 3) {
             return false;
         }
 
         double distance;
-
         for (int i = 0; i < numpoints - kpts - 1; i++) {
             distance = distance(points.get(i), points.get(i + kpts + 1));
             if (Double.compare(distance, length1) == 1) {
@@ -328,8 +323,11 @@ public class LIC {
       final int cpts,
       final int dpts,
       final double epsilon) {
-    if (numpoints < 5 || cpts <= 1 || dpts <= 1
-        || cpts + dpts > (numpoints - 3)) {
+    assert (1 <= cpts);
+    assert (1 <= dpts);
+    assert (cpts + dpts <= numpoints - 3);
+
+    if (numpoints < 5) {
       return false;
     }
 
@@ -372,19 +370,23 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic9(
-          final ArrayList<Point> points,
+          final ArrayList<Point2D> points,
           final int numpoints,
           final int radius1,
           final int apts,
           final int bpts
   ) {
-    if (numpoints < 5 || 0 > apts || 0 > bpts
-            || apts + bpts > (numpoints - 3)) {
+    assert (1 <= apts);
+    assert (1 <= bpts);
+    assert (apts + bpts <= numpoints - 3);
+
+    if (numpoints < 5) {
       return false;
     }
-    Point a;
-    Point b;
-    Point c;
+
+    Point2D a;
+    Point2D b;
+    Point2D c;
     for (int i = 0; i < points.size() - apts - bpts - 2; i++) {
       a = points.get(i);
       b = points.get(i + 1 + apts);
@@ -392,8 +394,8 @@ public class LIC {
       double ab = a.distance(b);
       double bc = b.distance(c);
       double ac = a.distance(c);
-      double area = Math.abs(((a.x - c.x) * (b.x - a.x)
-              - (a.x - b.x) * (c.y - a.y)) * 0.5);
+      double area = Math.abs(((a.getX() - c.getX()) * (b.getX() - a.getX())
+              - (a.getX() - b.getX()) * (c.getY() - a.getY())) * 0.5);
       double longestLine = 0;
       double radiusOfPoints = 0;
       if (area == 0) {
@@ -430,6 +432,10 @@ public class LIC {
       final int area1,
       final int epts,
       final int fpts) {
+    assert (1 <= epts);
+    assert (1 <= fpts);
+    assert (epts + fpts <= numpoints - 3);
+
     if (numpoints < 5) {
       return false;
     }
@@ -479,7 +485,9 @@ public class LIC {
           final int length2,
           final int numpoints
   ) {
-    if (numpoints < 3 || length2 < 0) {
+    assert (0 <= length2);
+
+    if (numpoints < 3) {
       return false;
     }
     boolean distanceGreaterThanLength1 = false;
@@ -586,6 +594,8 @@ public class LIC {
       final int area2,
       final int epts,
       final int fpts) {
+    assert (0 <= area2);
+
     if (numpoints < 5) {
       return false;
     }
