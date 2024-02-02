@@ -30,6 +30,7 @@ public final class Parameters {
 
   /**
    * Length in LICs 0, 7, 12.
+   *
    * @return the parameter
    */
   public double getLength1() {
@@ -38,6 +39,7 @@ public final class Parameters {
 
   /**
    * Radius in LICs 1, 8, 13.
+   *
    * @return the parameter
    */
   public double getRadius1() {
@@ -46,6 +48,7 @@ public final class Parameters {
 
   /**
    * Deviation from PI in LICs 2, 9.
+   *
    * @return the parameter
    */
   public double getEpsilon() {
@@ -54,6 +57,7 @@ public final class Parameters {
 
   /**
    * Area in LICs 3, 10, 14.
+   *
    * @return the parameter
    */
   public double getArea1() {
@@ -62,6 +66,7 @@ public final class Parameters {
 
   /**
    * No{@literal .} of consecutive points in LIC 4.
+   *
    * @return the parameter
    */
   public int getQpts() {
@@ -70,6 +75,7 @@ public final class Parameters {
 
   /**
    * No{@literal .} of quadrants in LIC 4.
+   *
    * @return the parameter
    */
   public int getQuads() {
@@ -78,6 +84,7 @@ public final class Parameters {
 
   /**
    * Distance in LIC 6.
+   *
    * @return the parameter
    */
   public double getDist() {
@@ -86,6 +93,7 @@ public final class Parameters {
 
   /**
    * No{@literal .} of consecutive pts . in LIC 6.
+   *
    * @return the parameter
    */
   public int getNpts() {
@@ -94,6 +102,7 @@ public final class Parameters {
 
   /**
    * No{@literal .} of int{@literal .} pts{@literal .} in LICs 7, 12.
+   *
    * @return the parameter
    */
   public int getKpts() {
@@ -111,6 +120,7 @@ public final class Parameters {
 
   /**
    * No{@literal .} of int{@literal .} pts{@literal .} in LICs 8, 13.
+   *
    * @return the parameter
    */
   public int getBpts() {
@@ -119,6 +129,7 @@ public final class Parameters {
 
   /**
    * No{@literal .} of int{@literal .} pts{@literal .} in LIC 9.
+   *
    * @return the parameter
    */
   public int getCpts() {
@@ -127,6 +138,7 @@ public final class Parameters {
 
   /**
    * No{@literal .} of int{@literal .} pts{@literal .} in LIC 9.
+   *
    * @return the parameter
    */
   public int getDpts() {
@@ -135,6 +147,7 @@ public final class Parameters {
 
   /**
    * No{@literal .} of int{@literal .} pts{@literal .} in LICs 10, 14.
+   *
    * @return the parameter
    */
   public int getEpts() {
@@ -143,6 +156,7 @@ public final class Parameters {
 
   /**
    * No{@literal .} of int{@literal .} pts{@literal .} in LICs 10, 14.
+   *
    * @return the parameter
    */
   public int getFpts() {
@@ -151,6 +165,7 @@ public final class Parameters {
 
   /**
    * No{@literal .} of int{@literal .} pts{@literal .} in LIC 11.
+   *
    * @return the parameter
    */
   public int getGpts() {
@@ -159,6 +174,7 @@ public final class Parameters {
 
   /**
    * Maximum length in LIC 12.
+   *
    * @return the parameter
    */
   public double getLength2() {
@@ -167,6 +183,7 @@ public final class Parameters {
 
   /**
    * Maximum radius in LIC 13.
+   *
    * @return the parameter
    */
   public double getRadius2() {
@@ -175,6 +192,7 @@ public final class Parameters {
 
   /**
    * Maximum area in LIC 14.
+   *
    * @return the parameter
    */
   public double getArea2() {

@@ -8,18 +8,30 @@ import java.util.HashSet;
  * Class for the LIC functions.
  */
 public class LIC {
+  /**
+   * Class holding parameters for LIC’s.
+   */
   Parameters parameters;
+  /**
+   * Array containing the coordinates of data points.
+   */
   ArrayList<Point2D> points;
+  /**
+   * The number of planar data points.
+   */
   int numPoints;
 
-  protected LIC(Parameters parameters, ArrayList<Point2D> points, int numPoints) {
+  /**
+   * Constructor for the LIC.
+   */
+  public LIC(Parameters parameters, ArrayList<Point2D> points, int numPoints) {
     this.parameters = parameters;
     this.points = points;
     this.numPoints = numPoints;
   }
 
   /**
-   * Method for LIC 1
+   * Method for LIC 1.
    * There exists at least one set of two consecutive data points that
    * are a distance greater than the length, LENGTH1, apart.
    * (0 &le; LENGTH1)
@@ -49,6 +61,7 @@ public class LIC {
   }
 
   /**
+   * Method for LIC 2.
    * There exists at least one set of three consecutive data points that
    * cannot all be contained within or on a circle of radius RADIUS1.
    * (0 &le; RADIUS1)
@@ -83,6 +96,7 @@ public class LIC {
   }
 
   /**
+   * Method for LIC 3.
    * There exists at least one set of three consecutive data points which form
    * an angle such that angle &lt; (PI−EPSILON) or angle &gt; (PI+EPSILON)
    * The second of the three consecutive points is always the vertex of the
@@ -95,37 +109,37 @@ public class LIC {
    * @param epsilon Deviation from pi
    * @return true if all the conditions are met
    */
-    protected boolean lic3(
-            final ArrayList<Point2D> points,
-            final double epsilon
-    ) {
-        assert (0 <= epsilon && epsilon < Math.PI);
+  protected boolean lic3(
+      final ArrayList<Point2D> points,
+      final double epsilon
+  ) {
+    assert (0 <= epsilon && epsilon < Math.PI);
 
-        Point2D a;
-        Point2D b;
-        Point2D c;
-        for (int i = 0; i < (points.size() - 2); i++) {
-            a = points.get(i);
-            b = points.get(i + 1);
-            c = points.get(i + 2);
-            if (a.equals(b) || c.equals(b)) {
-              return false;
-            }
-            double ab = a.distance(b);
-            double bc = b.distance(c);
-            double ac = a.distance(c);
-            double angle = Math.acos((ab * ab + bc * bc - ac * ac)
-                    / (2 * ab * bc));
-            if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
-                return true;
-            }
-        }
+    Point2D a;
+    Point2D b;
+    Point2D c;
+    for (int i = 0; i < (points.size() - 2); i++) {
+      a = points.get(i);
+      b = points.get(i + 1);
+      c = points.get(i + 2);
+      if (a.equals(b) || c.equals(b)) {
         return false;
       }
+      double ab = a.distance(b);
+      double bc = b.distance(c);
+      double ac = a.distance(c);
+      double angle = Math.acos((ab * ab + bc * bc - ac * ac)
+          / (2 * ab * bc));
+      if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
+        return true;
+      }
+    }
+    return false;
+  }
 
 
   /**
-   * A method for LIC 4.
+   * Method for LIC 4.
    * There exists at least one set of three consecutive data points that are
    * the vertices of a triangle with area greater than AREA1
    *
@@ -147,7 +161,7 @@ public class LIC {
       area = Math.abs(
           (a.getX() * (b.getY() - c.getY())
               + b.getX() * (c.getY() - a.getY()) + c.getX()
-                  * (a.getY() - b.getY())))
+              * (a.getY() - b.getY())))
           / 2;
       if (area > area1) {
         return true;
@@ -157,7 +171,7 @@ public class LIC {
   }
 
   /**
-   * LIC 5
+   * Method for LIC 5.
    * There exists at least one set of Q PTS consecutive data points that lie
    * in more than QUADS quadrants. Where there is ambiguity as to which
    * quadrant contains a given point, priority of decision will be by
@@ -196,6 +210,7 @@ public class LIC {
   }
 
   /**
+   * Method for LIC 6.
    * There exists at least one set of two consecutive data points, (X[i], Y[i])
    * and (X[j], Y[j]), such that X[j] - X[i] &lt; 0. (where i = j - 1)
    *
@@ -216,6 +231,7 @@ public class LIC {
   }
 
   /**
+   * Method for LIC 7.
    * There exists at least one set of N_PTS consecutive data points such that at
    * least one of the points lies a distance greater than DIST from the line
    * joining the first and last of these N_PTS points. If the first and last
@@ -229,7 +245,6 @@ public class LIC {
    * @param numpoints The number of planar data points
    * @param npts      Number of consecutive points
    * @param dist      Distance
-   *
    * @return true iff LIC 7 is satisfied
    */
   @SuppressWarnings("checkstyle:magicnumber")
@@ -273,40 +288,42 @@ public class LIC {
     return false;
   }
 
-    /**
-     * There exists at least one set of two data points separated by exactly
-     * K_PTS consecutive intervening points that are a distance greater than
-     * the length, LENGTH1, apart. The condition is not met when
-     * NUMPOINTS &lt; 3.
-     *
-     * @param points    Array containing the coordinates of data points
-     * @param numpoints The number of planar data points
-     * @param kpts      Number of intervening points
-     * @param length1   Distance that two points need to be from each other
-     * @return true iff LIC 8 is met
-     */
-    @SuppressWarnings("checkstyle:magicnumber")
-    protected boolean lic8(
-            final ArrayList<Point2D> points,
-            final int numpoints,
-            final int kpts,
-            final double length1) {
-        assert (1 <= kpts && kpts <= numpoints - 2);
-        if (numpoints < 3) {
-            return false;
-        }
-
-        double distance;
-        for (int i = 0; i < numpoints - kpts - 1; i++) {
-            distance = distance(points.get(i), points.get(i + kpts + 1));
-            if (Double.compare(distance, length1) == 1) {
-                return true;
-            }
-        }
-        return false;
+  /**
+   * Method for LIC 8.
+   * There exists at least one set of two data points separated by exactly
+   * K_PTS consecutive intervening points that are a distance greater than
+   * the length, LENGTH1, apart. The condition is not met when
+   * NUMPOINTS &lt; 3.
+   *
+   * @param points    Array containing the coordinates of data points
+   * @param numpoints The number of planar data points
+   * @param kpts      Number of intervening points
+   * @param length1   Distance that two points need to be from each other
+   * @return true iff LIC 8 is met
+   */
+  @SuppressWarnings("checkstyle:magicnumber")
+  protected boolean lic8(
+      final ArrayList<Point2D> points,
+      final int numpoints,
+      final int kpts,
+      final double length1) {
+    assert (1 <= kpts && kpts <= numpoints - 2);
+    if (numpoints < 3) {
+      return false;
     }
 
+    double distance;
+    for (int i = 0; i < numpoints - kpts - 1; i++) {
+      distance = distance(points.get(i), points.get(i + kpts + 1));
+      if (Double.compare(distance, length1) == 1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
+   * Method for LIC 10.
    * There exists at least one set of three data points separated by exactly
    * cpts and dpts consecutive intervening points, respectively,
    * that form an angle such that:
@@ -364,6 +381,7 @@ public class LIC {
   }
 
   /**
+   * Method for LIC 9.
    * There exists at least one set of three data points separated
    * by exactly A PTS and B PTS
    * consecutive intervening points, respectively,
@@ -381,11 +399,11 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic9(
-          final ArrayList<Point2D> points,
-          final int numpoints,
-          final double radius1,
-          final int apts,
-          final int bpts
+      final ArrayList<Point2D> points,
+      final int numpoints,
+      final double radius1,
+      final int apts,
+      final int bpts
   ) {
     assert (1 <= apts);
     assert (1 <= bpts);
@@ -406,7 +424,7 @@ public class LIC {
       double bc = b.distance(c);
       double ac = a.distance(c);
       double area = Math.abs(((a.getX() - c.getX()) * (b.getX() - a.getX())
-              - (a.getX() - b.getX()) * (c.getY() - a.getY())) * 0.5);
+          - (a.getX() - b.getX()) * (c.getY() - a.getY())) * 0.5);
       double longestLine = 0;
       double radiusOfPoints = 0;
       if (area == 0) {
@@ -424,6 +442,7 @@ public class LIC {
   }
 
   /**
+   * Method for LIC 11.
    * There exists at least one set of three data points separated by exactly
    * E PTS and F PTS consecutive intervening points, respectively, that are
    * the vertices of a triangle with area greater
@@ -454,10 +473,10 @@ public class LIC {
     Point2D b;
     Point2D c;
     double area;
-    for (int i = 0; i < numpoints - epts - fpts; i++) {
+    for (int i = 0; i < numpoints - epts - fpts - 2; i++) {
       a = points.get(i);
-      b = points.get(i + epts);
-      c = points.get(i + epts + fpts);
+      b = points.get(i + epts + 1);
+      c = points.get(i + epts + fpts + 1);
       area = Math.abs(
           (a.getX() * (b.getY() - c.getY())
               + b.getX() * (c.getY() - a.getY())
@@ -471,7 +490,7 @@ public class LIC {
   }
 
   /**
-   * Method for LIC 12
+   * Method for LIC 12.
    * There exists at least one set of two data points, (X[i],Y[i])
    * and (X[j],Y[j]), separated by exactly G PTS consecutive intervening
    * points, such that X[j] - X[i] &lt; 0. (where i &lt; j ) The
@@ -479,7 +498,7 @@ public class LIC {
    * 1 ≤ G PTS ≤ NUMPOINTS−2
    *
    * @param points ArrayList of points
-   * @param gpts Number of points between pairs of points to check
+   * @param gpts   Number of points between pairs of points to check
    * @return true if condition is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
@@ -504,6 +523,7 @@ public class LIC {
   }
 
   /**
+   * Method for LIC 13.
    * There exists at least one set of two data points,
    * separated by exactly K PTS consecutive intervening points,
    * which are a distance greater than the length, LENGTH1, apart.
@@ -524,11 +544,11 @@ public class LIC {
    */
   @SuppressWarnings("checkstyle:magicnumber")
   protected boolean lic13(
-          final ArrayList<Point2D> points,
-          final int kpts,
-          final double length1,
-          final double length2,
-          final int numpoints
+      final ArrayList<Point2D> points,
+      final int kpts,
+      final double length1,
+      final double length2,
+      final int numpoints
   ) {
     assert (0 <= length2);
 
@@ -554,6 +574,7 @@ public class LIC {
   }
 
   /**
+   * Method for LIC 14.
    * There exists at least one set of three data points,
    * separated by exactly A PTS and B PTS
    * consecutive intervening points, respectively,
@@ -590,10 +611,10 @@ public class LIC {
     }
     boolean isOutside = false;
     boolean isInside = false;
-    for (int i = 0; i < numpoints - apts - bpts; i++) {
+    for (int i = 0; i < numpoints - apts - bpts - 2; i++) {
       Point2D a = points.get(i);
-      Point2D b = points.get(i + apts);
-      Point2D c = points.get(i + apts + bpts);
+      Point2D b = points.get(i + apts + 1);
+      Point2D c = points.get(i + apts + bpts + 1);
       Point2D center = new Point2D.Double(
           (a.getX() + b.getX() + c.getX()) / 3,
           (a.getY() + b.getY() + c.getY()) / 3);
@@ -612,6 +633,7 @@ public class LIC {
   }
 
   /**
+   * METHOD FOR LIC 15.
    * There exists at least one set of three data points, separated by
    * exactly E_PTS and F_PTS consecutive intervening points, respectively,
    * that are the vertices of a triangle with area greater than AREA1.
@@ -649,10 +671,10 @@ public class LIC {
     double area;
     boolean isGreater = false;
     boolean isLesser = false;
-    for (int i = 0; i < points.size() - epts - fpts; i++) {
+    for (int i = 0; i < points.size() - epts - fpts - 2; i++) {
       a = points.get(i);
-      b = points.get(i + epts);
-      c = points.get(i + epts + fpts);
+      b = points.get(i + epts + 1);
+      c = points.get(i + epts + fpts + 1);
       area = Math.abs(
           (a.getX() * (b.getY() - c.getY())
               + b.getX() * (c.getY() - a.getY())
@@ -704,9 +726,9 @@ public class LIC {
   /**
    * Calculates the distance between a point and a line using Heron's formula.
    *
-   * @param point
-   * @param lineStart
-   * @param lineEnd
+   * @param point the points
+   * @param lineStart the point of the lines start
+   * @param lineEnd the point of the lines end
    * @return the distance
    */
   private double pointToLineDistance(
@@ -726,8 +748,8 @@ public class LIC {
   /**
    * Calculates the distance between two points.
    *
-   * @param point1
-   * @param point2
+   * @param point1 first point
+   * @param point2 second point
    * @return the distance
    */
   private double pointToPointDistance(
@@ -759,68 +781,68 @@ public class LIC {
     cmv[2] = lic3(points, parameters.getEpsilon());
     cmv[3] = lic4(points, parameters.getArea1());
     cmv[4] = lic5(
-            points,
-            parameters.getQpts(),
-            parameters.getQuads(),
-            numPoints
+        points,
+        parameters.getQpts(),
+        parameters.getQuads(),
+        numPoints
     );
     cmv[5] = lic6(points, numPoints);
     cmv[6] = lic7(
-            points,
-            numPoints,
-            parameters.getNpts(),
-            parameters.getDist()
+        points,
+        numPoints,
+        parameters.getNpts(),
+        parameters.getDist()
     );
     cmv[7] = lic8(
-            points,
-            numPoints,
-            parameters.getKpts(),
-            parameters.getLength1()
+        points,
+        numPoints,
+        parameters.getKpts(),
+        parameters.getLength1()
     );
     cmv[8] = lic9(
-            points,
-            numPoints,
-            parameters.getRadius1(),
-            parameters.getApts(),
-            parameters.getBpts()
+        points,
+        numPoints,
+        parameters.getRadius1(),
+        parameters.getApts(),
+        parameters.getBpts()
     );
     cmv[9] = lic10(
-            points,
-            numPoints,
-            parameters.getCpts(),
-            parameters.getDpts(),
-            parameters.getEpsilon()
+        points,
+        numPoints,
+        parameters.getCpts(),
+        parameters.getDpts(),
+        parameters.getEpsilon()
     );
     cmv[10] = lic11(
-            points,
-            numPoints,
-            parameters.getArea1(),
-            parameters.getEpts(),
-            parameters.getFpts()
+        points,
+        numPoints,
+        parameters.getArea1(),
+        parameters.getEpts(),
+        parameters.getFpts()
     );
     cmv[11] = lic12(points, parameters.getGpts());
     cmv[12] = lic13(
-            points,
-            parameters.getKpts(),
-            parameters.getLength1(),
-            parameters.getLength2(),
-            numPoints
+        points,
+        parameters.getKpts(),
+        parameters.getLength1(),
+        parameters.getLength2(),
+        numPoints
     );
     cmv[13] = lic14(
-            points,
-            numPoints,
-            parameters.getRadius1(),
-            parameters.getRadius2(),
-            parameters.getApts(),
-            parameters.getBpts()
+        points,
+        numPoints,
+        parameters.getRadius1(),
+        parameters.getRadius2(),
+        parameters.getApts(),
+        parameters.getBpts()
     );
     cmv[14] = lic15(
-            points,
-            numPoints,
-            parameters.getArea1(),
-            parameters.getArea2(),
-            parameters.getEpts(),
-            parameters.getFpts()
+        points,
+        numPoints,
+        parameters.getArea1(),
+        parameters.getArea2(),
+        parameters.getEpts(),
+        parameters.getFpts()
     );
 
     return cmv;

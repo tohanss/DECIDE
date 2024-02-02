@@ -5,15 +5,21 @@ package decide;
  * Class to the Decide problem.
  */
 public final class Decide {
+
+  /**
+   * Constructor of the Decide problem.
+   *
+   * @param filePath path to the JSON-file
+   */
   private Decide(String filePath) {
     InputReader reader = new InputReader(filePath);
 
-    LIC lics = new LIC(input.getParameters(), input.getPoints(), input.getNumPoints());
-    cmv = lics.calculateCmv();
+    LIC lics = new LIC(reader.getParameters(), reader.getPoints(), reader.getNumPoints());
+    boolean[] cmv = lics.calculateCmv();
 
-    pum = DecideHelper.calculatePum(cmv, reader.getLogicalConnectorMatrix());
+    boolean[][] pum = DecideHelper.calculatePum(cmv, reader.getLogicalConnectorMatrix());
 
-    fuv = DecideHelper.calculateFuv(pum, reader.getPreliminaryUnlockingVector());
+    boolean[] fuv = DecideHelper.calculateFuv(pum, reader.getPreliminaryUnlockingVector());
 
     boolean launch = DecideHelper.calculateLaunch(fuv);
 
@@ -26,6 +32,7 @@ public final class Decide {
 
   /**
    * Entry point of the program.
+   *
    * @param args command line arguments
    */
   public static void main(final String[] args) {
