@@ -8,14 +8,7 @@ import java.util.HashSet;
  * Class for the LIC functions.
  */
 public class LIC {
-  Parameters parameters;
-  ArrayList<Point2D> points;
-  int numPoints;
-
-  protected LIC(Parameters parameters, ArrayList<Point2D> points, int numPoints) {
-    this.parameters = parameters;
-    this.points = points;
-    this.numPoints = numPoints;
+  protected LIC() {
   }
 
   /**
@@ -28,7 +21,7 @@ public class LIC {
    * @param length1 Distance that two points need to be from each other
    * @return True if LIC 1 is met
    */
-  protected boolean lic1(
+  protected static boolean lic1(
       final ArrayList<Point2D> points,
       final double length1) {
     assert (length1 >= 0);
@@ -58,7 +51,7 @@ public class LIC {
    * @return True if LIC2 is met
    */
   @SuppressWarnings("checkstyle:MagicNumber")
-  protected boolean lic2(
+  protected static boolean lic2(
       final ArrayList<Point2D> points,
       final double radius1) {
     assert (radius1 >= 0);
@@ -95,34 +88,32 @@ public class LIC {
    * @param epsilon Deviation from pi
    * @return true if all the conditions are met
    */
-    protected boolean lic3(
-            final ArrayList<Point2D> points,
-            final double epsilon
-    ) {
-        assert (0 <= epsilon && epsilon < Math.PI);
+  protected static boolean lic3(
+      final ArrayList<Point2D> points,
+      final double epsilon) {
+    assert (0 <= epsilon && epsilon < Math.PI);
 
-        Point2D a;
-        Point2D b;
-        Point2D c;
-        for (int i = 0; i < (points.size() - 2); i++) {
-            a = points.get(i);
-            b = points.get(i + 1);
-            c = points.get(i + 2);
-            if (a.equals(b) || c.equals(b)) {
-              return false;
-            }
-            double ab = a.distance(b);
-            double bc = b.distance(c);
-            double ac = a.distance(c);
-            double angle = Math.acos((ab * ab + bc * bc - ac * ac)
-                    / (2 * ab * bc));
-            if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
-                return true;
-            }
-        }
+    Point2D a;
+    Point2D b;
+    Point2D c;
+    for (int i = 0; i < (points.size() - 2); i++) {
+      a = points.get(i);
+      b = points.get(i + 1);
+      c = points.get(i + 2);
+      if (a.equals(b) || c.equals(b)) {
         return false;
       }
-
+      double ab = a.distance(b);
+      double bc = b.distance(c);
+      double ac = a.distance(c);
+      double angle = Math.acos((ab * ab + bc * bc - ac * ac)
+          / (2 * ab * bc));
+      if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   /**
    * A method for LIC 4.
@@ -133,7 +124,9 @@ public class LIC {
    * @param area1  Area in LICs
    * @return true iff LIC 4 is met
    */
-  protected boolean lic4(final ArrayList<Point2D> points, final double area1) {
+  protected static boolean lic4(
+      final ArrayList<Point2D> points,
+      final double area1) {
     assert (0 <= area1);
 
     Point2D a;
@@ -173,7 +166,7 @@ public class LIC {
    * @return True if LIC 5 is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic5(
+  protected static boolean lic5(
       final ArrayList<Point2D> points,
       final int qpts,
       final int quads,
@@ -203,7 +196,9 @@ public class LIC {
    * @param numpoints The number of planar data points
    * @return true iff LIC 6 is met
    */
-  protected boolean lic6(final ArrayList<Point2D> points, final int numpoints) {
+  protected static boolean lic6(
+      final ArrayList<Point2D> points,
+      final int numpoints) {
     for (int i = 0; i < numpoints - 1; i++) {
       double x1 = points.get(i).getX();
       double x2 = points.get(i + 1).getX();
@@ -233,7 +228,7 @@ public class LIC {
    * @return true iff LIC 7 is satisfied
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic7(
+  protected static boolean lic7(
       final ArrayList<Point2D> points,
       final int numpoints,
       final int npts,
@@ -273,38 +268,38 @@ public class LIC {
     return false;
   }
 
-    /**
-     * There exists at least one set of two data points separated by exactly
-     * K_PTS consecutive intervening points that are a distance greater than
-     * the length, LENGTH1, apart. The condition is not met when
-     * NUMPOINTS &lt; 3.
-     *
-     * @param points    Array containing the coordinates of data points
-     * @param numpoints The number of planar data points
-     * @param kpts      Number of intervening points
-     * @param length1   Distance that two points need to be from each other
-     * @return true iff LIC 8 is met
-     */
-    @SuppressWarnings("checkstyle:magicnumber")
-    protected boolean lic8(
-            final ArrayList<Point2D> points,
-            final int numpoints,
-            final int kpts,
-            final double length1) {
-        assert (1 <= kpts && kpts <= numpoints - 2);
-        if (numpoints < 3) {
-            return false;
-        }
-
-        double distance;
-        for (int i = 0; i < numpoints - kpts - 1; i++) {
-            distance = distance(points.get(i), points.get(i + kpts + 1));
-            if (Double.compare(distance, length1) == 1) {
-                return true;
-            }
-        }
-        return false;
+  /**
+   * There exists at least one set of two data points separated by exactly
+   * K_PTS consecutive intervening points that are a distance greater than
+   * the length, LENGTH1, apart. The condition is not met when
+   * NUMPOINTS &lt; 3.
+   *
+   * @param points    Array containing the coordinates of data points
+   * @param numpoints The number of planar data points
+   * @param kpts      Number of intervening points
+   * @param length1   Distance that two points need to be from each other
+   * @return true iff LIC 8 is met
+   */
+  @SuppressWarnings("checkstyle:magicnumber")
+  protected static boolean lic8(
+      final ArrayList<Point2D> points,
+      final int numpoints,
+      final int kpts,
+      final double length1) {
+    assert (1 <= kpts && kpts <= numpoints - 2);
+    if (numpoints < 3) {
+      return false;
     }
+
+    double distance;
+    for (int i = 0; i < numpoints - kpts - 1; i++) {
+      distance = distance(points.get(i), points.get(i + kpts + 1));
+      if (Double.compare(distance, length1) == 1) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   /**
    * There exists at least one set of three data points separated by exactly
@@ -328,7 +323,7 @@ public class LIC {
    * @return true if lic 10 is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic10(
+  protected static boolean lic10(
       final ArrayList<Point2D> points,
       final int numpoints,
       final int cpts,
@@ -380,13 +375,12 @@ public class LIC {
    * @return true if the conditions are met
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic9(
-          final ArrayList<Point2D> points,
-          final int numpoints,
-          final double radius1,
-          final int apts,
-          final int bpts
-  ) {
+  protected static boolean lic9(
+      final ArrayList<Point2D> points,
+      final int numpoints,
+      final double radius1,
+      final int apts,
+      final int bpts) {
     assert (1 <= apts);
     assert (1 <= bpts);
     assert (apts + bpts <= numpoints - 3);
@@ -406,7 +400,7 @@ public class LIC {
       double bc = b.distance(c);
       double ac = a.distance(c);
       double area = Math.abs(((a.getX() - c.getX()) * (b.getX() - a.getX())
-              - (a.getX() - b.getX()) * (c.getY() - a.getY())) * 0.5);
+          - (a.getX() - b.getX()) * (c.getY() - a.getY())) * 0.5);
       double longestLine = 0;
       double radiusOfPoints = 0;
       if (area == 0) {
@@ -437,7 +431,7 @@ public class LIC {
    * @return true iff LIC 10 is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic11(
+  protected static boolean lic11(
       final ArrayList<Point2D> points,
       final int numpoints,
       final double area1,
@@ -479,11 +473,13 @@ public class LIC {
    * 1 ≤ G PTS ≤ NUMPOINTS−2
    *
    * @param points ArrayList of points
-   * @param gpts Number of points between pairs of points to check
+   * @param gpts   Number of points between pairs of points to check
    * @return true if condition is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic12(final ArrayList<Point2D> points, final int gpts) {
+  protected static boolean lic12(
+      final ArrayList<Point2D> points,
+      final int gpts) {
     int numpoints = points.size();
     if (numpoints < 3) {
       return false;
@@ -523,13 +519,12 @@ public class LIC {
    * @return true if the conditions of lic13 is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic13(
-          final ArrayList<Point2D> points,
-          final int kpts,
-          final double length1,
-          final double length2,
-          final int numpoints
-  ) {
+  protected static boolean lic13(
+      final ArrayList<Point2D> points,
+      final int kpts,
+      final double length1,
+      final double length2,
+      final int numpoints) {
     assert (0 <= length2);
 
     if (numpoints < 3) {
@@ -577,7 +572,7 @@ public class LIC {
    * @return true iff LIC 14 is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic14(
+  protected static boolean lic14(
       final ArrayList<Point2D> points,
       final int numpoints,
       final double radius1,
@@ -631,7 +626,7 @@ public class LIC {
    * @return true iff LIC 14 is met
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  protected boolean lic15(
+  protected static boolean lic15(
       final ArrayList<Point2D> points,
       final int numpoints,
       final double area1,
@@ -675,7 +670,7 @@ public class LIC {
    * @param b Point b
    * @return Double
    */
-  private double distance(final Point2D a, final Point2D b) {
+  private static double distance(final Point2D a, final Point2D b) {
     Point2D distVec = new Point2D.Double(
         a.getX() - b.getX(), a.getY() - b.getY());
     return Math.sqrt(distVec.getX() * distVec.getX()
@@ -689,7 +684,7 @@ public class LIC {
    * @return The quadrant as 1, 2, 3, or 4
    */
   @SuppressWarnings("checkstyle:MagicNumber")
-  private int getQuadFromPoint(final Point2D point) {
+  private static int getQuadFromPoint(final Point2D point) {
     if (point.getX() >= 0 && point.getY() >= 0) {
       return 1;
     } else if (point.getX() < 0 && point.getY() >= 0) {
@@ -709,7 +704,7 @@ public class LIC {
    * @param lineEnd
    * @return the distance
    */
-  private double pointToLineDistance(
+  private static double pointToLineDistance(
       final Point2D point,
       final Point2D lineStart,
       final Point2D lineEnd) {
@@ -730,7 +725,7 @@ public class LIC {
    * @param point2
    * @return the distance
    */
-  private double pointToPointDistance(
+  private static double pointToPointDistance(
       final Point2D point1,
       final Point2D point2) {
     double x1 = point1.getX();
@@ -748,10 +743,16 @@ public class LIC {
   /**
    * Method to calculate the CMV.
    *
+   * @param parameters Parameters to calculate CMV
+   * @param points     Planner points
+   * @param numPoints  Length of points
    * @return the CMV
    */
   @SuppressWarnings("checkstyle:magicnumber")
-  public boolean[] calculateCmv() {
+  public static boolean[] calculateCmv(
+      final Parameters parameters,
+      final ArrayList<Point2D> points,
+      final int numPoints) {
     boolean[] cmv = new boolean[15];
 
     cmv[0] = lic1(points, parameters.getLength1());
@@ -759,69 +760,60 @@ public class LIC {
     cmv[2] = lic3(points, parameters.getEpsilon());
     cmv[3] = lic4(points, parameters.getArea1());
     cmv[4] = lic5(
-            points,
-            parameters.getQpts(),
-            parameters.getQuads(),
-            numPoints
-    );
+        points,
+        parameters.getQpts(),
+        parameters.getQuads(),
+        numPoints);
     cmv[5] = lic6(points, numPoints);
     cmv[6] = lic7(
-            points,
-            numPoints,
-            parameters.getNpts(),
-            parameters.getDist()
-    );
+        points,
+        numPoints,
+        parameters.getNpts(),
+        parameters.getDist());
     cmv[7] = lic8(
-            points,
-            numPoints,
-            parameters.getKpts(),
-            parameters.getLength1()
-    );
+        points,
+        numPoints,
+        parameters.getKpts(),
+        parameters.getLength1());
     cmv[8] = lic9(
-            points,
-            numPoints,
-            parameters.getRadius1(),
-            parameters.getApts(),
-            parameters.getBpts()
-    );
+        points,
+        numPoints,
+        parameters.getRadius1(),
+        parameters.getApts(),
+        parameters.getBpts());
     cmv[9] = lic10(
-            points,
-            numPoints,
-            parameters.getCpts(),
-            parameters.getDpts(),
-            parameters.getEpsilon()
-    );
+        points,
+        numPoints,
+        parameters.getCpts(),
+        parameters.getDpts(),
+        parameters.getEpsilon());
     cmv[10] = lic11(
-            points,
-            numPoints,
-            parameters.getArea1(),
-            parameters.getEpts(),
-            parameters.getFpts()
-    );
+        points,
+        numPoints,
+        parameters.getArea1(),
+        parameters.getEpts(),
+        parameters.getFpts());
     cmv[11] = lic12(points, parameters.getGpts());
     cmv[12] = lic13(
-            points,
-            parameters.getKpts(),
-            parameters.getLength1(),
-            parameters.getLength2(),
-            numPoints
-    );
+        points,
+        parameters.getKpts(),
+        parameters.getLength1(),
+        parameters.getLength2(),
+        numPoints);
     cmv[13] = lic14(
-            points,
-            numPoints,
-            parameters.getRadius1(),
-            parameters.getRadius2(),
-            parameters.getApts(),
-            parameters.getBpts()
-    );
+        points,
+        numPoints,
+        parameters.getRadius1(),
+        parameters.getRadius2(),
+        parameters.getApts(),
+        parameters.getBpts());
     cmv[14] = lic15(
-            points,
-            numPoints,
-            parameters.getArea1(),
-            parameters.getArea2(),
-            parameters.getEpts(),
-            parameters.getFpts()
-    );
+        points,
+        numPoints,
+        parameters.getArea1(),
+        parameters.getArea2(),
+        parameters.getEpts(),
+        parameters.getFpts());
 
     return cmv;
   }

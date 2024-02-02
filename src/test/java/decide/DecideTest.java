@@ -1,7 +1,8 @@
 package decide;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
+import java.io.File;
 import org.junit.Test;
 
 /**
@@ -9,7 +10,17 @@ import org.junit.Test;
  */
 public class DecideTest {
   @Test
-  public void test() {
-    assertTrue(true);
+  public void testPositive() {
+    File f = new File("src/test/resources/decide/positive.JSON");
+    boolean launch = Decide.decideFile(f.getAbsolutePath());
+    assertTrue(launch);
   }
+
+  @Test
+  public void testNegative() {
+    File f = new File("src/test/resources/decide/negative.JSON");
+    boolean launch = Decide.decideFile(f.getAbsolutePath());
+    assertFalse(launch);
+  }
+
 }

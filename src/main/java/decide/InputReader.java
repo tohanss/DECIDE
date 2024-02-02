@@ -23,13 +23,14 @@ public class InputReader {
   private String[][] logicalConnectorMatrix;
   /** Preliminary Unlocking Vector. */
   private boolean[] preliminaryUnlockingVector;
+  /** Length of input vector and matrix. */
+  private static final int LENGTH = 15;
 
   /**
    * Constructor to the InputReader class.
    *
    * @param filePath the path to the JSON-file
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   public InputReader(final String filePath) {
     JSONParser jsonParser = new JSONParser();
 
@@ -72,7 +73,6 @@ public class InputReader {
    * @param jsonPoints JSON-formatted array of points
    * @return parsed points
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   private ArrayList<Point2D> parsePoints(final JSONArray jsonPoints) {
     ArrayList<Point2D> parsedPoints = new ArrayList<>();
     jsonPoints.forEach(point -> parsePoint(parsedPoints, (JSONObject) point));
@@ -85,7 +85,6 @@ public class InputReader {
    * @param parsedPoints correctly formatted points
    * @param jsonPoint JSON-formatted point
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   private void parsePoint(
       final ArrayList<Point2D> parsedPoints,
       final JSONObject jsonPoint
@@ -101,7 +100,6 @@ public class InputReader {
    * @param jsonParameters JSON-formatted parameters
    * @return parsed parameters
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   private Parameters parseParameters(final JSONObject jsonParameters) {
     final double length1 = ((Long) jsonParameters.get("LENGTH1")).doubleValue();
     final double radius1 = ((Long) jsonParameters.get("RADIUS1")).doubleValue();
@@ -133,16 +131,15 @@ public class InputReader {
    * @param jsonLogicalConnectorMatrix matrix of JSON-formatted LCM
    * @return parsed LCM
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   private String[][] parseLogicalConnectorMatrix(
       final JSONArray jsonLogicalConnectorMatrix
   ) {
-    assert jsonLogicalConnectorMatrix.size() == 15;
-    String[][] parsedLogicalConnectorMatrix = new String[15][15];
+    assert jsonLogicalConnectorMatrix.size() == LENGTH;
+    String[][] parsedLogicalConnectorMatrix = new String[LENGTH][LENGTH];
     for (int i = 0; i < jsonLogicalConnectorMatrix.size(); i++) {
       JSONArray jsonLogicalConnectorArray =
           (JSONArray) jsonLogicalConnectorMatrix.get(i);
-      assert jsonLogicalConnectorArray.size() == 15;
+      assert jsonLogicalConnectorArray.size() == LENGTH;
       for (int j = 0; j < jsonLogicalConnectorArray.size(); j++) {
         parsedLogicalConnectorMatrix[i][j] =
             (String) jsonLogicalConnectorArray.get(j);
@@ -157,11 +154,10 @@ public class InputReader {
    * @param jsonPreliminaryUnlockingVector array of JSON-formatted PUV
    * @return parsed PUV
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   private boolean[] parsePreliminaryUnlockingVector(
       final JSONArray jsonPreliminaryUnlockingVector) {
-    boolean[] parsedPreliminaryUnlockingVector = new boolean[15];
-    assert jsonPreliminaryUnlockingVector.size() == 15;
+    boolean[] parsedPreliminaryUnlockingVector = new boolean[LENGTH];
+    assert jsonPreliminaryUnlockingVector.size() == LENGTH;
     for (int i = 0; i < jsonPreliminaryUnlockingVector.size(); i++) {
       parsedPreliminaryUnlockingVector[i] =
           (boolean) jsonPreliminaryUnlockingVector.get(i);
@@ -174,7 +170,6 @@ public class InputReader {
    *
    * @return numPoints
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   public int getNumPoints() {
     return numPoints;
   }
@@ -184,7 +179,6 @@ public class InputReader {
    *
    * @return points
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   public ArrayList<Point2D> getPoints() {
     return points;
   }
@@ -194,7 +188,6 @@ public class InputReader {
    *
    * @return parameters
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   public Parameters getParameters() {
     return parameters;
   }
@@ -204,7 +197,6 @@ public class InputReader {
    *
    * @return LCM
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   public String[][] getLogicalConnectorMatrix() {
     return logicalConnectorMatrix;
   }
@@ -214,7 +206,6 @@ public class InputReader {
    *
    * @return PUV
    */
-  @SuppressWarnings("checkstyle:magicnumber")
   public boolean[] getPreliminaryUnlockingVector() {
     return preliminaryUnlockingVector;
   }
