@@ -10,6 +10,17 @@ public final class Decide {
   private Decide() {
   }
 
+  /**
+   * Decide from parameters given.
+   *
+   * @param parameters given parameters
+   * @param points planner points
+   * @param numPoints number of points
+   * @param lcm LCM
+   * @param puv PUV
+   *
+   * @return decision of launch
+   */
   public static boolean decide(
       final Parameters parameters,
       final ArrayList<Point2D> points,
@@ -34,6 +45,13 @@ public final class Decide {
 
   }
 
+  /**
+   * Decide from a file.
+   *
+   * @param filePath path of the file
+   *
+   * @return decision of launch
+   */
   public static boolean decideFile(final String filePath) {
 
     InputReader reader = new InputReader(filePath);
