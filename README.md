@@ -1,4 +1,5 @@
 # DECIDE
+
 ![unit test](https://github.com/tohanss/DECIDE/actions/workflows/test.yml/badge.svg)
 ![document](https://github.com/tohanss/DECIDE/actions/workflows/docs.yml/badge.svg)
 ![coding style](https://github.com/tohanss/DECIDE/actions/workflows/style.yml/badge.svg)
@@ -21,12 +22,13 @@ The requirements can be downloaded [here](https://canvas.kth.se/courses/45179/fi
 The program would take the following as input.
 
 - **NUMPOINTS** : The number of planar data points.
-- **POINTS** : Array containing the coordinates of data points. 
-- **PARAMETERS** : Struct holding parameters for LICs. 
+- **POINTS** : Array containing the coordinates of data points.
+- **PARAMETERS** : Struct holding parameters for LICs.
 - **LCM** : Logical Connector Matrix.
 - **PUV** : Preliminary Unlocking Vector.
 
 And calculate the following values for decision.
+
 - **CMV** : Conditions Met Vector.
 - **PUM** : Preliminary Unlocking Matrix.
 - **FUV** : Final Unlocking Vector.
@@ -36,17 +38,25 @@ Then a final decision is made based on FUV.
 ## Usage
 
 We use [maven](https://maven.apache.org) as the package manager for our project, which can be installed with the following commands.
+
 ```sh
 $ sudo apt update
 $ sudo apt install maven
 ```
+
 Then the following commands can be run:
+
 ```sh
 $ mvn package # Build the project and run unit tests
 $ mvn test # Only run the tests without rebuild
 $ mvn exec:java # Run the main function
 $ mvn javadoc:javadoc # Generate documentation
 ```
+
+### Dependencies
+
+- Maven 3.6+ requires JDK 8 or above to execute.
+- Additional Maven dependencies are configured in `pom.xml`
 
 ## Coding Standard
 
@@ -117,7 +127,7 @@ Contributions to the projected is stated below.
 - Fix code skeleton style
 - Implement input reader
 
-#### Celina Tjärnström 
+#### Celina Tjärnström
 
 - Implement LIC 3 & Related unit tests
 - Implement LIC 9 & Related unit tests
@@ -146,5 +156,3 @@ Contributions to the projected is stated below.
 - Implement calculation for PUM & FUV & final decision functionalities
 - Implement tests for the above functions
 - Help to fix coding styles, documentations and other minor issues
-
-
